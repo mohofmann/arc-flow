@@ -2,8 +2,8 @@
   <div id="app">
     <b-container fluid class="layout-container h-100">
       <b-row class="h-100">
-        <b-col cols="5" lg="2" sm="3" class="layout-sidebar">
-          <Sidebar msg="New Box"></Sidebar>
+        <b-col cols="5" lg="2" sm="3" class="layout-sidemenu">
+          <SideMenu msg="New Datasource"></SideMenu>
         </b-col>
         <b-col class="layout-editor">
           <Editor msg=""></Editor>
@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import Sidebar from './components/Sidebar.vue'
+import SideMenu from './components/SideMenu.vue'
 import Editor from './components/Editor.vue'
 
 export default {
   name: 'app',
   components: {
     Editor,
-    Sidebar
+    SideMenu
   },
   data: function() {
     return {
@@ -45,11 +45,19 @@ html, body {
   height: 100%;
 }
 
-.layout-sidebar {
-  background-color: #111111;
+.layout-sidemenu {
+  background-color: #444444;
   -webkit-box-shadow: 3px 0px 5px 0px rgba(0,0,0,0.3);
   -moz-box-shadow: 3px 0px 5px 0px rgba(0,0,0,0.3);
   box-shadow: 3px 0px 5px 0px rgba(0,0,0,0.3);
+  z-index: 100;
+}
+
+.layout-detailmenu {
+  background-color: #444444;
+  -webkit-box-shadow: -3px 0px 5px 0px rgba(0,0,0,0.3);
+  -moz-box-shadow: -3px 0px 5px 0px rgba(0,0,0,0.3);
+  box-shadow: -3px 0px 5px 0px rgba(0,0,0,0.3);
   z-index: 100;
 }
 

@@ -1,20 +1,20 @@
 <template>
-  <div>
+  <nav>
     <br>
     <h4 style="color: #FFFFFF">ARCflow 0.1</h4>
     <br>
-    <b-button @click="createElement('BOX')">&nbsp;{{ msg }}&nbsp;&nbsp;</b-button>
+    <b-button @click="createElement('DATASOURCE')">&nbsp;{{ msg }}&nbsp;&nbsp;</b-button>
     <br><br>
-    <b-button @click="createElement('CIRCLE')">New Circle</b-button>
-    <p style="position: absolute; bottom: 0;">&nbsp;&nbsp;&nbsp;&nbsp;Moritz Hofmann</p>
-  </div>
+    <b-button @click="createElement('PREPROCESSOR')">New Preprocessor</b-button>
+    <p style="position: absolute; bottom: 0; color: #000000">&nbsp;&nbsp;&nbsp;&nbsp;Moritz Hofmann</p>
+  </nav>
 </template>
 
 <script>
 import { EventBus } from '../main.js'
 
 export default {
-  name: 'Menu',
+  name: 'SideMenu',
   props: {
     msg: String
   },
