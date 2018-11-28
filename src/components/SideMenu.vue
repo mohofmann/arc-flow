@@ -1,12 +1,11 @@
 <template>
-  <nav>
+  <nav id="sideMenu">
+    <md-toolbar :md-elevation="1">
+      <span class="md-title" style="width: 100%; text-align: center">ARCflow</span>
+    </md-toolbar>
     <br>
-    <h4 style="color: #FFFFFF">ARCflow 0.1</h4>
-    <br>
-    <b-button @click="createElement('DATASOURCE')">&nbsp;{{ msg }}&nbsp;&nbsp;</b-button>
-    <br><br>
-    <b-button @click="createElement('PREPROCESSOR')">New Preprocessor</b-button>
-    <p style="position: absolute; bottom: 0; color: #000000">&nbsp;&nbsp;&nbsp;&nbsp;Moritz Hofmann</p>
+    <md-button class="md-raised af-full-width" @click="createElement('DATASOURCE')">&nbsp;{{ msg }}&nbsp;&nbsp;</md-button>
+    <md-button class="md-raised af-full-width" @click="createElement('PREPROCESSOR')">Preprocessor</md-button>
   </nav>
 </template>
 
@@ -33,5 +32,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+  .md-button {
+    margin: 12px 0;
+  }
 
 </style>

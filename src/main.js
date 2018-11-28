@@ -1,16 +1,29 @@
 import Vue from 'vue'
-import Bootstrap from 'bootstrap-vue'
-
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import {
+	MdButton,
+	MdField, 
+	MdFile,
+	MdSnackbar,
+	MdToolbar,
+	MdDrawer,
+	MdDivider,
+	MdCheckbox } from 'vue-material/dist/components'
 
 import App from './App.vue'
+import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default-dark.css'
 
 // Vue Configurations
 Vue.config.productionTip = false
 
 // Vue Modules Setup
-Vue.use(Bootstrap)
+Vue.use(MdButton)
+Vue.use(MdSnackbar)
+Vue.use(MdField)
+Vue.use(MdToolbar)
+Vue.use(MdDrawer)
+Vue.use(MdDivider)
+Vue.use(MdCheckbox)
 
 // Create event Bus
 export const EventBus = new Vue();

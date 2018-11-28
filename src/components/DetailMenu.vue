@@ -1,31 +1,37 @@
 <template>
-  <div class="wrapper">
-    <!-- Sidebar -->
-    <nav id="sidebar">
-
-    </nav>
-  </div>
+  <!-- Sidebar -->
+  <md-drawer class="md-right" :md-active.sync="nodeSelected">
+    <DataSourceMenu :node="selectedNode" v-show="selectedNodeType == 'DataSource'"></DataSourceMenu>
+  </md-drawer>
 </template>
 
 <script>
+import DataSourceMenu from './detailMenus/DataSourceMenu.vue'
 import { EventBus } from '../main.js'
 
 const setupEvents = function () {
-  EventBus.$on('selectNode', node => nodeDetails(node))
-}
-
-const nodeDetails = function (node) {
-  console.log(node + " got clicked")
+  EventBus.$on('selectNode', node => {
+    this.nodeSelected = true
+    this.selectedNode = node
+    this.selectedNodeType = node.constructor.name
+  })
+  EventBus.$on('deselectNode', node => {
+    this.nodeSelected = true
+    this.selectedNode = null
+    this.selectedNodeType = null
+  })
 }
 
 export default {
   name: 'DetailMenu',
-  props: {
-    msg: String
+  components: {
+    DataSourceMenu
   },
   data: function () {
     return {
-      inputString: ''
+      nodeSelected: false,
+      selectedNodeType: null,
+      selectedNode: null
     };
   },
   methods: {

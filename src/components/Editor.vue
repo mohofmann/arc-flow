@@ -1,19 +1,12 @@
 <template>
-  <b-row class="h-100" style="margin: 0">
-    <b-col style="padding: 0">
-      <div id="editor"></div>
-    </b-col>
-    <b-col cols="5" lg="2" sm="3" class="layout-detailmenu">
-      <DetailMenu></DetailMenu>
-    </b-col>
-  </b-row>
+  <div class="md-layout">
+    <div class="md-layout-item md-size-100" id="editor"></div>
+    <DetailMenu class="af-column-padding"></DetailMenu>
+  </div>
 </template>
 
 <script>
-import SVG from 'svg.js'
 import 'lodash'
-import 'svg.draggable.js'
-import 'svg.panzoom.js'
 import { EventBus } from '../main.js'
 import Canvas from '../classes/Canvas.js'
 import DetailMenu from './DetailMenu.vue'
@@ -25,7 +18,7 @@ const setupEditor = function () {
 }
 
 const setupEvents = function () {
-  EventBus.$on('createElement', element => canvas.createElement(element))
+  EventBus.$on('createElement', node => canvas.createElement(node))
 }
 
 export default {
@@ -43,13 +36,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  #editor {
-    height: 100%;
-    width: 100%;
-  }
 
-  .layout-detailmenu {
-    padding: 0;
-    margin: 0;
-  }
 </style>
