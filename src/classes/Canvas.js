@@ -10,6 +10,7 @@ import 'svg.panzoom.js'
 
 import DataSource  from './DataSource.js'
 import Preprocessor from './Preprocessor.js'
+import Memory from './Memory.js'
 import { EventBus } from '../main.js'
 
 const domId = 'editor'
@@ -42,6 +43,7 @@ export default class Canvas {
     switch (elementName) {
       case 'DATASOURCE': node = new DataSource(this._canvas, this.watchCanvas); break
       case 'PREPROCESSOR': node = new Preprocessor(this._canvas, this.watchCanvas); break
+      case 'MEMORY': node = new Memory(this._canvas, this.watchCanvas); break
       default: break
     }
   }

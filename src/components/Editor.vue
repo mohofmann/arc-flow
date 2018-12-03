@@ -1,7 +1,7 @@
 <template>
   <div class="md-layout">
     <div class="md-layout-item md-size-100" id="editor"></div>
-    <DetailMenu class="af-column-padding"></DetailMenu>
+    <DetailMenu class="md-layout-item"></DetailMenu>
   </div>
 </template>
 

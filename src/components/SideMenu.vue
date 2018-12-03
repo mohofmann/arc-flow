@@ -5,6 +5,7 @@
     </md-toolbar>
     <br>
     <md-button class="md-raised af-full-width" @click="createElement('DATASOURCE')">&nbsp;{{ msg }}&nbsp;&nbsp;</md-button>
+    <md-button class="md-raised af-full-width" @click="createElement('MEMORY')">Memory</md-button>
     <md-button class="md-raised af-full-width" @click="createElement('PREPROCESSOR')">Preprocessor</md-button>
   </nav>
 </template>

@@ -10,15 +10,9 @@
     </md-field>
     <md-divider></md-divider>
     <md-field>
-      <label for="movies">Features</label>
-      <md-select v-model="selectedFeatures" name="features" id="features" multiple>
-        <md-option value="fight-club">Fight Club</md-option>
-        <md-option value="godfather">Godfather</md-option>
-        <md-option value="godfather-ii">Godfather II</md-option>
-        <md-option value="godfather-iii">Godfather III</md-option>
-        <md-option value="godfellas">Godfellas</md-option>
-        <md-option value="pulp-fiction">Pulp Fiction</md-option>
-        <md-option value="scarface">Scarface</md-option>
+      <label for="features">Features</label>
+      <md-select v-model="selectedFeatures" name="features" id="features" multiple @md-selected="updateSelection">
+        <md-option v-for="feature in features" :value="feature">{{ feature }}</md-option>
       </md-select>
     </md-field>
   </div>
@@ -34,8 +28,16 @@ const parseFile = function (fileList) {
     complete: result => {
       this.showAlert = true
       this.node.setData(result)
+      this.features = result.data[0]
+      this.selectedFeatures = this.features.slice(0,3)
     }
   })
+}
+
+const updateSelection = function () {
+  if (this.node) {
+    this.node.setFeatures(this.selectedFeatures)
+  }
 }
 
 export default {
@@ -47,14 +49,13 @@ export default {
     return {
       file: null,
       showAlert: false,
+      features: [],
       selectedFeatures: []
     }
   },
   methods: {
     parseFile: parseFile,
-    updateCountdown: countdownValue => {
-      console.log(countdownValue)
-    }
+    updateSelection: updateSelection
   }
 }
 </script>

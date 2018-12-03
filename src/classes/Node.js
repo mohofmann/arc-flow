@@ -66,7 +66,7 @@ export default class Node {
     this.element.add(this.headline)
     this.hint = this._canvas
       .text(attributes.hint)
-      .move(sizeX/2, sizeY/2)
+      .move(sizeX/2, sizeY/2 + 2)
       .font({
         family: 'Helvetica',
         anchor: 'middle',
@@ -114,24 +114,58 @@ export default class Node {
       let input = this._canvas.group()
       input.add(this._canvas
         .text(el)
-        .move(sizeX - 20, 30 + this._inputs.length * 30)
+        .move(20, 42 + this._inputs.length * 30)
         .attr({fill: '#00000099', cursor: 'default'})
-        .font({anchor: 'end', weight: '600'}))
+        .font({anchor: 'start', weight: '600'}))
       input.add(this._canvas
         .circle(15, 15)
         .attr({fill: '#FFFFFF', cursor: 'pointer'})
-        .move(sizeX - 7.5, 30 + this._inputs.length * 30))
+        .move(-7.5, 42 + this._inputs.length * 30))
       this.element.add(input)
       this._inputs.push(input)
     })
     // Adjust the tile size
-    this.body.size(sizeX, sizeY + 21 * this._inputs.length)
+    if (this._inputs.length > 0) {
+      this.body.size(sizeX, sizeY + 30 * this._inputs.length - 30)
+    } else {
+      this.body.size(sizeX, sizeY)
+    }
+  }
+
+  setOutputs = function (outputs) {
+    // Remove existing inputs
+    _.each(this._outputs, el => {
+      el.remove()
+    })
+    this._outputs = []
+    // Add every single input
+    _.each(outputs, el => {
+      let output = this._canvas.group()
+      output.add(this._canvas
+        .text(el)
+        .move(sizeX - 20, 42 + this._outputs.length * 30)
+        .attr({fill: '#00000099', cursor: 'default'})
+        .font({anchor: 'end', weight: '600'}))
+      output.add(this._canvas
+        .circle(15, 15)
+        .attr({fill: '#FFFFFF', cursor: 'pointer'})
+        .move(sizeX - 7.5, 42 + this._outputs.length * 30))
+      this.element.add(output)
+      this._outputs.push(output)
+    })
+    // Adjust the tile size
+    if (this._outputs.length > 0) {
+      this.body.size(sizeX, sizeY + 30 * this._outputs.length - 30)
+    } else {
+      this.body.size(sizeX, sizeY)
+    }
   }
 
 
   addDefaultBehavior = function () {
-    this.element.node.childNodes[3].instance.click(() => {
+    this.element.node.childNodes[3].instance.click(event => {
       this.nodeRemoveEvent()
+      event.preventDefault()
     })
     this.element.on('dragmove', event => {
       this.nodeMoveEvent()

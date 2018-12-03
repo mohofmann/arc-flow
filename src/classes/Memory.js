@@ -1,26 +1,26 @@
 /**************************************
- *	PREPROCESSOR
- *	inherits from Node, enabling
- *	energy calculation
+ *	MEMORY
+ *	inherits from Node, simulates
+ *	memory like a ring buffer
  **************************************/
 
 import Node from './Node.js'
  
 let attributes = {
-	backgroundColor: '#F06',
-	headerColor: '#CF0053',
-	title: 'Preprocessor',
+	backgroundColor: '#FFB000',
+	headerColor: '#BF8400',
+	title: 'Memory',
 	hint: 'Connect inputs to Data Source'
 }
 
-export default class Preprocessor extends Node {
+export default class Memory extends Node {
 
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
 	}
 
 	perform = function (args) {
-		calculateEnergy(args)
+		// calculateEnergy(args)
 	}
 
 }

@@ -7,7 +7,9 @@ import {
 	MdToolbar,
 	MdDrawer,
 	MdDivider,
-	MdCheckbox } from 'vue-material/dist/components'
+	MdCheckbox,
+	MdMenu,
+	MdList } from 'vue-material/dist/components'
 
 import App from './App.vue'
 import 'vue-material/dist/vue-material.min.css'
@@ -24,6 +26,8 @@ Vue.use(MdToolbar)
 Vue.use(MdDrawer)
 Vue.use(MdDivider)
 Vue.use(MdCheckbox)
+Vue.use(MdMenu)
+Vue.use(MdList)
 
 // Create event Bus
 export const EventBus = new Vue();

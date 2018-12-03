@@ -26,6 +26,8 @@ export default {
 <style>
 html, body {
   height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 svg {
@@ -34,6 +36,10 @@ svg {
 
 md-overlay {
   z-index: 0 !important;
+}
+
+.md-field.md-theme-default>.md-icon:after {
+  background-color: #424242 !important;
 }
 
 #app {
