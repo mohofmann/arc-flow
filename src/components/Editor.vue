@@ -2,6 +2,9 @@
   <div class="md-layout">
     <div class="md-layout-item md-size-100" id="editor"></div>
     <DetailMenu class="md-layout-item"></DetailMenu>
+    <md-button class="md-fab af-fab" disabled>
+      <md-icon>play_arrow</md-icon>
+    </md-button>
   </div>
 </template>
 

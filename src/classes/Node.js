@@ -76,11 +76,14 @@ export default class Node {
     this.element.add(this.hint)
   }
 
-  nodeClickEvent = function () {
+  nodeClickEvent = function (event) {
     // don't confuse click with dragmove event
+    console.log('click node')
     if (!this._gettingDragged) {
-        EventBus.$emit('selectNode', this)
-      }
+      console.log(event.srcElement)
+      console.log(this._inputs)
+      EventBus.$emit('selectNode', this)
+    }
     this._gettingDragged = false
     this._startDragging = false
   }
@@ -94,13 +97,24 @@ export default class Node {
     }
   }
 
-  nodeRemoveEvent = function () {
+  nodeRemoveEvent = function (event) {
     // delete Node upon button press
     this.remove()
+    event.stopPropagation()
   }
 
   showElement = function () {
     console.log(this.element)
+  }
+
+  inputClickEvent = function (event) {
+    console.log("input clicked")
+    event.stopPropagation()
+  }
+
+  outputClickEvent = function (event) {
+    console.log("output clicked")
+    event.stopPropagation()
   }
 
   setInputs = function (inputs) {
@@ -121,6 +135,9 @@ export default class Node {
         .circle(15, 15)
         .attr({fill: '#FFFFFF', cursor: 'pointer'})
         .move(-7.5, 42 + this._inputs.length * 30))
+      input.click(event => {
+        this.inputClickEvent(event)
+      })
       this.element.add(input)
       this._inputs.push(input)
     })
@@ -150,6 +167,7 @@ export default class Node {
         .circle(15, 15)
         .attr({fill: '#FFFFFF', cursor: 'pointer'})
         .move(sizeX - 7.5, 42 + this._outputs.length * 30))
+      output.click(event => this.outputClickEvent(event))
       this.element.add(output)
       this._outputs.push(output)
     })
@@ -163,15 +181,12 @@ export default class Node {
 
 
   addDefaultBehavior = function () {
-    this.element.node.childNodes[3].instance.click(event => {
-      this.nodeRemoveEvent()
-      event.preventDefault()
-    })
+    this.element.node.childNodes[3].instance.click(event => this.nodeRemoveEvent(event))
     this.element.on('dragmove', event => {
       this.nodeMoveEvent()
     })
-    this.element.click(() => {
-      this.nodeClickEvent()
+    this.element.click(element => {
+      this.nodeClickEvent(element)
     })
     this.element.draggable()
     // includes snap to grid

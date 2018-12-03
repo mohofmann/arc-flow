@@ -5,19 +5,20 @@
     <br>
     <md-field>
       <label for="features">Memory Type</label>
-      <md-select v-model="memoryType" name="type" id="type">
+      <md-select v-model="memoryType">
         <md-option value="RINGBUFFER">Ringbuffer</md-option>
+      </md-select>
+    </md-field>
+    <md-field>
+      <label for="fieldSize">Field Size</label>
+      <md-select v-model="fieldSize" @md-selected="updateAttributes">
+        <md-option v-for="size in sizeOptions" :value="size">{{ size }}</md-option>
       </md-select>
     </md-field>
     <md-field>
       <md-icon>view_comfy</md-icon>
       <label for="fieldAmount">Memory Fields</label>
-      <md-input v-model="fieldAmount"></md-input>
-    </md-field>
-    <md-field>
-      <md-icon>view_compact</md-icon>
-      <label for="fieldSize">Field Size</label>
-      <md-input v-model="fieldSize"></md-input>
+      <md-input v-model="fieldAmount" @keyup.native="updateAttributes"></md-input>
     </md-field>
   </div>
 </template>
@@ -29,6 +30,12 @@ const changeMemoryType = function () {
   // body...
 }
 
+const updateAttributes  = function () {
+  if (this.node) {
+    this.node.updateNode(this.fieldSize, this.fieldAmount)
+  }
+}
+
 export default {
   name: 'MemoryMenu',
   props: {
@@ -37,11 +44,14 @@ export default {
   data: function () {
     return {
       memoryType: 'RINGBUFFER',
-      memorySize: 256
+      fieldAmount: 256,
+      fieldSize: 0,
+      sizeOptions: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     }
   },
   methods: {
-    changeMemoryType: changeMemoryType
+    changeMemoryType: changeMemoryType,
+    updateAttributes: updateAttributes
   }
 }
 </script>

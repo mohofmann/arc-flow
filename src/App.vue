@@ -74,4 +74,12 @@ md-overlay {
 .af-column-padding {
   padding: 0 12px;
 }
+
+.af-fab {
+  position: absolute !important;
+  z-index: 999;
+  bottom: 10px;
+  right: 10px;
+  /*background-color: #39CF4E !important;*/
+}
 </style>
