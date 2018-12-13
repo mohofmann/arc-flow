@@ -21,7 +21,8 @@ const setupEditor = function () {
 }
 
 const setupEvents = function () {
-  EventBus.$on('createElement', node => canvas.createElement(node))
+  EventBus.$on('createNode', node => canvas.createNode(node))
+  EventBus.$on('selectConnector', (node, connector) => canvas.createEdge(node, connector))
 }
 
 export default {

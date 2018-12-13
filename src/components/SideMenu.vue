@@ -4,9 +4,9 @@
       <span class="md-title" style="width: 100%; text-align: center">ARCflow</span>
     </md-toolbar>
     <br>
-    <md-button class="md-raised af-full-width" @click="createElement('DATASOURCE')">&nbsp;{{ msg }}&nbsp;&nbsp;</md-button>
-    <md-button class="md-raised af-full-width" @click="createElement('MEMORY')">Memory</md-button>
-    <md-button class="md-raised af-full-width" @click="createElement('PREPROCESSOR')">Preprocessor</md-button>
+    <md-button class="md-raised af-full-width" @click="createNode('DATASOURCE')">&nbsp;{{ msg }}&nbsp;&nbsp;</md-button>
+    <md-button class="md-raised af-full-width" @click="createNode('MEMORY')">Memory</md-button>
+    <md-button class="md-raised af-full-width" @click="createNode('PREPROCESSOR')">Preprocessor</md-button>
   </nav>
 </template>
 
@@ -24,8 +24,8 @@ export default {
     };
   },
   methods: {
-    createElement: elementName => {
-      EventBus.$emit('createElement', elementName)
+    createNode: nodeName => {
+      EventBus.$emit('createNode', nodeName)
     }
   }
 }

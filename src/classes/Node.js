@@ -4,8 +4,7 @@
  *	drawable nodes on the canvas
  **************************************/
 
-import 'lodash'
-import SVG from 'svg.js'
+import _ from 'lodash'
 import { EventBus } from '../main.js'
 
 let sizeX = 250
@@ -18,7 +17,7 @@ export default class Node {
     this.body = null
     this.headline = null
     this.hint = null
-    this._inputs = []
+    this._inputs = []
     this._outputs = []
 
     this._startDragging = false
@@ -76,12 +75,9 @@ export default class Node {
     this.element.add(this.hint)
   }
 
-  nodeClickEvent = function (event) {
+  nodeClickEvent = function () {
     // don't confuse click with dragmove event
-    console.log('click node')
     if (!this._gettingDragged) {
-      console.log(event.srcElement)
-      console.log(this._inputs)
       EventBus.$emit('selectNode', this)
     }
     this._gettingDragged = false
@@ -92,6 +88,7 @@ export default class Node {
     // ignore first emit of dragMove event
     if (this._startDragging) {
       this._gettingDragged = true
+      console.log('gettin DRAGGGGD')
     } else {
       this._startDragging = true
     }
@@ -104,16 +101,11 @@ export default class Node {
   }
 
   showElement = function () {
-    console.log(this.element)
+    //
   }
 
-  inputClickEvent = function (event) {
-    console.log("input clicked")
-    event.stopPropagation()
-  }
-
-  outputClickEvent = function (event) {
-    console.log("output clicked")
+  connectorClickEvent = function (event) {
+    EventBus.$emit('selectConnector', this, event.target.instance)
     event.stopPropagation()
   }
 
@@ -136,10 +128,10 @@ export default class Node {
         .attr({fill: '#FFFFFF', cursor: 'pointer'})
         .move(-7.5, 42 + this._inputs.length * 30))
       input.click(event => {
-        this.inputClickEvent(event)
+        this.connectorClickEvent(event)
       })
       this.element.add(input)
-      this._inputs.push(input)
+      this._inputs.push({name: input})
     })
     // Adjust the tile size
     if (this._inputs.length > 0) {
@@ -167,9 +159,9 @@ export default class Node {
         .circle(15, 15)
         .attr({fill: '#FFFFFF', cursor: 'pointer'})
         .move(sizeX - 7.5, 42 + this._outputs.length * 30))
-      output.click(event => this.outputClickEvent(event))
+      output.click(event => this.connectorClickEvent(event))
       this.element.add(output)
-      this._outputs.push(output)
+      this._outputs.push({name: output})
     })
     // Adjust the tile size
     if (this._outputs.length > 0) {
@@ -182,7 +174,7 @@ export default class Node {
 
   addDefaultBehavior = function () {
     this.element.node.childNodes[3].instance.click(event => this.nodeRemoveEvent(event))
-    this.element.on('dragmove', event => {
+    this.element.on('dragmove', () => {
       this.nodeMoveEvent()
     })
     this.element.click(element => {

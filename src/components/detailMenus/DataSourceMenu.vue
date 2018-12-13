@@ -11,15 +11,14 @@
     <md-divider></md-divider>
     <md-field>
       <label for="features">Features</label>
-      <md-select v-model="selectedFeatures" name="features" id="features" multiple @md-selected="updateSelection">
-        <md-option v-for="feature in features" :value="feature">{{ feature }}</md-option>
+      <md-select :disabled="!features.toString()" v-model="selectedFeatures" name="features" id="features" multiple @md-selected="updateSelection">
+        <md-option v-for="feature in features" :data="feature" :key="feature" :value="feature">{{ feature }}</md-option>
       </md-select>
     </md-field>
   </div>
 </template>
 
 <script>
-import { EventBus } from '../../main.js'
 import Papa from 'papaparse'
 
 const parseFile = function (fileList) {
@@ -47,7 +46,6 @@ export default {
   },
   data: function () {
     return {
-      file: null,
       showAlert: false,
       features: [],
       selectedFeatures: []

@@ -9,6 +9,7 @@ import 'svg.draggable.js'
 import 'svg.panzoom.js'
 
 import DataSource  from './DataSource.js'
+import Edge from './Edge.js'
 import Preprocessor from './Preprocessor.js'
 import Memory from './Memory.js'
 import { EventBus } from '../main.js'
@@ -25,6 +26,10 @@ const style = 'background-color: #161616; background-size: 20px 20px, 20px 20px;
 
 export default class Canvas {
 
+  nodes = []
+  edges = []
+  edgeInConstruction = null
+
   // creates an empty SVG canvas based on the configuration above
 	constructor () {
     this._canvas = new SVG(domId)
@@ -37,15 +42,26 @@ export default class Canvas {
       })
   }
 
-  createElement = function (elementName) {
+  createEdge = function (node, connector) {
+    if (!this.edgeInConstruction) {
+      this.edgeInConstruction = new Edge(this._canvas, connector)
+    } else {
+      this.edgeInConstruction.setEnd(connector)
+      this.edges.push(this.edgeInConstruction)
+      this.edgeInConstruction = null
+    }
+  }
+
+  createNode = function (nodeName) {
     // eslint-disable-next-line
     let node = null
-    switch (elementName) {
+    switch (nodeName) {
       case 'DATASOURCE': node = new DataSource(this._canvas, this.watchCanvas); break
       case 'PREPROCESSOR': node = new Preprocessor(this._canvas, this.watchCanvas); break
       case 'MEMORY': node = new Memory(this._canvas, this.watchCanvas); break
       default: break
     }
+    this.nodes.push(node)
   }
 
   watchCanvas = function () {
