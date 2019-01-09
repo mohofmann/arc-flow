@@ -10,43 +10,42 @@ const linecap = 'round'
 
 export default class Edge {
 
-	constructor (canvas, connector) {
+	constructor (canvas, node) {
 		this._line = null
 
 		this._inConstruction = false
 		this._canvas = canvas
-		this._startX = connector.rbox(this._canvas).cx
-		this._startY = connector.rbox(this._canvas).cy
-		this._endX = null
-		this._endY = null
-
-		this._inConstruction = true
+		this._start = node
 	}
 
-	setEnd = function (connector) {
-		this.endNode = connector
-		console.log(this.endNode)
-		this._endX = connector.rbox(this._canvas).cx
-		this._endY = connector.rbox(this._canvas).cy
+	setEnd = function (node) {
+		this._end = node
+		this._startConnector = this._start.findConnector(this)
+		this._endConnector = this._end.findConnector(this)
 		this.drawEdge()
 	}
 
 	drawEdge = function () {
 		this._line = this._canvas
-		.line(this._startX, this._startY, this._endX, this._endY)
+		.line(this._startConnector.rbox(this._canvas).cx,
+			this._startConnector.rbox(this._canvas).cy,
+			this._endConnector.rbox(this._canvas).cx,
+			this._endConnector.rbox(this._canvas).cy)
 		.stroke({ color: color, width: width, linecap: linecap })
+		.back()
 	}
 
-	moveStart = function (x, y) {
-		this.startX = x
-		this.startY = y
-		this._line.plot(this._startX, this._startY, this._endX, this._endY)
+	updatePosition = function () {
+		this._line.plot(this._startConnector.rbox(this._canvas).cx,
+			this._startConnector.rbox(this._canvas).cy,
+			this._endConnector.rbox(this._canvas).cx,
+			this._endConnector.rbox(this._canvas).cy)
 	}
 
-	moveEnd = function (x, y) {
-		this.endX = x
-		this.endY = y
-		this._line.plot(this._startX, this._startY, this._endX, this._endY)
+	remove = function () {
+		this._startConnector.edge = null
+		this._endConnector.edge = null
+		this._line.remove()
 	}
 
 }

@@ -43,10 +43,15 @@ export default class Canvas {
   }
 
   createEdge = function (node, connector) {
+    // On first connector, only create edge without drawing it
     if (!this.edgeInConstruction) {
-      this.edgeInConstruction = new Edge(this._canvas, connector)
+      this.edgeInConstruction = new Edge(this._canvas, node)
+      // TODO: DRY the node.setEdge 2 times in function
+      node.setEdge(connector, this.edgeInConstruction)
+    // As soon as second connector selected, actually draw edge between
     } else {
-      this.edgeInConstruction.setEnd(connector)
+      node.setEdge(connector, this.edgeInConstruction)
+      this.edgeInConstruction.setEnd(node)
       this.edges.push(this.edgeInConstruction)
       this.edgeInConstruction = null
     }
