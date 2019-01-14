@@ -2,7 +2,7 @@
   <div class="md-layout">
     <div class="md-layout-item md-size-100" id="editor"></div>
     <DetailMenu class="md-layout-item"></DetailMenu>
-    <md-button class="md-fab af-fab" disabled>
+    <md-button @click="run" class="md-fab af-fab">
       <md-icon>play_arrow</md-icon>
     </md-button>
   </div>
@@ -25,6 +25,10 @@ const setupEvents = function () {
   EventBus.$on('selectConnector', (node, connector) => canvas.createEdge(node, connector))
 }
 
+const run = function () {
+  canvas.nodes[0].run()
+}
+
 export default {
   name: 'Editor',
   components: {
@@ -32,6 +36,9 @@ export default {
   },
   props: {
     msg: String
+  },
+  methods: {
+    run: run
   },
   mounted: setupEditor,
   created: setupEvents

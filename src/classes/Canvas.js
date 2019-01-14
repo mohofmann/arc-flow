@@ -8,10 +8,10 @@ import SVG from 'svg.js'
 import 'svg.draggable.js'
 import 'svg.panzoom.js'
 
-import DataSource  from './DataSource.js'
+import DataSource  from './nodes/DataSource.js'
+import Preprocessor from './nodes/Preprocessor.js'
+import Memory from './nodes/Memory.js'
 import Edge from './Edge.js'
-import Preprocessor from './Preprocessor.js'
-import Memory from './Memory.js'
 import { EventBus } from '../main.js'
 
 const domId = 'editor'
@@ -42,16 +42,16 @@ export default class Canvas {
       })
   }
 
-  createEdge = function (node, connector) {
+  createEdge = function (connector) {
     // On first connector, only create edge without drawing it
     if (!this.edgeInConstruction) {
-      this.edgeInConstruction = new Edge(this._canvas, node)
+      this.edgeInConstruction = new Edge(this._canvas, connector)
       // TODO: DRY the node.setEdge 2 times in function
-      node.setEdge(connector, this.edgeInConstruction)
+      connector.setEdge(this.edgeInConstruction)
     // As soon as second connector selected, actually draw edge between
     } else {
-      node.setEdge(connector, this.edgeInConstruction)
-      this.edgeInConstruction.setEnd(node)
+      connector.setEdge(this.edgeInConstruction)
+      this.edgeInConstruction.setEnd(connector)
       this.edges.push(this.edgeInConstruction)
       this.edgeInConstruction = null
     }

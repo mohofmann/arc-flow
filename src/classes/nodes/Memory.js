@@ -4,7 +4,7 @@
  *	memory like a ring buffer
  **************************************/
 
-import Node from './Node.js'
+import Node from '../Node.js'
  
 let attributes = {
 	backgroundColor: '#FFB000',

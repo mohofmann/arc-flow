@@ -4,7 +4,7 @@
  *	energy calculation
  **************************************/
 
-import Node from './Node.js'
+import Node from '../Node.js'
  
 let attributes = {
 	backgroundColor: '#F06',

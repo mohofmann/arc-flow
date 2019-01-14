@@ -4,7 +4,7 @@
  *	data input for the chain
  **************************************/
 
-import Node from './Node.js'
+import Node from '../Node.js'
 
 let attributes = {
 	backgroundColor: '#57A9FF',
