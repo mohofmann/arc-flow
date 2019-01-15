@@ -107,7 +107,6 @@ export default class Node {
   }
 
   nodeClickEvent = function () {
-    console.log(this.outputs);
     // don't confuse click with dragmove event
     if (!this._gettingDragged) {
       EventBus.$emit('selectNode', this)

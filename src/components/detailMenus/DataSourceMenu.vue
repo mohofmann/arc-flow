@@ -6,7 +6,7 @@
     <h4>Data Source</h4>
     <md-field>
       <label>Upload CSV</label>
-      <md-file @md-change="parseFile" style="max-width: 100% !important"/>
+      <md-file @md-change="parseFile" :placeholder="fileName" style="max-width: 100% !important"/>
     </md-field>
     <md-divider></md-divider>
     <md-field>
@@ -22,18 +22,23 @@
 import Papa from 'papaparse'
 
 const parseFile = function (fileList) {
-  const file = fileList[0]
-  Papa.parse(file, {
-    complete: result => {
-      this.showAlert = true
-      this.node.setData(result)
-      this.features = result.data[0]
-      this.selectedFeatures = this.features.slice(0,3)
-    }
-  })
+  console.log(fileList);
+  if (fileList) {
+    const file = fileList[0]
+    Papa.parse(file, {
+      complete: result => {
+        this.showAlert = true
+        this.node.setData(result)
+        this.node.name = file.name
+        this.features = result.data[0]
+        this.selectedFeatures = this.features.slice(0,3)
+      }
+    })
+  }
 }
 
 const updateSelection = function () {
+  console.log("update selection gets called");
   if (this.node) {
     this.node.setFeatures(this.selectedFeatures)
   }
@@ -47,13 +52,18 @@ export default {
   data: function () {
     return {
       showAlert: false,
-      features: [],
-      selectedFeatures: []
+      features: this.node.data ? this.node.data.data[0] : [],
+      selectedFeatures: this.node.features,
+      fileName: this.node.name
     }
   },
   methods: {
     parseFile: parseFile,
     updateSelection: updateSelection
+  },
+  created: function () {
+    console.log("created yay");
+
   }
 }
 </script>

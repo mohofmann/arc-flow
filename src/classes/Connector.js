@@ -19,6 +19,7 @@ export default class Connector {
     this.node = node
   	this.data = null
   	this.edge = null
+    this.name = name
   	this.element = null
 
   	let circlePos = type === 'INPUT' ? -7.5 : node.sizeX - 7.5
@@ -28,7 +29,7 @@ export default class Connector {
 
     this.element = canvas.group()
     let text = canvas
-      .text(name)
+      .text(this.name)
       .move(textPos, verticalMargin + verticalPos * height)
       .attr({fill: '#00000099', cursor: 'default'})
       .font({anchor: anchor, weight: '600'})

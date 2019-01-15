@@ -20,6 +20,7 @@
       <label for="fieldAmount">Memory Fields</label>
       <md-input v-model="fieldAmount" @keyup.native="updateAttributes"></md-input>
     </md-field>
+    {{ fieldAmount }}
   </div>
 </template>
 
@@ -44,7 +45,7 @@ export default {
   data: function () {
     return {
       memoryType: 'RINGBUFFER',
-      fieldAmount: 256,
+      fieldAmount: this.node.fieldAmount,
       fieldSize: 0,
       sizeOptions: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     }

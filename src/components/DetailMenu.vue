@@ -1,10 +1,11 @@
 <template>
   <!-- Sidebar -->
-    <md-drawer class="af-column-padding md-right" :md-active.sync="nodeSelected">
-      <DataSourceMenu :node="selectedNode" v-show="selectedNodeType == 'DataSource'">
+    <md-drawer class="af-column-padding md-right" :md-active.sync="nodeSelected" @md-closed="deselectNode">
+      <DataSourceMenu :node="selectedNode" v-if="selectedNodeType == 'DataSource'">
       </DataSourceMenu>
-      <MemoryMenu :node="selectedNode" v-show="selectedNodeType == 'Memory'">
+      <MemoryMenu :node="selectedNode" v-if="selectedNodeType == 'Memory'">
       </MemoryMenu>
+      <!-- <Component v-bind:is="selectedNodeType+'Menu'" :node="selectedNode"></Component> -->
     </md-drawer>
 </template>
 
@@ -20,10 +21,15 @@ const setupEvents = function () {
     this.selectedNodeType = node.constructor.name
   })
   EventBus.$on('deselectNode', node => {
-    this.nodeSelected = false
-    this.selectedNode = null
-    this.selectedNodeType = null
+    deselectNode();
   })
+}
+
+let deselectNode = function () {
+  console.log("deselectiooon");
+  this.nodeSelected = false
+  this.selectedNode = null
+  this.selectedNodeType = null
 }
 
 export default {
@@ -40,6 +46,7 @@ export default {
     };
   },
   methods: {
+    deselectNode: deselectNode
   },
   created: setupEvents
 }

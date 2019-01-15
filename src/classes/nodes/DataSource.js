@@ -19,6 +19,7 @@ export default class DataSource extends Node {
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
 		this.data = null
+		this.name = ""
 		this.features = []
 		this._index = 0
 	}
