@@ -5,7 +5,7 @@
     <br>
     <md-field>
       <label for="calculation">Calculation</label>
-      <md-select v-model="preprocessorType">
+      <md-select v-model="preprocessorType" @md-selected="updateType">
         <md-option value="ENERGY">Energy</md-option>
       </md-select>
     </md-field>
@@ -21,8 +21,12 @@
 <script>
 import { EventBus } from '../../main.js'
 
-const updateInputs  = function () {
+const updateInputs = function () {
 
+}
+
+const updateType = function () {
+  this.node.setType(this.preprocessorType)
 }
 
 export default {
@@ -32,13 +36,14 @@ export default {
   },
   data: function () {
     return {
-      preprocessorType: 'ENERGY',
+      preprocessorType: this.node.type,
       inputSize: this.node.inputs.length,
       sizeOptions: [1, 2, 3, 4, 5, 6, 7, 8, 9]
     }
   },
   methods: {
-    updateInputs: updateInputs
+    updateInputs: updateInputs,
+    updateType: updateType
   }
 }
 </script>

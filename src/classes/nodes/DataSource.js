@@ -33,7 +33,6 @@ export default class DataSource extends Node {
 	setFeatures = function (features) {
 		this.features = features
 		this.setOutputs(features)
-		console.log(this.outputs);
 	}
 
 	updateNode = function () {
@@ -41,15 +40,24 @@ export default class DataSource extends Node {
 		this.headline.text(attributes.title + ' (CSV)')
 	}
 
+	_runSuccessors () {
+		// Empty function as datasource acts as initial
+		// clock and runs successor nodes not once but for every
+		// data row (see _perform function)
+	}
+
 	_perform () {
 		this._index += 1 // Skip first row containing labels
 		_.each(this.data.data, row => {
 			_.each(this.outputs, (output, index) => {
-				output.edge._end.data = row[index]
-				output.edge._end.node.run()
+				if (output.edge) {
+					output.edge._end.data = row[index]
+					// Run successor nodes once for each parsed row
+					output.edge._end.node.run()
+				}
 			})
 		})
-		console.log("done");
+		console.log("Flow execution done.");
 	}
 
 }

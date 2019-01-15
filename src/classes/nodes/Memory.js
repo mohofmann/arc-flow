@@ -43,10 +43,14 @@ export default class Memory extends Node {
 
 	_perform = function () {
 		let newField = []
-		_.each(this.inputs, function (input) {
+		_.each(this.inputs, (input, index) => {
 			newField.push(input.data)
+			if (this.outputs[index].edge) {
+				this.outputs[index].edge._end.data = input.data
+			}
 		})
 		this.store(newField)
+		console.log(newField);
 	}
 
 	setFieldSize = function (fieldSize) {
@@ -69,7 +73,6 @@ export default class Memory extends Node {
 		this.increaseIndex()
 		this.fields[this.index] = newField
 		console.log("Index is at ") + console.log(this.index)
-		console.log(this.fields)
 	}
 
 	increaseIndex = function () {

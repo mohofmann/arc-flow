@@ -1,5 +1,14 @@
 <template>
   <div class="md-layout">
+    <md-snackbar md-position="center" :md-duration="4000" :md-active.sync="showProgress" md-persistent>
+      <span>Flow is running</span>
+    </md-snackbar>
+    <md-snackbar md-position="center" :md-duration="2000" :md-active.sync="showSuccess" md-persistent>
+      <span>Flow successfully executed</span>
+    </md-snackbar>
+    <md-snackbar md-position="center" :md-duration="2000" :md-active.sync="showError" md-persistent>
+      <span>Flow execution failed</span>
+    </md-snackbar>
     <div class="md-layout-item md-size-100" id="editor"></div>
     <DetailMenu class="md-layout-item"></DetailMenu>
     <md-button @click="run" class="md-fab af-fab">
@@ -26,7 +35,15 @@ const setupEvents = function () {
 }
 
 const run = function () {
-  canvas.nodes[0].run()
+  try {
+    this.showProgress = true
+    canvas.nodes[0].run()
+    this.showSuccess = true
+  }
+  catch (error) {
+    this.showError = true
+    console.log(error)
+  }
 }
 
 export default {
@@ -36,6 +53,13 @@ export default {
   },
   props: {
     msg: String
+  },
+  data: function () {
+    return {
+      showError: false,
+      showProgress: false,
+      showSuccess: false
+    }
   },
   methods: {
     run: run

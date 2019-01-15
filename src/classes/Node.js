@@ -55,9 +55,17 @@ export default class Node {
       _.each(this.inputs, input => {
         input.data = null
       })
+      // And every output requests execution of the successors
+      this._runSuccessors()
     } else {
-      console.log('refusing run as data missing');
+      console.log('REFUSING TO RUN AS NO DATA PRESENT');
     }
+  }
+
+  _runSuccessors () {
+    _.each(this.outputs, output => {
+      output.edge && output.edge._end.node.run()
+    })
   }
 
   _perform () {
