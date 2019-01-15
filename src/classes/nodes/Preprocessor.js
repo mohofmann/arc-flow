@@ -10,16 +10,19 @@ let attributes = {
 	backgroundColor: '#F06',
 	headerColor: '#CF0053',
 	title: 'Preprocessor',
-	hint: 'Connect inputs to Data Source'
+	hint: 'Connect inputs'
 }
 
 export default class Preprocessor extends Node {
 
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
+
+		this.setInputs(["1", "2", "3"])
+		this.setOutputs(["Energy"])
 	}
 
-	perform = function (args) {
+	_perform = function (args) {
 		calculateEnergy(args)
 	}
 

@@ -20,7 +20,6 @@
       <label for="fieldAmount">Memory Fields</label>
       <md-input v-model="fieldAmount" @keyup.native="updateAttributes"></md-input>
     </md-field>
-    {{ fieldAmount }}
   </div>
 </template>
 

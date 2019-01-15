@@ -1,17 +1,14 @@
 <template>
   <!-- Sidebar -->
     <md-drawer class="af-column-padding md-right" :md-active.sync="nodeSelected" @md-closed="deselectNode">
-      <DataSourceMenu :node="selectedNode" v-if="selectedNodeType == 'DataSource'">
-      </DataSourceMenu>
-      <MemoryMenu :node="selectedNode" v-if="selectedNodeType == 'Memory'">
-      </MemoryMenu>
-      <!-- <Component v-bind:is="selectedNodeType+'Menu'" :node="selectedNode"></Component> -->
+      <Component v-bind:is="selectedNode && selectedNodeType+'Menu'" :node="selectedNode"></Component>
     </md-drawer>
 </template>
 
 <script>
 import DataSourceMenu from './detailMenus/DataSourceMenu.vue'
 import MemoryMenu from './detailMenus/MemoryMenu.vue'
+import PreprocessorMenu from './detailMenus/PreprocessorMenu.vue'
 import { EventBus } from '../main.js'
 
 const setupEvents = function () {
@@ -37,7 +34,8 @@ export default {
   name: 'DetailMenu',
   components: {
     DataSourceMenu,
-    MemoryMenu
+    MemoryMenu,
+    PreprocessorMenu
   },
   data: function () {
     return {

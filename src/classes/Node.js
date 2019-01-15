@@ -150,7 +150,8 @@ export default class Node {
       this.inputs.push(connector)
     })
     // Adjust the tile size
-    this.adjustHeight(this.inputs)
+    console.log(this.inputs.length + ", " + this.outputs.length)
+    this.adjustHeight()
   }
 
   setOutputs = function (outputs) {
@@ -163,7 +164,8 @@ export default class Node {
       this.outputs.push(connector)
     })
     // Adjust the tile size
-    this.adjustHeight(this.outputs)
+    console.log(this.inputs.length + ", " + this.outputs.length)
+    this.adjustHeight()
   }
 
   resetConnectors = function (connectors) {
@@ -173,9 +175,10 @@ export default class Node {
     })
   }
 
-  adjustHeight = function (connectors) {
-    if (connectors.length > 0) {
-      this.body.size(sizeX, sizeY + 30 * connectors.length - 30)
+  adjustHeight = function () {
+    const connectorCount = Math.max(this.inputs.length, this.outputs.length)
+    if (connectorCount > 0) {
+      this.body.size(sizeX, sizeY + 30 * connectorCount - 30)
     } else {
       this.body.size(sizeX, sizeY)
     }
