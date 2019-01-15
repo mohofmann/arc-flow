@@ -5,6 +5,7 @@
  **************************************/
 
 import Node from '../Node.js'
+import _ from 'lodash'
 
 let attributes = {
 	backgroundColor: '#57A9FF',
@@ -31,6 +32,7 @@ export default class DataSource extends Node {
 	setFeatures = function (features) {
 		this.features = features
 		this.setOutputs(features)
+		console.log(this.outputs);
 	}
 
 	updateNode = function () {
@@ -38,16 +40,15 @@ export default class DataSource extends Node {
 		this.headline.text(attributes.title + ' (CSV)')
 	}
 
-	_perform = function () {
+	_perform () {
 		this._index += 1 // Skip first row containing labels
-		console.log(this.data)
-		console.log(this.features)
-		console.log(this._outputs)
-		// _.each(this.data.data, function (row) {
-		// 	_.each(this._outputs, function (output, index) {
-		// 		output.edge.
-		// 	})
-		// })
+		_.each(this.data.data, row => {
+			_.each(this.outputs, (output, index) => {
+				output.edge._end.data = row[index]
+				output.edge._end.node.run()
+			})
+		})
+		console.log("done");
 	}
 
 }

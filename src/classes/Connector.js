@@ -16,6 +16,7 @@ export default class Connector {
 
   constructor (canvas, node, name, type) {
   	this._canvas = canvas
+    this.node = node
   	this.data = null
   	this.edge = null
   	this.element = null

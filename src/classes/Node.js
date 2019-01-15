@@ -51,12 +51,16 @@ export default class Node {
     if (_.every(this.inputs, 'data')) {
       console.log('running and all data present');
       this._perform()
+      // After performing, input data gets resetted
+      _.each(this.inputs, input => {
+        input.data = null
+      })
     } else {
       console.log('refusing run as data missing');
     }
   }
 
-  _perform = function () {
+  _perform () {
     // Perform behavior should be customly overwritten
     // by every node implementation
   }
@@ -103,6 +107,7 @@ export default class Node {
   }
 
   nodeClickEvent = function () {
+    console.log(this.outputs);
     // don't confuse click with dragmove event
     if (!this._gettingDragged) {
       EventBus.$emit('selectNode', this)
@@ -136,72 +141,41 @@ export default class Node {
     //
   }
 
-  // TODO: DRY setInputs and setOutputs functions
   setInputs = function (inputs) {
     // Remove existing inputs
-    _.each(this.inputs, el => {
-      el.element.remove()
-    })
-    this.inputs = []
+    this.resetConnectors(this.inputs)
+    this.inputs = []
     // Add every single input
     _.each(inputs, el => {
       let connector = new Connector(this._canvas, this, el, 'INPUT')
       this.inputs.push(connector)
-      // let input = this._canvas.group()
-      // let text = this._canvas
-      //   .text(el)
-      //   .move(20, 42 + this.inputs.length * 30)
-      //   .attr({fill: '#00000099', cursor: 'default'})
-      //   .font({anchor: 'start', weight: '600'})
-      // let connector = this._canvas
-      //   .circle(15, 15)
-      //   .attr({fill: '#FFFFFF', cursor: 'pointer'})
-      //   .move(-7.5, 42 + this.inputs.length * 30)
-      // input.add(text)
-      // input.add(connector)
-      // input.click(event => {
-      //   this.connectorClickEvent(event)
-      // })
-      // this.element.add(input)
-      // this.inputs.push({element: input, edge: null, data: null })
     })
     // Adjust the tile size
-    if (this.inputs.length > 0) {
-      this.body.size(sizeX, sizeY + 30 * this.inputs.length - 30)
-    } else {
-      this.body.size(sizeX, sizeY)
-    }
+    this.adjustHeight(this.inputs)
   }
 
   setOutputs = function (outputs) {
     // Remove existing inputs
-    _.each(this.outputs, el => {
-      el.element.remove()
-    })
-    this.outputs = []
+    this.resetConnectors(this.outputs)
+    this.outputs = []
     // Add every single input
     _.each(outputs, el => {
       let connector = new Connector(this._canvas, this, el, 'OUTPUT')
       this.outputs.push(connector)
-      // let output = this._canvas.group()
-      // let text = this._canvas
-      //   .text(el)
-      //   .move(sizeX - 20, 42 + this.outputs.length * 30)
-      //   .attr({fill: '#00000099', cursor: 'default'})
-      //   .font({anchor: 'end', weight: '600'})
-      // let connector = this._canvas
-      //   .circle(15, 15)
-      //   .attr({fill: '#FFFFFF', cursor: 'pointer'})
-      //   .move(sizeX - 7.5, 42 + this.outputs.length * 30)
-      // output.add(text)
-      // output.add(connector)
-      // output.click(event => this.connectorClickEvent(event))
-      // this.element.add(output)
-      // this.outputs.push({element: output, edge: null})
     })
     // Adjust the tile size
-    if (this.outputs.length > 0) {
-      this.body.size(sizeX, sizeY + 30 * this.outputs.length - 30)
+    this.adjustHeight(this.outputs)
+  }
+
+  resetConnectors = function (connectors) {
+    _.each(connectors, connector => {
+      connector.element.remove()
+    })
+  }
+
+  adjustHeight = function (connectors) {
+    if (connectors.length > 0) {
+      this.body.size(sizeX, sizeY + 30 * connectors.length - 30)
     } else {
       this.body.size(sizeX, sizeY)
     }
