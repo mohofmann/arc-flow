@@ -21,11 +21,12 @@ export default class Connector {
   	this.edge = null
     this.name = name
   	this.element = null
+    this.type = type
 
-  	let circlePos = type === 'INPUT' ? -7.5 : node.sizeX - 7.5
-    let textPos = type === 'INPUT' ? 20 : node.sizeX - 20
-    let verticalPos = type === 'INPUT' ? node.inputs.length : node.outputs.length
-    let anchor = type === 'INPUT' ? 'start' : 'end'
+  	let circlePos = this.type === 'INPUT' ? -7.5 : node.sizeX - 7.5
+    let textPos = this.type === 'INPUT' ? 20 : node.sizeX - 20
+    let verticalPos = this.type === 'INPUT' ? node.inputs.length : node.outputs.length
+    let anchor = this.type === 'INPUT' ? 'start' : 'end'
 
     this.element = canvas.group()
     let text = canvas

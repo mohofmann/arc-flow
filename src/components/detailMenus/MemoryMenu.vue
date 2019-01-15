@@ -46,7 +46,7 @@ export default {
     return {
       memoryType: 'RINGBUFFER',
       fieldAmount: this.node.fieldAmount,
-      fieldSize: 0,
+      fieldSize: this.node.fieldSize,
       sizeOptions: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     }
   },

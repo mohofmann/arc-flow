@@ -51,8 +51,11 @@ export default class Canvas {
     // As soon as second connector selected, actually draw edge between
     } else {
       connector.setEdge(this.edgeInConstruction)
-      this.edgeInConstruction.setEnd(connector)
-      this.edges.push(this.edgeInConstruction)
+      if (this.edgeInConstruction.setEnd(connector)) {
+        this.edges.push(this.edgeInConstruction)
+      } else {
+        this.edgeInConstruction.remove()
+      }
       this.edgeInConstruction = null
     }
   }

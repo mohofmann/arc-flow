@@ -19,6 +19,7 @@ export default class Memory extends Node {
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
 		this.fieldAmount = 256
+		this.fieldSize = 0
 		this.index = 0
 		this.fields = []
 		this.adjustFields()

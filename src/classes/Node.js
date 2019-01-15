@@ -169,6 +169,7 @@ export default class Node {
   resetConnectors = function (connectors) {
     _.each(connectors, connector => {
       connector.element.remove()
+      connector.edge && connector.edge.remove()
     })
   }
 
@@ -192,22 +193,6 @@ export default class Node {
         el.edge = edge
       }
     })
-  }
-
-  // returns the node's connector for a given edge
-  findConnector = function (edge) {
-    let result = null
-    this.inputs.find( input => {
-      if (input.edge == edge) {
-        result = input.element.get(1)
-      }
-    })
-    this.outputs.find( output => {
-      if (output.edge == edge) {
-        result = output.element.get(1)
-      }
-    })
-    return result
   }
 
   addDefaultBehavior = function () {

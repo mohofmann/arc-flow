@@ -20,7 +20,12 @@ export default class Edge {
 
 	setEnd = function (connector) {
 		this._end = connector
-		this.drawEdge()
+		if (this._start.type != this._end.type) {
+			this.drawEdge()
+			return true
+		} else {
+			return false
+		}
 	}
 
 	drawEdge = function () {
@@ -47,7 +52,7 @@ export default class Edge {
 	remove = function () {
 		this._start.edge = null
 		this._end.edge = null
-		this._line.remove()
+		this._line && this._line.remove()
 	}
 
 }

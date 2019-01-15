@@ -26,10 +26,11 @@ const setupEvents = function () {
 }
 
 let deselectNode = function () {
-  console.log("deselectiooon");
-  this.nodeSelected = false
-  this.selectedNode = null
-  this.selectedNodeType = null
+  if (this) {
+    this.nodeSelected = false
+    this.selectedNode = null
+    this.selectedNodeType = null
+  }
 }
 
 export default {
