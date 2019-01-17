@@ -23,17 +23,18 @@ export default class Preprocessor extends Node {
 	}
 
 	_perform = function (args) {
-		let energy = 1
+		let energy = 0
 		_.each(this.inputs, input => {
-			energy *= input.data
+			energy += (input.data * input.data)
 		})
-		this.outputs[0].data = energy
+		this.outputs[0].edge._end.data = energy
 		console.log(energy)
 	}
 
 	setType = function (type) {
 		this.type = type
 		this.type && this.headline.text(attributes.title + ' (' + this.type + ')')
+		this.hint.text("")
 		this.setOutputs([this.type])
 	}
 

@@ -9,6 +9,7 @@
 import DataSourceMenu from './detailMenus/DataSourceMenu.vue'
 import MemoryMenu from './detailMenus/MemoryMenu.vue'
 import PreprocessorMenu from './detailMenus/PreprocessorMenu.vue'
+import PeakDetectorMenu from './detailMenus/PeakDetectorMenu.vue'
 import { EventBus } from '../main.js'
 
 const setupEvents = function () {
@@ -35,7 +36,8 @@ export default {
   components: {
     DataSourceMenu,
     MemoryMenu,
-    PreprocessorMenu
+    PreprocessorMenu,
+    PeakDetectorMenu
   },
   data: function () {
     return {

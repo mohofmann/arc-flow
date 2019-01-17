@@ -7,6 +7,7 @@
     <md-button class="md-raised af-full-width" @click="createNode('DATASOURCE')">&nbsp;{{ msg }}&nbsp;&nbsp;</md-button>
     <md-button class="md-raised af-full-width" @click="createNode('MEMORY')">Memory</md-button>
     <md-button class="md-raised af-full-width" @click="createNode('PREPROCESSOR')">Preprocessor</md-button>
+    <md-button class="md-raised af-full-width" @click="createNode('PEAKDETECTOR')">Peak Detector</md-button>
   </nav>
 </template>
 

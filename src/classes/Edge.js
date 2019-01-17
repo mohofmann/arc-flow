@@ -16,21 +16,28 @@ export default class Edge {
 		this._inConstruction = false
 		this._canvas = canvas
 		this._start = connector
+
+		this.drawEdge()
 	}
 
 	setEnd = function (connector) {
 		this._end = connector
 		if (this._start.type != this._end.type) {
-			this.drawEdge()
+			this.updatePosition()
 			return true
 		} else {
 			return false
 		}
 	}
 
+	followMouse = function (pos) {
+		let startPos = this._start.getPos()
+		this._line.plot(startPos.x, startPos.y, pos.x, pos.y)
+	}
+
 	drawEdge = function () {
 		let startPos = this._start.getPos()
-		let endPos = this._end.getPos()
+		let endPos = this._start.getPos()
 		this._line = this._canvas
 		.line(startPos.x,
 			startPos.y,
