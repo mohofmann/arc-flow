@@ -48,9 +48,8 @@ export default class PeakDetector extends Node {
 		// check whether a previously marked peak candidate was really a peak
 		if (this._lastPeakValue > 0 && this._samplesSinceLastPeak >= this.minPeakDistance) {
 			console.log("----")
-		  console.log("Peak found:")
-		  console.log(this._lastPeakValue)
-		  console.log("at position " + this._counter)
+		  console.log("Peak found: " + this._lastPeakValue)
+		  console.log("at position " + (this._counter - this._samplesSinceLastPeak))
 		  console.log("----")
 		  this._lastPeakValue = 0
 		}

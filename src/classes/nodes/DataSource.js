@@ -60,7 +60,7 @@ export default class DataSource extends Node {
 		_.each(data, row => {
 			_.each(this.outputs, (output, index) => {
 				if (output.edge) {
-					output.edge._end.data = row[index]
+					output.edge._end.data = row[this._featureIndices[index]]
 					// Run successor nodes once for each parsed row
 					output.edge._end.node.run()
 				}
