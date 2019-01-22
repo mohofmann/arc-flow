@@ -68,6 +68,11 @@ export default class Node {
     })
   }
 
+  _preperform () {
+    // Gets executed once for each node
+    // before flow gets executed
+  }
+
   _perform () {
     // Perform behavior should be customly overwritten
     // by every node implementation
@@ -158,7 +163,6 @@ export default class Node {
       this.inputs.push(connector)
     })
     // Adjust the tile size
-    console.log(this.inputs.length + ", " + this.outputs.length)
     this.adjustHeight()
   }
 
@@ -172,7 +176,6 @@ export default class Node {
       this.outputs.push(connector)
     })
     // Adjust the tile size
-    console.log(this.inputs.length + ", " + this.outputs.length)
     this.adjustHeight()
   }
 

@@ -38,6 +38,7 @@ const parseFile = function (fileList) {
 }
 
 const updateSelection = function () {
+  if (this.selectedFeatures == this.node.features) return
   console.log("update selection gets called");
   if (this.node) {
     this.node.setFeatures(this.selectedFeatures)

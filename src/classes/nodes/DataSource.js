@@ -21,6 +21,7 @@ export default class DataSource extends Node {
 		this.data = null
 		this.name = ""
 		this.features = []
+		this._featureIndices = []
 		this._index = 0
 	}
 
@@ -30,8 +31,16 @@ export default class DataSource extends Node {
 		this.setFeatures(this.data.data[0])
 	}
 
+	_setFeatureIndices () {
+		this._featureIndices = []
+		_.each(this.features, feature => {
+			this._featureIndices.push(_.findIndex(this.data.data[0], o => { return o == feature}))
+		})
+	}
+
 	setFeatures = function (features) {
 		this.features = features
+		this._setFeatureIndices()
 		this.setOutputs(features)
 	}
 
@@ -47,8 +56,8 @@ export default class DataSource extends Node {
 	}
 
 	_perform () {
-		this._index += 1 // Skip first row containing labels
-		_.each(this.data.data, row => {
+		let data = _.tail(this.data.data)
+		_.each(data, row => {
 			_.each(this.outputs, (output, index) => {
 				if (output.edge) {
 					output.edge._end.data = row[index]

@@ -25,10 +25,13 @@ export default class Preprocessor extends Node {
 	_perform = function (args) {
 		let energy = 0
 		_.each(this.inputs, input => {
+			console.log("current signal: " + input.data);
 			energy += (input.data * input.data)
 		})
-		this.outputs[0].edge._end.data = energy
-		console.log(energy)
+		if (this.outputs[0].edge) {
+			this.outputs[0].edge._end.data = energy
+		}
+		console.log("energy is: " + energy)
 	}
 
 	setType = function (type) {

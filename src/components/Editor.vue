@@ -35,6 +35,9 @@ const setupEvents = function () {
 }
 
 const run = function () {
+  _.each(canvas.nodes, node => {
+    node._preperform()
+  })
   try {
     this.showProgress = true
     canvas.nodes[0].run()

@@ -29,12 +29,14 @@ export default class PeakDetector extends Node {
 		this.minPeakHeight = 0
 		this.minPeakDistance = 0
 
+		defaultInputs && this.setInputs(defaultInputs)
+    defaultOutputs && this.setOutputs(defaultOutputs)
+	}
+
+	_preperform () {
 		this._samplesSinceLastPeak = 0
 		this._lastPeakValue = 0
 		this._counter = 0
-
-		defaultInputs && this.setInputs(defaultInputs)
-    defaultOutputs && this.setOutputs(defaultOutputs)
 	}
 
 	_perform = function () {
@@ -45,7 +47,11 @@ export default class PeakDetector extends Node {
  
 		// check whether a previously marked peak candidate was really a peak
 		if (this._lastPeakValue > 0 && this._samplesSinceLastPeak >= this.minPeakDistance) {
-		  console.log("Peak found: " + this._lastPeakValue + " at position " + this._counter)
+			console.log("----")
+		  console.log("Peak found:")
+		  console.log(this._lastPeakValue)
+		  console.log("at position " + this._counter)
+		  console.log("----")
 		  this._lastPeakValue = 0
 		}
  
