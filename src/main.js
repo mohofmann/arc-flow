@@ -9,6 +9,7 @@ import {
 	MdDivider,
 	MdCheckbox,
 	MdMenu,
+	MdSwitch,
 	MdList } from 'vue-material/dist/components'
 
 import App from './App.vue'
@@ -27,6 +28,7 @@ Vue.use(MdDrawer)
 Vue.use(MdDivider)
 Vue.use(MdCheckbox)
 Vue.use(MdMenu)
+Vue.use(MdSwitch)
 Vue.use(MdList)
 
 // Create event Bus

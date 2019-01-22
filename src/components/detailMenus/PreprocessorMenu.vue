@@ -15,6 +15,7 @@
         <md-option v-for="size in sizeOptions" :value="size">{{ size }}</md-option>
       </md-select>
     </md-field>
+    <md-switch v-model="node.logging">Logging</md-switch>
   </div>
 </template>
 

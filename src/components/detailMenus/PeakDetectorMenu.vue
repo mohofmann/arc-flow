@@ -13,6 +13,7 @@
       <label for="fieldAmount">Min Peak Distance</label>
       <md-input v-model="minPeakDistance" @keyup.native="updateAttributes"></md-input>
     </md-field>
+    <md-switch v-model="node.logging">Logging</md-switch>
   </div>
 </template>
 

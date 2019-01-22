@@ -18,6 +18,7 @@ export default class Node {
     this.body = null
     this.headline = null
     this.hint = null
+    this.logging = false
     this.inputs = []
     this.outputs = []
     this.sizeX = sizeX
@@ -49,7 +50,6 @@ export default class Node {
   run = function () {
     // Only execute computation if every input got data
     if (_.every(this.inputs, 'data')) {
-      console.log('running and all data present');
       this._perform()
       // After performing, input data gets resetted
       _.each(this.inputs, input => {
@@ -58,8 +58,16 @@ export default class Node {
       // And every output requests execution of the successors
       this._runSuccessors()
     } else {
-      console.log('REFUSING TO RUN AS NO DATA PRESENT');
+      //
     }
+  }
+
+  log () {
+    this.logging && this._log()
+  }
+
+  _log () {
+    // To be overwritten by every implementation
   }
 
   _runSuccessors () {

@@ -15,6 +15,7 @@
         <md-option v-for="feature in features" :data="feature" :key="feature" :value="feature">{{ feature }}</md-option>
       </md-select>
     </md-field>
+    <md-switch v-model="node.logging">Logging</md-switch>
   </div>
 </template>
 
