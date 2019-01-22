@@ -49,7 +49,6 @@ export default class PeakDetector extends Node {
 	_perform = function () {
 		this._samplesSinceLastPeak ++
 		this._counter ++
-		console.log("works")
 		let energy = this.inputs[0].data
  
 		// check whether a previously marked peak candidate was really a peak
