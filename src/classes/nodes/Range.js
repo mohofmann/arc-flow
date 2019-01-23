@@ -55,18 +55,28 @@ export default class Range extends Node {
 		this.store(newField)
 	}
 
+	setRange (range) {
+		this.range = range
+		let rangeLabel = range > 0 ? " (Range: " + this.range + ")" : ""
+		_.each(this.outputs, (output, index) => {
+			output.element.get(0).text((index + 1) + rangeLabel)
+		})
+	}
+
 	setFieldSize = function (fieldSize) {
 		if (fieldSize == 0) {
 			this.setInputs([])
 			this.hint.text(attributes.hint)
 		} else {
 			this.fieldSize = fieldSize
-			let fields = []
+			let inputs = []
+			let outputs = []
 			for (let i = 1; i <= fieldSize; i ++) {
-				fields.push(i.toString())
+				inputs.push(i.toString())
+				outputs.push(i.toString())
 			}
-			this.setInputs(fields)
-			this.setOutputs(fields)
+			this.setInputs(inputs)
+			this.setOutputs(outputs)
 			this.hint.text("")
 		}	
 	}
@@ -80,12 +90,13 @@ export default class Range extends Node {
 		this.index = (this.index + 1) % this.fieldAmount
 	}
 
-	updateNode = function (fieldSize, fieldAmount) {
+	updateNode = function (fieldSize, fieldAmount, range) {
 		this.fieldAmount = fieldAmount
 		this.adjustFields()
 		if (this.fieldSize != fieldSize) {
 			this.setFieldSize(fieldSize)
 		}
+		this.setRange(range)
 	}
 
 }

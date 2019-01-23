@@ -1,6 +1,6 @@
 <template>
   <div class="md-content">
-    <h4>Memory</h4>
+    <h4>Range</h4>
     <md-divider></md-divider>
     <br>
     <md-field>
@@ -23,7 +23,7 @@
     <md-field>
       <md-icon>linear_scale</md-icon>
       <label for="fieldAmount">Range Size</label>
-      <md-input v-model="outputRange" @keyup.native="updateAttributes"></md-input>
+      <md-input v-model="rangeSize" @keyup.native="updateAttributes"></md-input>
     </md-field>
     <md-switch v-model="node.logging">Logging</md-switch>
   </div>
@@ -37,9 +37,7 @@ const changeMemoryType = function () {
 }
 
 const updateAttributes  = function () {
-  if (this.node) {
-    this.node.updateNode(this.fieldSize, this.fieldAmount)
-  }
+  this.node.updateNode(this.fieldSize, this.fieldAmount, this.rangeSize)
 }
 
 export default {
@@ -52,7 +50,7 @@ export default {
       memoryType: 'RINGBUFFER',
       fieldAmount: this.node.fieldAmount,
       fieldSize: this.node.fieldSize,
-      outputRange: 0,
+      rangeSize: this.node.range,
       sizeOptions: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     }
   },

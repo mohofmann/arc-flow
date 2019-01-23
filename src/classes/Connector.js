@@ -39,10 +39,13 @@ export default class Connector {
       .attr({fill: '#FFFFFF', cursor: 'pointer'})
       .move(circlePos, verticalMargin + verticalPos * height)
     this.element.add(text)
-    this.element.add(connector)
-    this.element.click(event => {
+    connector.click(event => {
       this.connectorClickEvent(event)
     })
+    this.element.add(connector)
+    // this.element.click(event => {
+    //   this.connectorClickEvent(event)
+    // })
     node.element.add(this.element)
   }
 
