@@ -12,91 +12,71 @@ let attributes = {
 	backgroundColor: '#FFB000',
 	headerColor: '#BF8400',
 	title: 'Range',
-	hint: 'Click to set Range',
+	hint: '',
 	description: 'Buffers a configurable amount of signals and outputs a range of signals'
 }
+
+const defaultInputs = [
+	'Input',
+	'Index'
+]
+
+const defaultOutputs = [
+	'Range'
+]
 
 export default class Range extends Node {
 
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
-		this.fieldAmount = 512
-		this.fieldSize = 0
-		this.index = 0
-		this.range = 0
-		this.fields = []
-		this.adjustFields()
-	}
+		this.queueSize = 1
+		this.rangeBeforeIndex = 0
+		this.rangeAfterIndex = 0
+		this.queue = []
+		this.latestPeakIndex = -1
+		this.counter = 0
 
-	adjustFields = function () {
-		// shrink the amount of fields
-		if (this.fields.length > this.fieldAmount) {
-			this.fields = _.take(this.fields, this.fieldAmount)
-			if (this.index >= this.fieldAmount) {
-				this.index = this.fieldAmount - 1
-			}
-		// or add fields
-		} else {
-			const missingFields = this.fieldAmount - this.fields.length
-			for (let i = 0; i < missingFields; i ++) {
-				this.fields.push([])
-			}
-		}
+		this.updateQueueSize()
+
+		this.setInputs(defaultInputs)
+		this.setOutputs(defaultOutputs)
 	}
 
 	_perform = function () {
-		let newField = []
-		_.each(this.inputs, (input, index) => {
-			newField.push(input.data)
-			if (this.outputs[index].edge) {
-				this.outputs[index].edge._end.data = input.data
-			}
-		})
-		this.store(newField)
-	}
+		this.store(this.inputs[0].data)
 
-	setRange (range) {
-		this.range = range
-		let rangeLabel = range > 0 ? " (Range: " + this.range + ")" : ""
-		_.each(this.outputs, (output, index) => {
-			output.element.get(0).text((index + 1) + rangeLabel)
-		})
-	}
-
-	setFieldSize = function (fieldSize) {
-		if (fieldSize == 0) {
-			this.setInputs([])
-			this.hint.text(attributes.hint)
-		} else {
-			this.fieldSize = fieldSize
-			let inputs = []
-			let outputs = []
-			for (let i = 1; i <= fieldSize; i ++) {
-				inputs.push(i.toString())
-				outputs.push(i.toString())
-			}
-			this.setInputs(inputs)
-			this.setOutputs(outputs)
-			this.hint.text("")
-		}	
-	}
-
-	store = function (newField) {
-		this.increaseIndex()
-		this.fields[this.index] = newField
-	}
-
-	increaseIndex = function () {
-		this.index = (this.index + 1) % this.fieldAmount
-	}
-
-	updateNode = function (fieldSize, fieldAmount, range) {
-		this.fieldAmount = fieldAmount
-		this.adjustFields()
-		if (this.fieldSize != fieldSize) {
-			this.setFieldSize(fieldSize)
+		let index = this.inputs[1].data
+		// If a peak index gets provided..
+		if (index != -1) {
+			// ..buffer it for later..
+			this.latestPeakIndex = index
 		}
-		this.setRange(range)
+		// .. and try to find its proper range
+		if (this.latestPeakIndex != -1) {
+			//
+		}
+	}
+
+	store = function (newValue) {
+		this.queue.push(newValue)
+		this.queue.shift()
+		this.counter += 1
+	}
+
+	updateQueueSize () {
+		this.queueSize = parseInt(this.rangeBeforeIndex) + parseInt(this.rangeAfterIndex) + 1
+		this.queue = []
+		for (let i = 0; i < this.queueSize; i ++) {
+			this.queue.push(null)
+		}
+	}
+
+	updateNode = function (rangeBeforeIndex, rangeAfterIndex) {
+		// this.fieldAmount = fieldAmount
+		this.rangeBeforeIndex = rangeBeforeIndex
+		this.rangeAfterIndex = rangeAfterIndex
+		// Set field amount to total range incl. index
+		this.updateQueueSize()
 	}
 
 }

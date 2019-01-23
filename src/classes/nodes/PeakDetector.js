@@ -18,7 +18,7 @@ const defaultInputs = [
 ]
 
 const defaultOutputs = [
-	'Peak'
+	'Peak Index'
 ]
 
 export default class PeakDetector extends Node {

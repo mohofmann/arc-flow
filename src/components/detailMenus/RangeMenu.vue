@@ -4,26 +4,14 @@
     <md-divider></md-divider>
     <br>
     <md-field>
-      <label for="features">Memory Type</label>
-      <md-select v-model="memoryType">
-        <md-option value="RINGBUFFER">Ringbuffer</md-option>
-      </md-select>
+      <md-icon>skip_previous</md-icon>
+      <label for="fieldAmount">Range before Index</label>
+      <md-input v-model="rangeBeforeIndex" @keyup.native="updateAttributes"></md-input>
     </md-field>
     <md-field>
-      <label for="fieldSize">Field Size</label>
-      <md-select v-model="fieldSize" @md-selected="updateAttributes">
-        <md-option v-for="size in sizeOptions" :value="size">{{ size }}</md-option>
-      </md-select>
-    </md-field>
-    <md-field>
-      <md-icon>view_comfy</md-icon>
-      <label for="fieldAmount">Memory Fields</label>
-      <md-input v-model="fieldAmount" @keyup.native="updateAttributes"></md-input>
-    </md-field>
-    <md-field>
-      <md-icon>linear_scale</md-icon>
-      <label for="fieldAmount">Range Size</label>
-      <md-input v-model="rangeSize" @keyup.native="updateAttributes"></md-input>
+      <md-icon>skip_next</md-icon>
+      <label for="fieldAmount">Range after Index</label>
+      <md-input v-model="rangeAfterIndex" @keyup.native="updateAttributes"></md-input>
     </md-field>
     <md-switch v-model="node.logging">Logging</md-switch>
   </div>
@@ -32,12 +20,8 @@
 <script>
 import { EventBus } from '../../main.js'
 
-const changeMemoryType = function () {
-  // body...
-}
-
 const updateAttributes  = function () {
-  this.node.updateNode(this.fieldSize, this.fieldAmount, this.rangeSize)
+  this.node.updateNode(this.rangeBeforeIndex, this.rangeAfterIndex)
 }
 
 export default {
@@ -48,14 +32,11 @@ export default {
   data: function () {
     return {
       memoryType: 'RINGBUFFER',
-      fieldAmount: this.node.fieldAmount,
-      fieldSize: this.node.fieldSize,
-      rangeSize: this.node.range,
-      sizeOptions: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+      rangeBeforeIndex: this.node.rangeBeforeIndex,
+      rangeAfterIndex: this.node.rangeAfterIndex
     }
   },
   methods: {
-    changeMemoryType: changeMemoryType,
     updateAttributes: updateAttributes
   }
 }
