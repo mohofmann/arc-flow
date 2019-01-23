@@ -10,7 +10,8 @@ import {
 	MdCheckbox,
 	MdMenu,
 	MdSwitch,
-	MdList } from 'vue-material/dist/components'
+	MdList,
+	MdTooltip } from 'vue-material/dist/components'
 
 import App from './App.vue'
 import 'vue-material/dist/vue-material.min.css'
@@ -30,6 +31,7 @@ Vue.use(MdCheckbox)
 Vue.use(MdMenu)
 Vue.use(MdSwitch)
 Vue.use(MdList)
+Vue.use(MdTooltip)
 
 // Create event Bus
 export const EventBus = new Vue();

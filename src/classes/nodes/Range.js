@@ -1,7 +1,8 @@
 /**************************************
- *	MEMORY
- *	inherits from Node, simulates
- *	memory like a ring buffer
+ *	RANGE
+ *	inherits from Node, stores a stream
+ *	of data in a ring buffer and
+ *	outputs it as a range of signals
  **************************************/
 
 import _ from 'lodash'
@@ -10,12 +11,12 @@ import Node from '../Node.js'
 let attributes = {
 	backgroundColor: '#FFB000',
 	headerColor: '#BF8400',
-	title: 'Memory',
-	hint: 'Click to set Memory Size',
-	description: 'Buffers a configurable amount of signals and is able to output range of past signals'
+	title: 'Range',
+	hint: 'Click to set Range',
+	description: 'Buffers a configurable amount of signals and outputs a range of signals'
 }
 
-export default class Memory extends Node {
+export default class Range extends Node {
 
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)

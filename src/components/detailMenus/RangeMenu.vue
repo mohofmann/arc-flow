@@ -22,7 +22,7 @@
     </md-field>
     <md-field>
       <md-icon>linear_scale</md-icon>
-      <label for="fieldAmount">Output Range</label>
+      <label for="fieldAmount">Range Size</label>
       <md-input v-model="outputRange" @keyup.native="updateAttributes"></md-input>
     </md-field>
     <md-switch v-model="node.logging">Logging</md-switch>
@@ -43,7 +43,7 @@ const updateAttributes  = function () {
 }
 
 export default {
-  name: 'MemoryMenu',
+  name: 'RangeMenu',
   props: {
     node: Object
   },
