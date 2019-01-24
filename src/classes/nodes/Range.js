@@ -64,7 +64,8 @@ export default class Range extends Node {
 			let minIndex = this.queueEndIndex - this.queueSize + this.rangeBeforeIndex
 			let maxIndex = this.queueEndIndex - this.rangeAfterIndex
 			// check if given peak and range are contained in queue
-			let relativeIndex = this.queueEndIndex - this.latestPeakIndex - 1
+			let relativeIndex = this.queueSize - (this.queueEndIndex - this.latestPeakIndex) - 1
+			// let relativeIndex = this.queueEndIndex - this.latestPeakIndex - 1
 			if (this.latestPeakIndex >= minIndex && this.latestPeakIndex <= maxIndex) {
 				
 				console.log("----------------")
@@ -91,6 +92,7 @@ export default class Range extends Node {
 				console.log("maxIndex is: " + maxIndex)
 				console.log("Queue contains index, but not the whole range before")
 				console.log("----------------")
+				this.latestPeakIndex = -1
 			}
 			else if (this.latestPeakIndex > maxIndex) {
 				console.log("----------------")
@@ -103,7 +105,6 @@ export default class Range extends Node {
 				console.log("maxIndex is: " + maxIndex)
 				console.log("Queue contains index, but not the whole range after")
 				console.log("----------------")
-				this.latestPeakIndex = -1
 			}
 			else {
 				console.log("Queue does not contain the index")
