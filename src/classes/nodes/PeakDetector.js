@@ -14,10 +14,11 @@ const attributes = {
 }
 
 const defaultInputs = [
-	'1'
+	'Peak Signal'
 ]
 
 const defaultOutputs = [
+	'Peak Signal',
 	'Peak Index'
 ]
 
@@ -50,12 +51,17 @@ export default class PeakDetector extends Node {
 		this._samplesSinceLastPeak ++
 		this._counter ++
 		let energy = this.inputs[0].data
+		if (this.outputs[0].edge) this.outputs[0].edge._end.data = energy
  
 		// check whether a previously marked peak candidate was really a peak
 		if (this._lastPeakValue > 0 && this._samplesSinceLastPeak >= this.minPeakDistance) {
 			// TODO: Handle the peak
 			this.log()
+			if (this.outputs[1].edge) this.outputs[1].edge._end.data = this._counter - this._samplesSinceLastPeak
 		  this._lastPeakValue = 0
+		}
+		else {
+			if (this.outputs[1].edge) this.outputs[1].edge._end.data = -1
 		}
  
 		// Mark new peak candidates

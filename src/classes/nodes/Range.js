@@ -34,7 +34,7 @@ export default class Range extends Node {
 		this.rangeAfterIndex = 0
 		this.queue = []
 		this.latestPeakIndex = -1
-		this.counter = 0
+		this.queueEndIndex = 0
 
 		this.updateQueueSize()
 
@@ -42,7 +42,14 @@ export default class Range extends Node {
 		this.setOutputs(defaultOutputs)
 	}
 
-	_perform = function () {
+	_preperform () {
+		this.queue = []
+		this.updateQueueSize()
+		this.latestPeakIndex = -1
+		this.queueEndIndex = 0
+	}
+
+	_perform () {
 		this.store(this.inputs[0].data)
 
 		let index = this.inputs[1].data
@@ -53,29 +60,75 @@ export default class Range extends Node {
 		}
 		// .. and try to find its proper range
 		if (this.latestPeakIndex != -1) {
-			//
+			// calculate possible index range
+			let minIndex = this.queueEndIndex - this.queueSize + this.rangeBeforeIndex
+			let maxIndex = this.queueEndIndex - this.rangeAfterIndex
+			// check if given peak and range are contained in queue
+			let relativeIndex = this.queueEndIndex - this.latestPeakIndex - 1
+			if (this.latestPeakIndex >= minIndex && this.latestPeakIndex <= maxIndex) {
+				
+				console.log("----------------")
+				console.log("Queue is: ")
+				console.log(this.queue)
+				console.log("End Index is: " + this.queueEndIndex)
+				console.log("Relative Index is: " + relativeIndex)
+				console.log("Lates Peak Index is: " + this.latestPeakIndex)
+				console.log("minIndex is: " + minIndex)
+				console.log("maxIndex is: " + maxIndex)
+				let range = this.queue.slice(relativeIndex - this.rangeBeforeIndex, relativeIndex + this.rangeAfterIndex + 1)
+				console.log(range)
+				console.log("----------------")
+				this.latestPeakIndex = -1
+			}
+			else if (this.latestPeakIndex < minIndex) {
+				console.log("----------------")
+				console.log("Queue is: ")
+				console.log(this.queue)
+				console.log("End Index is: " + this.queueEndIndex)
+				console.log("Relative Index is: " + relativeIndex)
+				console.log("Lates Peak Index is: " + this.latestPeakIndex)
+				console.log("minIndex is: " + minIndex)
+				console.log("maxIndex is: " + maxIndex)
+				console.log("Queue contains index, but not the whole range before")
+				console.log("----------------")
+			}
+			else if (this.latestPeakIndex > maxIndex) {
+				console.log("----------------")
+				console.log("Queue is: ")
+				console.log(this.queue)
+				console.log("End Index is: " + this.queueEndIndex)
+				console.log("Relative Index is: " + relativeIndex)
+				console.log("Lates Peak Index is: " + this.latestPeakIndex)
+				console.log("minIndex is: " + minIndex)
+				console.log("maxIndex is: " + maxIndex)
+				console.log("Queue contains index, but not the whole range after")
+				console.log("----------------")
+				this.latestPeakIndex = -1
+			}
+			else {
+				console.log("Queue does not contain the index")
+				this.latestPeakIndex = -1
+			}
 		}
 	}
 
 	store = function (newValue) {
 		this.queue.push(newValue)
 		this.queue.shift()
-		this.counter += 1
+		this.queueEndIndex += 1
 	}
 
 	updateQueueSize () {
-		this.queueSize = parseInt(this.rangeBeforeIndex) + parseInt(this.rangeAfterIndex) + 1
 		this.queue = []
 		for (let i = 0; i < this.queueSize; i ++) {
 			this.queue.push(null)
 		}
 	}
 
-	updateNode = function (rangeBeforeIndex, rangeAfterIndex) {
-		// this.fieldAmount = fieldAmount
-		this.rangeBeforeIndex = rangeBeforeIndex
-		this.rangeAfterIndex = rangeAfterIndex
-		// Set field amount to total range incl. index
+	updateNode = function (rangeBeforeIndex, rangeAfterIndex, queueSize) {
+		this.rangeBeforeIndex = parseInt(rangeBeforeIndex)
+		this.rangeAfterIndex = parseInt(rangeAfterIndex)
+		this.queueSize = parseInt(queueSize)
 		this.updateQueueSize()
 	}
 
