@@ -69,40 +69,18 @@ export default class Range extends Node {
 			if (this.latestPeakIndex >= minIndex && this.latestPeakIndex <= maxIndex) {
 				
 				console.log("----------------")
-				console.log("Queue is: ")
-				console.log(this.queue)
-				console.log("End Index is: " + this.queueEndIndex)
-				console.log("Relative Index is: " + relativeIndex)
-				console.log("Lates Peak Index is: " + this.latestPeakIndex)
-				console.log("minIndex is: " + minIndex)
-				console.log("maxIndex is: " + maxIndex)
 				let range = this.queue.slice(relativeIndex - this.rangeBeforeIndex, relativeIndex + this.rangeAfterIndex + 1)
 				console.log(range)
 				console.log("----------------")
 				this.latestPeakIndex = -1
 			}
 			else if (this.latestPeakIndex < minIndex) {
-				console.log("----------------")
-				console.log("Queue is: ")
-				console.log(this.queue)
-				console.log("End Index is: " + this.queueEndIndex)
-				console.log("Relative Index is: " + relativeIndex)
-				console.log("Lates Peak Index is: " + this.latestPeakIndex)
-				console.log("minIndex is: " + minIndex)
-				console.log("maxIndex is: " + maxIndex)
 				console.log("Queue contains index, but not the whole range before")
+				console.log("Consider increasing the queue size")
 				console.log("----------------")
 				this.latestPeakIndex = -1
 			}
 			else if (this.latestPeakIndex > maxIndex) {
-				console.log("----------------")
-				console.log("Queue is: ")
-				console.log(this.queue)
-				console.log("End Index is: " + this.queueEndIndex)
-				console.log("Relative Index is: " + relativeIndex)
-				console.log("Lates Peak Index is: " + this.latestPeakIndex)
-				console.log("minIndex is: " + minIndex)
-				console.log("maxIndex is: " + maxIndex)
 				console.log("Queue contains index, but not the whole range after")
 				console.log("----------------")
 			}
