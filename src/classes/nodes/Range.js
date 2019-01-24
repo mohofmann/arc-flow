@@ -67,11 +67,10 @@ export default class Range extends Node {
 			let relativeIndex = this.queueSize - (this.queueEndIndex - this.latestPeakIndex) - 1
 			// let relativeIndex = this.queueEndIndex - this.latestPeakIndex - 1
 			if (this.latestPeakIndex >= minIndex && this.latestPeakIndex <= maxIndex) {
-				
-				console.log("----------------")
 				let range = this.queue.slice(relativeIndex - this.rangeBeforeIndex, relativeIndex + this.rangeAfterIndex + 1)
-				console.log(range)
-				console.log("----------------")
+				if (this.outputs[0].edge) {
+					this.outputs[0].edge._end.data = range
+				}
 				this.latestPeakIndex = -1
 			}
 			else if (this.latestPeakIndex < minIndex) {

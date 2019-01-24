@@ -11,6 +11,7 @@ import MemoryMenu from './detailMenus/MemoryMenu.vue'
 import PreprocessorMenu from './detailMenus/PreprocessorMenu.vue'
 import PeakDetectorMenu from './detailMenus/PeakDetectorMenu.vue'
 import RangeMenu from './detailMenus/RangeMenu.vue'
+import SegmentorMenu from './detailMenus/SegmentorMenu.vue'
 import { EventBus } from '../main.js'
 
 const setupEvents = function () {
@@ -39,7 +40,8 @@ export default {
     MemoryMenu,
     PreprocessorMenu,
     PeakDetectorMenu,
-    RangeMenu
+    RangeMenu,
+    SegmentorMenu
   },
   data: function () {
     return {

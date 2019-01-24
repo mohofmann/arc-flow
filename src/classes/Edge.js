@@ -5,7 +5,7 @@
  **************************************/
 
 const color = '#FFFFFF'
-const width = 5
+const width = 3
 const linecap = 'round'
 
 export default class Edge {

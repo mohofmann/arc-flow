@@ -9,12 +9,12 @@
     <md-button class="md-raised af-full-width" @click="createNode('RANGE')">Range</md-button>
     <md-button class="md-raised af-full-width" @click="createNode('PREPROCESSOR')">Preprocessor</md-button>
     <md-button class="md-raised af-full-width" @click="createNode('PEAKDETECTOR')">Peak Detector</md-button>
+    <md-button class="md-raised af-full-width" @click="createNode('SEGMENTOR')">Segmentor</md-button>
   </nav>
 </template>
 
 <script>
 import { EventBus } from '../main.js'
-import Memory from '../classes/nodes/Memory.js'
 
 export default {
   name: 'SideMenu',

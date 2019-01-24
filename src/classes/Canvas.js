@@ -13,6 +13,7 @@ import Preprocessor from './nodes/Preprocessor.js'
 import Memory from './nodes/Memory.js'
 import Range from './nodes/Range.js'
 import PeakDetector from './nodes/PeakDetector.js'
+import Segmentor from './nodes/Segmentor.js'
 import Edge from './Edge.js'
 import { EventBus } from '../main.js'
 
@@ -76,6 +77,7 @@ export default class Canvas {
       case 'RANGE': node = new Range(this._canvas, this.watchCanvas); break
       case 'PREPROCESSOR': node = new Preprocessor(this._canvas, this.watchCanvas); break
       case 'PEAKDETECTOR': node = new PeakDetector(this._canvas, this.watchCanvas); break
+      case 'SEGMENTOR': node = new Segmentor(this._canvas, this.watchCanvas); break
       default: break
     }
     this.nodes.push(node)
