@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "generate node": "plop"
+    "generate": "plop"
   },
   "dependencies": {
     "papaparse": "^4.6.2",
