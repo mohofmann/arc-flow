@@ -16,6 +16,7 @@ import PeakDetector from './nodes/PeakDetector.js'
 import Segmentor from './nodes/Segmentor.js'
 import FeatureExtractor from './nodes/FeatureExtractor.js'
 /* PLOP: APPEND IMPORT */
+import Zrc from './nodes/Zrc.js'
 
 import Edge from './Edge.js'
 import { EventBus } from '../main.js'
@@ -97,6 +98,7 @@ export default class Canvas {
       case 'SEGMENTOR': node = new Segmentor(this._canvas, this.watchCanvas); break
       case 'FEATUREEXTRACTOR': node = new FeatureExtractor(this._canvas, this.watchCanvas); break
       /* PLOP: APPEND CASE */
+      case 'ZRC': node = new Zrc(this._canvas, this.watchCanvas); break
       default: break
     }
     this.nodes.push(node)

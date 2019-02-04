@@ -49,6 +49,10 @@
           </md-list-item>   
         <md-subheader>Misc</md-subheader>
           <!-- PLOP: APPEND -->
+					<md-list-item @click="createNode('ZRC')">
+					  <md-icon>extension</md-icon>
+					  <span class="md-list-item-text">Zrc</span>
+					</md-list-item>
       </md-list>
   </nav>
 </template>

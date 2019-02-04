@@ -14,6 +14,7 @@ import RangeMenu from './detailMenus/RangeMenu.vue'
 import SegmentorMenu from './detailMenus/SegmentorMenu.vue'
 import FeatureExtractorMenu from './detailMenus/FeatureExtractorMenu.vue'
 /* PLOP: APPEND IMPORT */
+import ZrcMenu from './detailMenus/ZrcMenu.vue'
 import { EventBus } from '../main.js'
 
 const setupEvents = function () {
@@ -45,6 +46,7 @@ export default {
     RangeMenu,
     SegmentorMenu,
     /* PLOP: APPEND COMPONENT */
+    ZrcMenu,
     FeatureExtractorMenu
   },
   data: function () {
