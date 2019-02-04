@@ -44,6 +44,7 @@ const run = function () {
   try {
     this.showProgress = true
     canvas.nodes[0].run()
+    EventBus.$emit('setTab', 'analytics-tab')
     this.showSuccess = true
   }
   catch (error) {

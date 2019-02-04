@@ -3,7 +3,7 @@
     <h2>&nbsp;&nbsp;ARCFLOW</h2>
     <span>&nbsp;&nbsp;&nbsp;v 0.349</span>
     <span style="flex: 1"></span>
-    <md-tabs @md-changed="switchTab">
+    <md-tabs @md-changed="switchTab" :md-active-tab="activeTab">
       <md-tab id="editor-tab" md-label="Editor"></md-tab>
       <md-tab id="analytics-tab" md-label="Analytics"></md-tab>
     </md-tabs>
@@ -23,8 +23,19 @@
 <script>
 import { EventBus } from '../main.js'
 
+const setupEvents = function () {
+  EventBus.$on('setTab', tabId => {
+    this.activeTab = tabId
+  })
+}
+
 export default {
   name: 'Header',
+  data: function () {
+    return {
+      activeTab: 'editor-tab'
+    }
+  },
   methods: {
     run: () => {
       EventBus.$emit('runFlow', null)
@@ -35,7 +46,8 @@ export default {
     switchTab: tabId => {
       EventBus.$emit('switchTab', tabId)
     }
-  }
+  },
+  created: setupEvents
 }
 </script>
 
