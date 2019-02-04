@@ -47,6 +47,8 @@
             <md-icon>gps_fixed</md-icon>
             <span class="md-list-item-text">Mean</span>
           </md-list-item>   
+        <md-subheader>Misc</md-subheader>
+          <!-- PLOP: APPEND -->
         <br>
         <br>
         <br>   

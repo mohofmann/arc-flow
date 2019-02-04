@@ -1,7 +1,6 @@
 /**************************************
- *	SEGMENTOR
- *	inherits from Node, takes a range
- *	and segments it in subranges
+ *	{{ upperCase name }}
+ *	{{ description }}
  **************************************/
 
 import Node from '../Node.js'
@@ -9,45 +8,29 @@ import Node from '../Node.js'
 let attributes = {
 	backgroundColor: '#F06',
 	headerColor: '#CF0053',
-	title: 'Feature Extractor',
-	hint: ''
+	title: '{{ titleCase name }}',
+	hint: '{{ description }}'
 }
 
-export default class FeatureExtractor extends Node {
+export default class {{ properCase name }} extends Node {
 
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
 
-		this.feature = ''
-		this.setInputs(["Range"])
-		this.setOutputs(["Feature"])
+		// this.setInputs(["1"])
+		// this.setOutputs(["1"])
 	}
 
 	_perform () {
-		console.log("performing")
-		let range = this.inputs[0].data
-		let mean = 0
+		// take incoming data from this.inputs array
 
-		_.each(range, value => {
-			mean += value * (1/range.length)
-		})
+		// process it
 
-		this.log({mean: mean})
-
-		if (this.outputs[0].edge) {
-			this.outputs[0].edge._end.data = mean
-		}
+		// and send result to the edge._end of this.outputs array
 	}
 
 	_log (args) {
-		console.log("Mean is " + args.mean)
-	}
-
-	updateFeature (selectedFeature) {
-		if (selectedFeature != this.feature) {
-			this.feature = selectedFeature
-  		this.headline.text(attributes.title + " (" + this.feature + ")")
-		}
+		
 	}
 
 
