@@ -49,10 +49,6 @@
           </md-list-item>   
         <md-subheader>Misc</md-subheader>
           <!-- PLOP: APPEND -->
-        <br>
-        <br>
-        <br>   
-      
       </md-list>
   </nav>
 </template>

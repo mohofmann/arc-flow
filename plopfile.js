@@ -26,8 +26,20 @@ module.exports = function (plop) {
     {
       type: 'append',
       path: 'src/components/SideMenu.vue',
-      pattern: '<!-- PLOP: APPEND -->'
+      pattern: '<!-- PLOP: APPEND -->',
       templateFile: 'generators/NodeListItem.hbs'
+    },
+    {
+      type: 'append',
+      path: 'src/classes/Canvas.js',
+      pattern: '/* PLOP: APPEND IMPORT */',
+      template: 'import {{ name }} from \'./nodes/{{ name }}.js\''
+    },
+    {
+      type: 'append',
+      path: 'src/classes/Canvas.js',
+      pattern: '/* PLOP: APPEND CASE */',
+      template: 'case \'{{ upperCase name }}\': node = new {{ name }}(this._canvas, this.watchCanvas); break'
     }]
   });
 };
