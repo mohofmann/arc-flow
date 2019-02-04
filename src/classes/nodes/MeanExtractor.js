@@ -17,7 +17,6 @@ export default class MeanExtractor extends Node {
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
 
-		this.feature = ''
 		this.setInputs(["Range"])
 		this.setOutputs(["Feature"])
 	}
@@ -40,13 +39,6 @@ export default class MeanExtractor extends Node {
 
 	_log (args) {
 		console.log("Mean is " + args.mean)
-	}
-
-	updateFeature (selectedFeature) {
-		if (selectedFeature != this.feature) {
-			this.feature = selectedFeature
-  		this.headline.text(attributes.title + " (" + this.feature + ")")
-		}
 	}
 
 
