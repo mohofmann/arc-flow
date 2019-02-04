@@ -5,6 +5,7 @@
  **************************************/
 
 import _ from 'lodash'
+import JStat from 'jStat'
 import Connector from './Connector.js'
 import { EventBus } from '../main.js'
 

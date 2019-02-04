@@ -1,7 +1,6 @@
 /**************************************
- *	SEGMENTOR
- *	inherits from Node, takes a range
- *	and segments it in subranges
+ *	MEANEXTRACTOR
+ *	Extracting the Mean Feature
  **************************************/
 
 import Node from '../Node.js'
@@ -9,11 +8,11 @@ import Node from '../Node.js'
 let attributes = {
 	backgroundColor: '#F06',
 	headerColor: '#CF0053',
-	title: 'Feature Extractor',
+	title: 'Mean Extractor',
 	hint: ''
 }
 
-export default class FeatureExtractor extends Node {
+export default class MeanExtractor extends Node {
 
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)

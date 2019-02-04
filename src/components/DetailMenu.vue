@@ -12,9 +12,8 @@ import PreprocessorMenu from './detailMenus/PreprocessorMenu.vue'
 import PeakDetectorMenu from './detailMenus/PeakDetectorMenu.vue'
 import RangeMenu from './detailMenus/RangeMenu.vue'
 import SegmentorMenu from './detailMenus/SegmentorMenu.vue'
-import FeatureExtractorMenu from './detailMenus/FeatureExtractorMenu.vue'
+import MeanExtractorMenu from './detailMenus/MeanExtractorMenu.vue'
 /* PLOP: APPEND IMPORT */
-import ZrcMenu from './detailMenus/ZrcMenu.vue'
 import { EventBus } from '../main.js'
 
 const setupEvents = function () {
@@ -46,8 +45,7 @@ export default {
     RangeMenu,
     SegmentorMenu,
     /* PLOP: APPEND COMPONENT */
-    ZrcMenu,
-    FeatureExtractorMenu
+    MeanExtractorMenu
   },
   data: function () {
     return {

@@ -43,16 +43,12 @@
           </md-list-item>
         <md-divider></md-divider>
         <md-subheader>Feature Extraction</md-subheader>
-          <md-list-item @click="createNode('FEATUREEXTRACTOR')">
+          <md-list-item @click="createNode('MEANEXTRACTOR')">
             <md-icon>gps_fixed</md-icon>
-            <span class="md-list-item-text">Mean</span>
+            <span class="md-list-item-text">Mean Extractor</span>
           </md-list-item>   
         <md-subheader>Misc</md-subheader>
           <!-- PLOP: APPEND -->
-					<md-list-item @click="createNode('ZRC')">
-					  <md-icon>extension</md-icon>
-					  <span class="md-list-item-text">Zrc</span>
-					</md-list-item>
       </md-list>
   </nav>
 </template>

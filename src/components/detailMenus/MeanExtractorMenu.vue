@@ -1,6 +1,6 @@
 <template>
   <div class="md-content">
-    <h4>Feature Extractor</h4>
+    <h4>Mean Extractor</h4>
     <md-divider></md-divider>
     <br>
     <md-field>
@@ -21,7 +21,7 @@ const updateFeature = function () {
 }
 
 export default {
-  name: 'SegmentorMenu',
+  name: 'MeanExtractorMenu',
   props: {
     node: Object
   },

@@ -14,9 +14,8 @@ import Memory from './nodes/Memory.js'
 import Range from './nodes/Range.js'
 import PeakDetector from './nodes/PeakDetector.js'
 import Segmentor from './nodes/Segmentor.js'
-import FeatureExtractor from './nodes/FeatureExtractor.js'
+import MeanExtractor from './nodes/MeanExtractor.js'
 /* PLOP: APPEND IMPORT */
-import Zrc from './nodes/Zrc.js'
 
 import Edge from './Edge.js'
 import { EventBus } from '../main.js'
@@ -96,9 +95,8 @@ export default class Canvas {
       case 'PREPROCESSOR': node = new Preprocessor(this._canvas, this.watchCanvas); break
       case 'PEAKDETECTOR': node = new PeakDetector(this._canvas, this.watchCanvas); break
       case 'SEGMENTOR': node = new Segmentor(this._canvas, this.watchCanvas); break
-      case 'FEATUREEXTRACTOR': node = new FeatureExtractor(this._canvas, this.watchCanvas); break
+      case 'MEANEXTRACTOR': node = new MeanExtractor(this._canvas, this.watchCanvas); break
       /* PLOP: APPEND CASE */
-      case 'ZRC': node = new Zrc(this._canvas, this.watchCanvas); break
       default: break
     }
     this.nodes.push(node)
