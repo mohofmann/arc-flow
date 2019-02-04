@@ -14,6 +14,7 @@ import Memory from './nodes/Memory.js'
 import Range from './nodes/Range.js'
 import PeakDetector from './nodes/PeakDetector.js'
 import Segmentor from './nodes/Segmentor.js'
+import FeatureExtractor from './nodes/FeatureExtractor.js'
 import Edge from './Edge.js'
 import { EventBus } from '../main.js'
 
@@ -44,6 +45,20 @@ export default class Canvas {
           EventBus.$emit('deselectNode', null)
         }
       })
+    // this._canvas.line(97, -1000, 98, 1000)
+    // .stroke({ width: 2, color: '#4687CC' })
+    // .style({ cursor: 'ew-resize', 'stroke-dasharray': '2'})
+    // this._canvas.line(100, -1000, 100, 1000)
+    // .stroke({ width: 2, color: '#CF0053' })
+    // .style({ cursor: 'ew-resize', 'stroke-dasharray': '2'})
+    // this._canvas.text("WEARABLE")
+    // .font({size: 32, anchor: 'end', weight: '600'})
+    // .fill({color: '#4687CC', opacity: '0.7'})
+    // .move(100-20, 0)
+    // this._canvas.text("SMARTPHONE")
+    // .font({size: 32, anchor: 'start', weight: '600'})
+    // .fill({color: '#CF0053', opacity: '0.7'})
+    // .move(100+20, 0)
   }
 
   createEdge = function (connector) {
@@ -78,6 +93,7 @@ export default class Canvas {
       case 'PREPROCESSOR': node = new Preprocessor(this._canvas, this.watchCanvas); break
       case 'PEAKDETECTOR': node = new PeakDetector(this._canvas, this.watchCanvas); break
       case 'SEGMENTOR': node = new Segmentor(this._canvas, this.watchCanvas); break
+      case 'FEATUREEXTRACTOR': node = new FeatureExtractor(this._canvas, this.watchCanvas); break
       default: break
     }
     this.nodes.push(node)

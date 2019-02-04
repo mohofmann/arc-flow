@@ -25,9 +25,7 @@ export default class Segmentor extends Node {
 	}
 
 	_perform () {
-		console.log("performing")
 		let range = this.inputs[0].data
-		console.log("range is " + range)
 
 		_.each(this.segments, (segment, index) => {
 			let newRange = []
@@ -38,11 +36,15 @@ export default class Segmentor extends Node {
 			else {
 				newRange = range.slice(segment.start)
 			}
-			console.log(newRange)
+			this.log({index: index, newRange: newRange})
 			if (this.outputs[index].edge) {
 				this.outputs[index].edge._end.data = newRange
 			}
 		})
+	}
+
+	_log (args) {
+		console.log("segment " + args.index + " is: " + args.newRange)
 	}
 
 	updateSegmentAmount (amount) {

@@ -24,6 +24,8 @@ export default class Node {
     this.sizeX = sizeX
     this.sizeY = sizeY
 
+    this.backgroundColor = attributes.backgroundColor
+
     this._startDragging = false
     this._getsDragged = false
     this._canvas = canvas
@@ -62,11 +64,11 @@ export default class Node {
     }
   }
 
-  log () {
-    this.logging && this._log()
+  log (args) {
+    this.logging && this._log(args)
   }
 
-  _log () {
+  _log (args) {
     // To be overwritten by every implementation
   }
 

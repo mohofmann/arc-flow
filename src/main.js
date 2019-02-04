@@ -11,7 +11,9 @@ import {
 	MdMenu,
 	MdSwitch,
 	MdList,
-	MdTooltip } from 'vue-material/dist/components'
+	MdTooltip,
+	MdSubheader,
+	MdTabs } from 'vue-material/dist/components'
 
 import App from './App.vue'
 import 'vue-material/dist/vue-material.min.css'
@@ -32,6 +34,8 @@ Vue.use(MdMenu)
 Vue.use(MdSwitch)
 Vue.use(MdList)
 Vue.use(MdTooltip)
+Vue.use(MdSubheader)
+Vue.use(MdTabs)
 
 // Create event Bus
 export const EventBus = new Vue();

@@ -11,9 +11,6 @@
     </md-snackbar>
     <div class="md-layout-item md-size-100" id="editor"></div>
     <DetailMenu class="md-layout-item"></DetailMenu>
-    <md-button @click="run" class="md-fab af-fab">
-      <md-icon>play_arrow</md-icon>
-    </md-button>
   </div>
 </template>
 
@@ -30,6 +27,7 @@ const setupEditor = function () {
 }
 
 const setupEvents = function () {
+  EventBus.$on('runFlow', this.run)
   EventBus.$on('createNode', node => canvas.createNode(node))
   EventBus.$on('selectConnector', (node, connector) => canvas.createEdge(node, connector))
 }

@@ -23,6 +23,8 @@ export default class Connector {
   	this.element = null
     this.type = type
 
+    console.log(node.backgroundColor)
+
   	let circlePos = this.type === 'INPUT' ? -7.5 : node.sizeX - 7.5
     let textPos = this.type === 'INPUT' ? 20 : node.sizeX - 20
     let verticalPos = this.type === 'INPUT' ? node.inputs.length : node.outputs.length
@@ -38,11 +40,19 @@ export default class Connector {
       .circle(circleSize, circleSize)
       .attr({fill: '#FFFFFF', cursor: 'pointer'})
       .move(circlePos, verticalMargin + verticalPos * height)
+    let innerCircle = canvas
+      .circle(circleSize-6, circleSize-6)
+      .attr({fill: node.backgroundColor, cursor: 'pointer'})
+      .move(circlePos+3, verticalMargin + verticalPos * height + 3)
     this.element.add(text)
     connector.click(event => {
       this.connectorClickEvent(event)
     })
+    innerCircle.click(event => {
+      this.connectorClickEvent(event)
+    })
     this.element.add(connector)
+    this.element.add(innerCircle)
     // this.element.click(event => {
     //   this.connectorClickEvent(event)
     // })

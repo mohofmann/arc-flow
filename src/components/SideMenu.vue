@@ -1,15 +1,57 @@
 <template>
-  <nav id="sideMenu">
-    <md-toolbar :md-elevation="1">
-      <span class="md-title" style="width: 100%; text-align: center">ARCflow</span>
-    </md-toolbar>
-    <br>
-    <md-button class="md-raised af-full-width" @click="createNode('DATASOURCE')">&nbsp;{{ msg }}&nbsp;&nbsp;</md-button>
-    <md-button class="md-raised af-full-width" @click="createNode('MEMORY')">Memory</md-button>
-    <md-button class="md-raised af-full-width" @click="createNode('RANGE')">Range</md-button>
-    <md-button class="md-raised af-full-width" @click="createNode('PREPROCESSOR')">Preprocessor</md-button>
-    <md-button class="md-raised af-full-width" @click="createNode('PEAKDETECTOR')">Peak Detector</md-button>
-    <md-button class="md-raised af-full-width" @click="createNode('SEGMENTOR')">Segmentor</md-button>
+  <nav id="sideMenu" style="height: 100%; overflow: scroll;">
+    <!-- <md-toolbar style="background-color: #424242" :md-elevation="1">
+      <md-field>
+        <md-icon>search</md-icon>
+        <label>Search Nodes</label>
+        <md-input v-model="search"></md-input>
+      </md-field>
+    </md-toolbar> -->
+      <br>
+      <md-list style="background-color: #303030">
+        <md-subheader>Data</md-subheader>
+          <md-list-item @click="createNode('DATASOURCE')">
+            <md-icon>notes</md-icon>
+            <span class="md-list-item-text">{{ msg }}</span>
+          </md-list-item>
+        <md-divider></md-divider>
+        <md-subheader>Memory</md-subheader>
+          <md-list-item @click="createNode('MEMORY')">
+            <md-icon>data_usage</md-icon>
+            <span class="md-list-item-text">Ring Buffer</span>
+          </md-list-item>
+          <md-list-item @click="createNode('RANGE')">
+            <md-icon>data_usage</md-icon>
+            <span class="md-list-item-text">Range</span></md-list-item>
+        <md-divider></md-divider>
+        <md-subheader>Preprocessing</md-subheader>
+          <md-list-item @click="createNode('PREPROCESSOR')">
+            <md-icon>trending_up</md-icon>
+            <span class="md-list-item-text">Energy</span>
+          </md-list-item>
+        <md-divider></md-divider>
+        <md-subheader>Peak Detection</md-subheader>
+          <md-list-item @click="createNode('PEAKDETECTOR')">
+            <md-icon>change_history</md-icon>
+            <span class="md-list-item-text">Simple</span>
+          </md-list-item>
+        <md-divider></md-divider>
+        <md-subheader>Segmentation</md-subheader>
+          <md-list-item @click="createNode('SEGMENTOR')">
+            <md-icon>view_week</md-icon>
+            <span class="md-list-item-text">Segmentor</span>
+          </md-list-item>
+        <md-divider></md-divider>
+        <md-subheader>Feature Extraction</md-subheader>
+          <md-list-item @click="createNode('FEATUREEXTRACTOR')">
+            <md-icon>gps_fixed</md-icon>
+            <span class="md-list-item-text">Mean</span>
+          </md-list-item>   
+        <br>
+        <br>
+        <br>   
+      
+      </md-list>
   </nav>
 </template>
 
@@ -23,7 +65,8 @@ export default {
   },
   data: function () {
     return {
-      inputString: ''
+      inputString: '',
+      search: ''
     };
   },
   methods: {
@@ -36,6 +79,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+  .md-subheader {
+    margin-top: 20px;
+    min-height: 0;
+    /*padding: 16px 0 0 0 !important;*/
+  }
 
   .md-button {
     margin: 12px 0;

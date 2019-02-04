@@ -49,6 +49,10 @@ export default class Range extends Node {
 		this.queueEndIndex = 0
 	}
 
+	_log (args) {
+		console.log(args.text)
+	}
+
 	_perform () {
 		this.store(this.inputs[0].data)
 
@@ -74,17 +78,15 @@ export default class Range extends Node {
 				this.latestPeakIndex = -1
 			}
 			else if (this.latestPeakIndex < minIndex) {
-				console.log("Queue contains index, but not the whole range before")
-				console.log("Consider increasing the queue size")
-				console.log("----------------")
+				this.log({text: "Queue contains index, but not the whole range before, Consider increasing the queue size"})
 				this.latestPeakIndex = -1
 			}
 			else if (this.latestPeakIndex > maxIndex) {
-				console.log("Queue contains index, but not the whole range after")
+				this.log({text: "Queue contains index, but not the whole range after"})
 				console.log("----------------")
 			}
 			else {
-				console.log("Queue does not contain the index")
+				this.log({text: "Queue does not contain the index"})
 				this.latestPeakIndex = -1
 			}
 		}
