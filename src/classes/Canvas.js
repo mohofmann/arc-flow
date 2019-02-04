@@ -107,6 +107,6 @@ export default class Canvas {
     else if (this._canvas.node.childElementCount > 1) {
       this._canvas.panZoom(panZoomSettings)
     }
-}
+  }
 
 }

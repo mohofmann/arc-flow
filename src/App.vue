@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <Header></Header>
-    <div id="content" class="md-layout">
+    <div class="md-layout content">
       <SideMenu class="md-layout-item md-size-15" msg="Datasource"></SideMenu>
       <Editor class="md-size-85" msg=""></Editor>
-      <Analytics v-show="!showEditor"></Analytics>
     </div>
+    <!-- <Analytics v-show="!showEditor"></Analytics> -->
   </div>
 </template>
 
@@ -13,7 +13,7 @@
 import SideMenu from './components/SideMenu.vue'
 import Editor from './components/Editor.vue'
 import Header from './components/Header.vue'
-import Analytics from './components/Analytics.vue'
+// import Analytics from './components/Analytics.vue'
 import { EventBus } from './main.js'
 
 const setupEvents = function () {
@@ -33,7 +33,7 @@ export default {
     Editor,
     SideMenu,
     Header,
-    Analytics
+    // Analytics
   },
   data: function() {
     return {
