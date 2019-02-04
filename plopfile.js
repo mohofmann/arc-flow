@@ -40,6 +40,18 @@ module.exports = function (plop) {
       path: 'src/classes/Canvas.js',
       pattern: '/* PLOP: APPEND CASE */',
       template: 'case \'{{ upperCase name }}\': node = new {{ name }}(this._canvas, this.watchCanvas); break'
+    },
+    {
+      type: 'append',
+      path: 'src/components/DetailMenu.vue',
+      pattern: '/* PLOP: APPEND IMPORT */',
+      template: 'import {{ name }}Menu from \'./detailMenus/{{ name }}Menu.vue\''
+    },
+    {
+      type: 'append',
+      path: 'src/components/DetailMenu.vue',
+      pattern: '/* PLOP: APPEND COMPONENT */',
+      template: '{{ name }}Menu,'
     }]
   });
 };
