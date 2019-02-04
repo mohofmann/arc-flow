@@ -33,6 +33,8 @@ const setupEvents = function () {
 }
 
 const run = function () {
+  // TODO: Use refs for vue-like behavior
+  document.getElementById("log").innerHTML = "";
   _.each(canvas.nodes, node => {
     node._preperform()
   })

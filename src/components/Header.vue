@@ -27,7 +27,6 @@ export default {
       EventBus.$emit('runFlow', null)
     },
     switchTab: tabId => {
-      console.log(tabId)
       EventBus.$emit('switchTab', tabId)
     }
   }

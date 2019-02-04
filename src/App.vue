@@ -23,7 +23,6 @@ const setupEvents = function () {
     } else {
       this.showEditor = false
     }
-    console.log(this.showEditor)
   })
 }
 

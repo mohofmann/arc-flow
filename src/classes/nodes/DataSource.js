@@ -55,9 +55,14 @@ export default class DataSource extends Node {
 		// data row (see _perform function)
 	}
 
+	_log (args) {
+		console.log("Row Output is " + args.data)
+	}
+
 	_perform () {
 		let data = _.tail(this.data.data)
 		_.each(data, row => {
+			this.log({data: row})
 			_.each(this.outputs, (output, index) => {
 				if (output.edge) {
 					output.edge._end.data = row[this._featureIndices[index]]

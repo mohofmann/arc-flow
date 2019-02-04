@@ -1,6 +1,7 @@
 <template>
   <div id="analytics" class="md-layout">
-    
+    <div id="log" ref="log" class="md-layout-item md-size-50" style="padding: 15px; overflow: scroll"></div>
+    <div class="md-layout"></div>
   </div>
 </template>
 

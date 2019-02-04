@@ -34,7 +34,7 @@ export default class Preprocessor extends Node {
 	}
 
 	_log = function (args) {
-		console.log("energy is " + args.energy)
+		console.log("energy is " + args.energy + "\n")
 	}
 
 	setType = function (type) {

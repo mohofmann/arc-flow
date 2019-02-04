@@ -23,7 +23,6 @@
 import Papa from 'papaparse'
 
 const parseFile = function (fileList) {
-  console.log(fileList);
   if (fileList) {
     const file = fileList[0]
     Papa.parse(file, {
@@ -40,7 +39,6 @@ const parseFile = function (fileList) {
 
 const updateSelection = function () {
   if (this.selectedFeatures == this.node.features) return
-  console.log("update selection gets called");
   if (this.node) {
     this.node.setFeatures(this.selectedFeatures)
   }
@@ -64,7 +62,6 @@ export default {
     updateSelection: updateSelection
   },
   created: function () {
-    console.log("created yay");
 
   }
 }

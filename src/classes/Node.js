@@ -156,6 +156,7 @@ export default class Node {
 
   nodeRemoveEvent = function (event) {
     // delete Node upon button press
+    // TODO: Also delete Node out of canvas' node list
     this.remove()
     event.stopPropagation()
   }
