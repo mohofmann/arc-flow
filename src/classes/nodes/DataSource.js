@@ -5,6 +5,7 @@
  **************************************/
 
 import Node from '../Node.js'
+import { EventBus } from '../../main.js'
 import _ from 'lodash'
 
 let attributes = {
@@ -72,6 +73,7 @@ export default class DataSource extends Node {
 			})
 		})
 		console.log("Flow execution done.");
+		EventBus.$emit('renderDataChart', data)
 	}
 
 }

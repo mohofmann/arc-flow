@@ -9,6 +9,7 @@
     "generate": "plop"
   },
   "dependencies": {
+    "chart.js": "^2.7.3",
     "jStat": "^1.7.1",
     "papaparse": "^4.6.2",
     "svg.draggable.js": "^2.2.1",
