@@ -1,24 +1,10 @@
 <template>
   <div id="app">
-    <md-toolbar :md-elevation="1" class="header">
-      <h2>&nbsp;&nbsp;ARCFLOW</h2>
-      <span>&nbsp;&nbsp;&nbsp;v 0.349</span>
-      <span style="flex: 1"></span>
-      <md-tabs>
-        <md-tab id="tab-home" style="background: transparent" md-label="Editor"></md-tab>
-        <md-tab id="tab-pages" md-label="Analytics"></md-tab>
-      </md-tabs>
-      <span style="flex: 1"></span>
-      <md-button @click="run" class="md-icon-button md-raised run">
-        <md-icon>play_arrow</md-icon>
-      </md-button>&nbsp;&nbsp;
-      <md-button @click="" class="md-icon-button md-raised">
-        <md-icon>settings</md-icon>
-      </md-button>
-    </md-toolbar>
+    <Header></Header>
     <div id="content" class="md-layout">
       <SideMenu class="md-layout-item md-size-15" msg="Datasource"></SideMenu>
       <Editor class="md-size-85" msg=""></Editor>
+      <Analytics v-show="!showEditor"></Analytics>
     </div>
   </div>
 </template>
@@ -26,22 +12,39 @@
 <script>
 import SideMenu from './components/SideMenu.vue'
 import Editor from './components/Editor.vue'
+import Header from './components/Header.vue'
+import Analytics from './components/Analytics.vue'
 import { EventBus } from './main.js'
 
+const setupEvents = function () {
+  EventBus.$on('switchTab', tab => {
+    if (tab == "editor") {
+      this.showEditor = true
+    } else {
+      this.showEditor = false
+    }
+    console.log(this.showEditor)
+  })
+}
+
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     Editor,
-    SideMenu
+    SideMenu,
+    Header,
+    Analytics
   },
   data: function() {
     return {
-      message: 'test'
-    };
+      message: 'test',
+      showEditor: true
+    }
   },
   methods: {
     run: () => {EventBus.$emit('runFlow', null)}
-  }
+  },
+  created: setupEvents
 }
 </script>
 
@@ -68,8 +71,22 @@ md-overlay {
   background: #212121 !important;
 }
 
+.md-tab {
+  color: #FFFFFF;
+}
+
+.md-tabs-indicator {
+  background-color: #FFFFFF !important;
+}
+
 .md-tabs .md-ripple {
   background: transparent;
+  color: #BBBBBB;
+}
+
+.md-tabs .md-active .md-ripple {
+  background: transparent;
+  color: #FFFFFF;
 }
 
 .md-field.md-theme-default>.md-icon:after {
