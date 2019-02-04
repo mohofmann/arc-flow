@@ -3,10 +3,10 @@
     <h2>&nbsp;&nbsp;ARCFLOW</h2>
     <span>&nbsp;&nbsp;&nbsp;v 0.349</span>
     <span style="flex: 1"></span>
-    <!-- <md-tabs @md-changed="switchTab">
-      <md-tab id="editor" md-label="Editor"></md-tab>
-      <md-tab id="analytics" md-label="Analytics"></md-tab>
-    </md-tabs> -->
+    <md-tabs @md-changed="switchTab">
+      <md-tab id="editor-tab" md-label="Editor"></md-tab>
+      <md-tab id="analytics-tab" md-label="Analytics"></md-tab>
+    </md-tabs>
     <span style="flex: 1"></span>
     <md-button @click="run" class="md-icon-button md-raised run">
       <md-icon>play_arrow</md-icon>

@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <Header></Header>
-    <div class="md-layout content">
+    <div id="content" class="md-layout">
       <SideMenu class="md-layout-item md-size-15" msg="Datasource"></SideMenu>
-      <Editor class="md-size-85" msg=""></Editor>
+      <Editor v-show="showEditor" class="md-size-85" msg=""></Editor>
+      <Analytics v-show="!showEditor"></Analytics>
     </div>
-    <!-- <Analytics v-show="!showEditor"></Analytics> -->
   </div>
 </template>
 
@@ -13,12 +13,12 @@
 import SideMenu from './components/SideMenu.vue'
 import Editor from './components/Editor.vue'
 import Header from './components/Header.vue'
-// import Analytics from './components/Analytics.vue'
+import Analytics from './components/Analytics.vue'
 import { EventBus } from './main.js'
 
 const setupEvents = function () {
   EventBus.$on('switchTab', tab => {
-    if (tab == "editor") {
+    if (tab == "editor-tab") {
       this.showEditor = true
     } else {
       this.showEditor = false
@@ -33,7 +33,7 @@ export default {
     Editor,
     SideMenu,
     Header,
-    // Analytics
+    Analytics
   },
   data: function() {
     return {
