@@ -16,6 +16,7 @@ import PeakDetector from './nodes/PeakDetector.js'
 import Segmentor from './nodes/Segmentor.js'
 import MeanExtractor from './nodes/MeanExtractor.js'
 /* PLOP: APPEND IMPORT */
+import MedianExtractor from './nodes/MedianExtractor.js'
 
 import Edge from './Edge.js'
 import { EventBus } from '../main.js'
@@ -63,6 +64,36 @@ export default class Canvas {
     // .move(100+20, 0)
   }
 
+  loadCanvas () {
+    this.createNode('DATASOURCE')
+    this.createNode('PREPROCESSOR')
+    this.createNode('PEAKDETECTOR')
+    this.createNode('RANGE')
+    this.createNode('SEGMENTOR')
+    this.createNode('MEANEXTRACTOR')
+
+    _.each(this.nodes, (node, index) => {
+      let y = (Math.random() * (100 - 300 + 1) ) << 0
+      node.element.move(index * 350, y)
+    })
+
+    this.nodes[1].setType('ENERGY')
+    this.nodes[2].minPeakHeight = 160
+    this.nodes[2].minPeakDistance = 100
+    this.nodes[3].updateNode(50, 50, 200)
+
+    this.createEdge(this.nodes[1].outputs[0])
+    this.createEdge(this.nodes[2].inputs[0])
+    this.createEdge(this.nodes[2].outputs[0])
+    this.createEdge(this.nodes[3].inputs[0])
+    this.createEdge(this.nodes[2].outputs[1])
+    this.createEdge(this.nodes[3].inputs[1])
+    this.createEdge(this.nodes[3].outputs[0])
+    this.createEdge(this.nodes[4].inputs[0])
+    this.createEdge(this.nodes[4].outputs[0])
+    this.createEdge(this.nodes[5].inputs[0])
+  }
+
   createEdge = function (connector) {
     // On first connector, only create edge without drawing it
     if (!this.edgeInConstruction) {
@@ -97,6 +128,7 @@ export default class Canvas {
       case 'SEGMENTOR': node = new Segmentor(this._canvas, this.watchCanvas); break
       case 'MEANEXTRACTOR': node = new MeanExtractor(this._canvas, this.watchCanvas); break
       /* PLOP: APPEND CASE */
+      case 'MEDIANEXTRACTOR': node = new MedianExtractor(this._canvas, this.watchCanvas); break
       default: break
     }
     this.nodes.push(node)

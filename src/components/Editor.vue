@@ -27,12 +27,15 @@ const setupEditor = function () {
 }
 
 const setupEvents = function () {
+  // TODO: investigate why sometimes (loadCanvas) arrow funcs are necessary
   EventBus.$on('runFlow', this.run)
   EventBus.$on('createNode', node => canvas.createNode(node))
   EventBus.$on('selectConnector', (node, connector) => canvas.createEdge(node, connector))
+  EventBus.$on('loadCanvas', () => canvas.loadCanvas())
 }
 
 const run = function () {
+  console.log("running")
   // TODO: Use refs for vue-like behavior
   document.getElementById("log").innerHTML = "";
   _.each(canvas.nodes, node => {

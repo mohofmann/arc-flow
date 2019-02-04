@@ -11,7 +11,10 @@
     <md-button @click="run" class="md-icon-button md-raised run">
       <md-icon>play_arrow</md-icon>
     </md-button>&nbsp;&nbsp;
-    <md-button @click="" class="md-icon-button md-raised">
+    <md-button @click="loadCanvas" class="md-icon-button md-raised">
+      <md-icon>cloud_upload</md-icon>
+    </md-button>&nbsp;&nbsp;
+    <md-button class="md-icon-button md-raised">
       <md-icon>settings</md-icon>
     </md-button>
   </md-toolbar>
@@ -25,6 +28,9 @@ export default {
   methods: {
     run: () => {
       EventBus.$emit('runFlow', null)
+    },
+    loadCanvas: () => {
+      EventBus.$emit('loadCanvas', null)
     },
     switchTab: tabId => {
       EventBus.$emit('switchTab', tabId)
