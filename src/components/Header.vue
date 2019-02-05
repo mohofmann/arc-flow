@@ -29,6 +29,11 @@ const setupEvents = function () {
   })
 }
 
+const switchTab = function (tabId) {
+  this.activeTab = tabId
+  EventBus.$emit('switchTab', tabId)
+}
+
 export default {
   name: 'Header',
   data: function () {
@@ -43,9 +48,7 @@ export default {
     loadCanvas: () => {
       EventBus.$emit('loadCanvas', null)
     },
-    switchTab: tabId => {
-      EventBus.$emit('switchTab', tabId)
-    }
+    switchTab: switchTab
   },
   created: setupEvents
 }

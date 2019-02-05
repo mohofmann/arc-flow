@@ -73,7 +73,6 @@ export default class DataSource extends Node {
 			})
 		})
 		console.log("Flow execution done.");
-		EventBus.$emit('renderDataChart', data)
 	}
 
 }

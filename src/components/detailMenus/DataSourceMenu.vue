@@ -29,6 +29,7 @@ const parseFile = function (fileList) {
       complete: result => {
         this.showAlert = true
         this.node.setData(result)
+        localStorage.setItem('tmpData', JSON.stringify(result))
         this.node.name = file.name
         this.features = result.data[0]
         this.selectedFeatures = this.features.slice(0,3)

@@ -73,15 +73,26 @@ export default class Canvas {
     this.createNode('MEANEXTRACTOR')
 
     _.each(this.nodes, (node, index) => {
-      let y = (Math.random() * (100 - 300 + 1) ) << 0
+      let y = Math.random() * (300 - 200) + 200;
+      console.log(y)
       node.element.move(index * 350, y)
     })
 
+    let data = JSON.parse(localStorage.getItem('tmpData'))
+    this.nodes[0].setData(data)
+    this.nodes[0].setFeatures(data.data[0].slice(3,6))
+    data = null
     this.nodes[1].setType('ENERGY')
     this.nodes[2].minPeakHeight = 160
     this.nodes[2].minPeakDistance = 100
     this.nodes[3].updateNode(50, 50, 200)
 
+    this.createEdge(this.nodes[0].outputs[0])
+    this.createEdge(this.nodes[1].inputs[0])
+    this.createEdge(this.nodes[0].outputs[1])
+    this.createEdge(this.nodes[1].inputs[1])
+    this.createEdge(this.nodes[0].outputs[2])
+    this.createEdge(this.nodes[1].inputs[2])
     this.createEdge(this.nodes[1].outputs[0])
     this.createEdge(this.nodes[2].inputs[0])
     this.createEdge(this.nodes[2].outputs[0])
