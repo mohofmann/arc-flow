@@ -74,9 +74,8 @@ export default class Canvas {
     this.createNode('MEANEXTRACTOR')
 
     _.each(this.nodes, (node, index) => {
-      let y = Math.random() * (300 - 200) + 200;
-      console.log(y)
-      node.element.move(index * 350, y)
+      let y = Math.random() * (300 - 100) + 100;
+      node.element.move(index * 300, y)
     })
 
     let data = JSON.parse(localStorage.getItem('tmpData'))
