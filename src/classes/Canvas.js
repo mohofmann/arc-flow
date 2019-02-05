@@ -16,6 +16,7 @@ import PeakDetector from './nodes/PeakDetector.js'
 import Segmentor from './nodes/Segmentor.js'
 import MeanExtractor from './nodes/MeanExtractor.js'
 /* PLOP: APPEND IMPORT */
+import FeatureVector from './nodes/FeatureVector.js'
 import SmaExtractor from './nodes/SmaExtractor.js'
 import MedianExtractor from './nodes/MedianExtractor.js'
 
@@ -82,7 +83,7 @@ export default class Canvas {
     this.nodes[0].setData(data)
     this.nodes[0].setFeatures(data.data[0].slice(3,6))
     data = null
-    this.nodes[1].setType('ENERGY')
+    this.nodes[1].setType('MAGNITUDE')
     this.nodes[2].minPeakHeight = 160
     this.nodes[2].minPeakDistance = 100
     this.nodes[3].updateNode(50, 50, 200)
@@ -139,6 +140,7 @@ export default class Canvas {
       case 'SEGMENTOR': node = new Segmentor(this._canvas, this.watchCanvas); break
       case 'MEANEXTRACTOR': node = new MeanExtractor(this._canvas, this.watchCanvas); break
       /* PLOP: APPEND CASE */
+      case 'FEATUREVECTOR': node = new FeatureVector(this._canvas, this.watchCanvas); break
       case 'SMAEXTRACTOR': node = new SmaExtractor(this._canvas, this.watchCanvas); break
       case 'MEDIANEXTRACTOR': node = new MedianExtractor(this._canvas, this.watchCanvas); break
       default: break

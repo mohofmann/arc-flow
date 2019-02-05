@@ -6,7 +6,7 @@
     <md-field>
       <label for="calculation">Calculation</label>
       <md-select v-model="preprocessorType" @md-selected="updateType">
-        <md-option value="ENERGY">Energy</md-option>
+        <md-option value="MAGNITUDE">Magnitude</md-option>
       </md-select>
     </md-field>
     <md-field>

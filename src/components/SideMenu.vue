@@ -27,7 +27,7 @@
         <md-subheader>Preprocessing</md-subheader>
           <md-list-item @click="createNode('PREPROCESSOR')">
             <md-icon>trending_up</md-icon>
-            <span class="md-list-item-text">Energy</span>
+            <span class="md-list-item-text">Magnitude</span>
           </md-list-item>
         <md-divider></md-divider>
         <md-subheader>Peak Detection</md-subheader>
@@ -57,6 +57,10 @@
           </md-list-item>
         <md-subheader>Misc</md-subheader>
           <!-- PLOP: APPEND -->
+					<md-list-item @click="createNode('FEATUREVECTOR')">
+					  <md-icon>extension</md-icon>
+					  <span class="md-list-item-text">Feature Vector</span>
+					</md-list-item>
       </md-list>
       <br><br><br><br><br><br>
   </nav>

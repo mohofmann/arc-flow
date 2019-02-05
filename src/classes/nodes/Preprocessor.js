@@ -9,8 +9,8 @@ import Node from '../Node.js'
 let attributes = {
 	backgroundColor: '#F06',
 	headerColor: '#CF0053',
-	title: 'Preprocessor',
-	hint: 'Select Calculation'
+	title: 'Preprocessing',
+	hint: ''
 }
 
 export default class Preprocessor extends Node {
@@ -20,6 +20,7 @@ export default class Preprocessor extends Node {
 
 		this.type = ""
 		this.setInputs(["1", "2", "3"])
+		this.setType("MAGNITUDE")
 	}
 
 	_perform = function (args) {
@@ -34,7 +35,7 @@ export default class Preprocessor extends Node {
 	}
 
 	_log = function (args) {
-		console.log("energy is " + args.energy + "\n")
+		console.log("magnitude is " + args.energy + "\n")
 	}
 
 	setType = function (type) {
