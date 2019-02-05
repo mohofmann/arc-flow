@@ -1,6 +1,6 @@
 <template>
   <md-toolbar :md-elevation="1" class="header">
-    <h2>&nbsp;&nbsp;ARCFLOW</h2>
+    <h2 @click="reload" style="cursor: pointer">&nbsp;&nbsp;ARCFLOW</h2>
     <span>&nbsp;&nbsp;&nbsp;v 0.349</span>
     <span style="flex: 1"></span>
     <md-tabs @md-changed="switchTab" :md-active-tab="activeTab">
@@ -47,6 +47,9 @@ export default {
     },
     loadCanvas: () => {
       EventBus.$emit('loadCanvas', null)
+    },
+    reload: () => {
+      location.reload()
     },
     switchTab: switchTab
   },

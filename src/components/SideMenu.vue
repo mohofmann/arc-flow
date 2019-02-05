@@ -50,7 +50,11 @@
           <md-list-item @click="createNode('MEDIANEXTRACTOR')">
             <md-icon>gps_fixed</md-icon>
             <span class="md-list-item-text">Median Extractor</span>
-          </md-list-item> 
+          </md-list-item>
+          <md-list-item @click="createNode('SMAEXTRACTOR')">
+            <md-icon>gps_fixed</md-icon>
+            <span class="md-list-item-text">SMA Extractor</span>
+          </md-list-item>
         <md-subheader>Misc</md-subheader>
           <!-- PLOP: APPEND -->
       </md-list>
