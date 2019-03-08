@@ -3,8 +3,13 @@
     <Header></Header>
     <div id="content" class="md-layout">
       <SideMenu class="md-layout-item md-size-15" msg="Datasource"></SideMenu>
-      <Editor v-show="showEditor" class="md-size-85" msg=""></Editor>
-      <Analytics v-show="!showEditor"></Analytics>
+      <Editor class="md-layout-item md-size-85" v-show="showEditor" msg=""></Editor>
+      <Analytics class="md-layout-item md-size-85" v-show="!showEditor"></Analytics>
+      <!-- TODO: See how to fix SVG render bug when container is display: none -->
+      <!-- <div class="md-layout-item md-size-85" style="position: relative">
+        <Editor class="editor" msg=""></Editor>
+        <Analytics :class="!showEditor ? 'af-foreground' : 'af-background'"></Analytics>
+      </div> -->
     </div>
   </div>
 </template>
@@ -128,6 +133,26 @@ md-overlay {
 .af-column-padding {
   padding: 0 12px;
 }
+
+/*.editor {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.af-foreground {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 100 !important;
+}
+
+.af-background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -2 !important;
+}*/
 
 .af-fab {
   position: absolute !important;

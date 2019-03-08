@@ -29,6 +29,7 @@ const parseFile = function (fileList) {
       complete: result => {
         this.showAlert = true
         this.node.setData(result)
+        // TODO: Fix saving/loading so it doesn't require uploading the csv once
         localStorage.setItem('tmpData', JSON.stringify(result))
         this.node.name = file.name
         this.features = result.data[0]

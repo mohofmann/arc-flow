@@ -34,6 +34,11 @@ const switchTab = function (tabId) {
   EventBus.$emit('switchTab', tabId)
 }
 
+const loadCanvas = function () {
+  EventBus.$emit('loadCanvas', null)
+  this.switchTab('editor-tab')
+}
+
 export default {
   name: 'Header',
   data: function () {
@@ -45,9 +50,7 @@ export default {
     run: () => {
       EventBus.$emit('runFlow', null)
     },
-    loadCanvas: () => {
-      EventBus.$emit('loadCanvas', null)
-    },
+    loadCanvas: loadCanvas,
     reload: () => {
       location.reload()
     },
