@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "generate": "plop"
+    "generate": "plop",
+    "deploy": "vue-cli-service build && cd dist && git init && git add -A && git commit -m 'deploy' && git push -f git@github.com:mohofmann/arc-flow.git master:gh-pages && cd -"
   },
   "dependencies": {
     "chart.js": "^2.7.3",
