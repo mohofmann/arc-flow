@@ -32,6 +32,8 @@ export default class PeakDetector extends Node {
 
 		defaultInputs && this.setInputs(defaultInputs)
     defaultOutputs && this.setOutputs(defaultOutputs)
+
+    this.detailMenu = 'PeakDetectorMenu'
 	}
 
 	_preperform () {

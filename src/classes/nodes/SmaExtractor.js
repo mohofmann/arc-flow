@@ -19,6 +19,8 @@ export default class SmaExtractor extends Node {
 
 		this.setInputs(["1"])
 		this.setOutputs(["1"])
+
+		this.detailMenu = 'SmaExtractorMenu'
 	}
 
 	_perform () {

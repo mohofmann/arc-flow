@@ -20,6 +20,8 @@ export default class MedianExtractor extends Node {
 
 		this.setInputs(["Segment"])
 		this.setOutputs(["Median"])
+
+		this.detailMenu = 'MedianExtractorMenu'
 	}
 
 	_perform () {

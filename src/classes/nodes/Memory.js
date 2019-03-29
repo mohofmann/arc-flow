@@ -25,6 +25,8 @@ export default class Memory extends Node {
 		this.range = 0
 		this.fields = []
 		this.adjustFields()
+
+		this.detailMenu = 'MemoryMenu'
 	}
 
 	adjustFields = function () {

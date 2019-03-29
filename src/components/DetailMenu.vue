@@ -1,7 +1,7 @@
 <template>
   <!-- Sidebar -->
     <md-drawer class="af-column-padding md-right" :md-active.sync="nodeSelected" @md-closed="deselectNode">
-      <Component v-bind:is="selectedNode && selectedNodeType+'Menu'" :node="selectedNode"></Component>
+      <Component v-bind:is="selectedNode && selectedNode.detailMenu" :node="selectedNode"></Component>
     </md-drawer>
 </template>
 
@@ -23,7 +23,6 @@ const setupEvents = function () {
   EventBus.$on('selectNode', node => {
     this.nodeSelected = true
     this.selectedNode = node
-    this.selectedNodeType = node.constructor.name
   })
   EventBus.$on('deselectNode', node => {
     deselectNode();

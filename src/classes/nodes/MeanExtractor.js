@@ -19,6 +19,8 @@ export default class MeanExtractor extends Node {
 
 		this.setInputs(["Range"])
 		this.setOutputs(["Feature"])
+
+		this.detailMenu = 'MeanExtractorMenu'
 	}
 
 	_perform () {

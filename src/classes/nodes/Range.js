@@ -40,6 +40,8 @@ export default class Range extends Node {
 
 		this.setInputs(defaultInputs)
 		this.setOutputs(defaultOutputs)
+
+		this.detailMenu = 'RangeMenu'
 	}
 
 	_preperform () {

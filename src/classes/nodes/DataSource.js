@@ -24,6 +24,8 @@ export default class DataSource extends Node {
 		this.features = []
 		this._featureIndices = []
 		this._index = 0
+
+		this.detailMenu = 'DataSourceMenu'
 	}
 
 	setData = function (data) {

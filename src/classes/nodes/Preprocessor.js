@@ -21,6 +21,8 @@ export default class Preprocessor extends Node {
 		this.type = ""
 		this.setInputs(["1", "2", "3"])
 		this.setType("MAGNITUDE")
+
+		this.detailMenu = 'PreprocessorMenu'
 	}
 
 	_perform = function (args) {

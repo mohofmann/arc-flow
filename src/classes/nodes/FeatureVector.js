@@ -20,6 +20,8 @@ export default class FeatureVector extends Node {
 
 		this.setInputs(["1"])
 		this.setOutputs(["1"])
+
+		this.detailMenu = 'FeatureVectorMenu'
 	}
 
 	_perform () {

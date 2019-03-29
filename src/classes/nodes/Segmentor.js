@@ -22,6 +22,8 @@ export default class Segmentor extends Node {
 		this.segments = [{start: 0}]
 		this.setInputs(["Range"])
 		this.setOutputs(["Segment 1"])
+
+		this.detailMenu = 'SegmentorMenu'
 	}
 
 	_perform () {

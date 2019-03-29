@@ -10,13 +10,13 @@
     "deploy": "vue-cli-service build && cd dist && git init && git add -A && git commit -m 'deploy' && git push -f git@github.com:mohofmann/arc-flow.git master:gh-pages && cd -"
   },
   "dependencies": {
-    "chart.js": "^2.7.3",
+    "chart.js": "^2.8.0",
     "jStat": "^1.7.1",
-    "papaparse": "^4.6.2",
-    "svg.draggable.js": "^2.2.1",
-    "svg.js": "^2.6.6",
-    "svg.panzoom.js": "^1.2.0",
-    "vue": "^2.5.17",
+    "papaparse": "^4.6.3",
+    "svg.draggable.js": "^2.2.2",
+    "svg.js": "^2.7.1",
+    "svg.panzoom.js": "^1.2.3",
+    "vue": "^2.6.9",
     "vue-material": "^1.0.0-beta-10.2"
   },
   "devDependencies": {
@@ -24,10 +24,10 @@
     "@vue/cli-plugin-eslint": "^3.5.0",
     "@vue/cli-service": "^3.5.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0-0",
-    "plop": "^2.2.0",
-    "vue-template-compiler": "^2.5.17"
+    "eslint": "^5.15.1",
+    "eslint-plugin-vue": "^5.2.2",
+    "plop": "^2.3.0",
+    "vue-template-compiler": "^2.6.9"
   },
   "eslintConfig": {
     "root": true,
