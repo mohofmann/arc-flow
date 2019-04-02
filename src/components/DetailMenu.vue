@@ -7,7 +7,7 @@
 
 <script>
 import DataSourceMenu from './detailMenus/DataSourceMenu.vue'
-import MemoryMenu from './detailMenus/MemoryMenu.vue'
+import RingbufferMenu from './detailMenus/RingbufferMenu.vue'
 import PreprocessorMenu from './detailMenus/PreprocessorMenu.vue'
 import PeakDetectorMenu from './detailMenus/PeakDetectorMenu.vue'
 import RangeMenu from './detailMenus/RangeMenu.vue'
@@ -41,7 +41,7 @@ export default {
   name: 'DetailMenu',
   components: {
     DataSourceMenu,
-    MemoryMenu,
+    RingbufferMenu,
     PreprocessorMenu,
     PeakDetectorMenu,
     RangeMenu,
@@ -55,7 +55,6 @@ export default {
   data: function () {
     return {
       nodeSelected: false,
-      selectedNodeType: null,
       selectedNode: null
     };
   },

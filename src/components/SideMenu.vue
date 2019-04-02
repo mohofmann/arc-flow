@@ -16,7 +16,7 @@
           </md-list-item>
         <md-divider></md-divider>
         <md-subheader>Memory</md-subheader>
-          <md-list-item @click="createNode('MEMORY')">
+          <md-list-item @click="createNode('RINGBUFFER')">
             <md-icon>data_usage</md-icon>
             <span class="md-list-item-text">Ring Buffer</span>
           </md-list-item>

@@ -10,7 +10,7 @@ import 'svg.panzoom.js'
 
 import DataSource  from './nodes/DataSource.js'
 import Preprocessor from './nodes/Preprocessor.js'
-import Memory from './nodes/Memory.js'
+import Ringbuffer from './nodes/Ringbuffer.js'
 import Range from './nodes/Range.js'
 import PeakDetector from './nodes/PeakDetector.js'
 import Segmentor from './nodes/Segmentor.js'
@@ -133,7 +133,7 @@ export default class Canvas {
     let node = null
     switch (nodeName) {
       case 'DATASOURCE': node = new DataSource(this._canvas, this.watchCanvas); break
-      case 'MEMORY': node = new Memory(this._canvas, this.watchCanvas); break
+      case 'RINGBUFFER': node = new Ringbuffer(this._canvas, this.watchCanvas); break
       case 'RANGE': node = new Range(this._canvas, this.watchCanvas); break
       case 'PREPROCESSOR': node = new Preprocessor(this._canvas, this.watchCanvas); break
       case 'PEAKDETECTOR': node = new PeakDetector(this._canvas, this.watchCanvas); break

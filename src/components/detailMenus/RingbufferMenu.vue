@@ -1,14 +1,8 @@
 <template>
   <div class="md-content">
-    <h4>Memory</h4>
+    <h4>Ringbuffer</h4>
     <md-divider></md-divider>
     <br>
-    <md-field>
-      <label for="features">Memory Type</label>
-      <md-select v-model="memoryType">
-        <md-option value="RINGBUFFER">Ringbuffer</md-option>
-      </md-select>
-    </md-field>
     <md-field>
       <label for="fieldSize">Field Size</label>
       <md-select v-model="fieldSize" @md-selected="updateAttributes">
@@ -32,10 +26,6 @@
 <script>
 import { EventBus } from '../../main.js'
 
-const changeMemoryType = function () {
-  // body...
-}
-
 const updateAttributes  = function () {
   if (this.node) {
     this.node.updateNode(this.fieldSize, this.fieldAmount)
@@ -49,7 +39,6 @@ export default {
   },
   data: function () {
     return {
-      memoryType: 'RINGBUFFER',
       fieldAmount: this.node.fieldAmount,
       fieldSize: this.node.fieldSize,
       outputRange: 0,
@@ -57,7 +46,6 @@ export default {
     }
   },
   methods: {
-    changeMemoryType: changeMemoryType,
     updateAttributes: updateAttributes
   }
 }

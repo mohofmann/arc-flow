@@ -1,5 +1,5 @@
 /**************************************
- *	MEMORY
+ *	RINGBUFFER
  *	inherits from Node, simulates
  *	memory like a ring buffer
  **************************************/
@@ -10,9 +10,9 @@ import Node from '../Node.js'
 let attributes = {
 	backgroundColor: '#FFB000',
 	headerColor: '#BF8400',
-	title: 'Memory',
+	title: 'Ringbuffer',
 	hint: 'Click to set Memory Size',
-	description: 'Buffers a configurable amount of signals and is able to output range of past signals'
+	description: 'Buffers a signal vector and is able to output past signals'
 }
 
 export default class Memory extends Node {
@@ -26,7 +26,7 @@ export default class Memory extends Node {
 		this.fields = []
 		this.adjustFields()
 
-		this.detailMenu = 'MemoryMenu'
+		this.detailMenu = 'RingbufferMenu'
 	}
 
 	adjustFields = function () {
