@@ -14,6 +14,10 @@
             <md-icon>notes</md-icon>
             <span class="md-list-item-text">{{ msg }}</span>
           </md-list-item>
+          <md-list-item @click="createNode('SELECTOR')">
+            <md-icon>notes</md-icon>
+            <span class="md-list-item-text">Selector</span>
+          </md-list-item>
         <md-divider></md-divider>
         <md-subheader>Memory</md-subheader>
           <md-list-item @click="createNode('RINGBUFFER')">

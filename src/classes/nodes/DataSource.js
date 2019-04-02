@@ -12,7 +12,8 @@ let attributes = {
 	backgroundColor: '#57A9FF',
 	headerColor: '#4687CC',
 	title: 'Data Source',
-	hint: 'Click to add Data'
+	hint: 'Click to add Data',
+	description: 'Imports and parses a table containing sensor data and outputs it sample by sample'
 }
  
 export default class DataSource extends Node {
@@ -21,6 +22,7 @@ export default class DataSource extends Node {
 		super (canvas, attributes, watchCanvas)
 		this.data = null
 		this.name = ""
+		this.description = attributes.description
 		this.features = []
 		this._featureIndices = []
 		this._index = 0
@@ -30,8 +32,10 @@ export default class DataSource extends Node {
 
 	setData = function (data) {
 		this.data = data
+		this.features = this.data.data[0]
+		console.log(this.features)
+		this.setOutputs(['Data (' + this.features.length + ' axes)'])
 		this.updateNode()
-		this.setFeatures(this.data.data[0])
 	}
 
 	_setFeatureIndices () {
@@ -41,11 +45,11 @@ export default class DataSource extends Node {
 		})
 	}
 
-	setFeatures = function (features) {
-		this.features = features
-		this._setFeatureIndices()
-		this.setOutputs(features)
-	}
+	// setFeatures = function (features) {
+	// 	this.features = features
+	// 	this._setFeatureIndices()
+	// 	this.setOutputs(features)
+	// }
 
 	updateNode = function () {
 		this.hint.text("")
@@ -66,13 +70,12 @@ export default class DataSource extends Node {
 		let data = _.tail(this.data.data)
 		_.each(data, row => {
 			this.log({data: row})
-			_.each(this.outputs, (output, index) => {
-				if (output.edge) {
-					output.edge._end.data = row[this._featureIndices[index]]
-					// Run successor nodes once for each parsed row
-					output.edge._end.node.run()
-				}
-			})
+			let output = this.outputs[0]
+			if (output.edge) {
+				output.edge._end.data = row
+				// Run successor nodes once for each parsed row
+				output.edge._end.node.run()
+			}
 		})
 		console.log("Flow execution done.");
 	}

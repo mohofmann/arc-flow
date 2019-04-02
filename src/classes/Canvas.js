@@ -16,6 +16,7 @@ import PeakDetector from './nodes/PeakDetector.js'
 import Segmentor from './nodes/Segmentor.js'
 import MeanExtractor from './nodes/MeanExtractor.js'
 /* PLOP: APPEND IMPORT */
+import Selector from './nodes/Selector.js'
 import FeatureVector from './nodes/FeatureVector.js'
 import SmaExtractor from './nodes/SmaExtractor.js'
 import MedianExtractor from './nodes/MedianExtractor.js'
@@ -140,6 +141,7 @@ export default class Canvas {
       case 'SEGMENTOR': node = new Segmentor(this._canvas, this.watchCanvas); break
       case 'MEANEXTRACTOR': node = new MeanExtractor(this._canvas, this.watchCanvas); break
       /* PLOP: APPEND CASE */
+      case 'SELECTOR': node = new Selector(this._canvas, this.watchCanvas); break
       case 'FEATUREVECTOR': node = new FeatureVector(this._canvas, this.watchCanvas); break
       case 'SMAEXTRACTOR': node = new SmaExtractor(this._canvas, this.watchCanvas); break
       case 'MEDIANEXTRACTOR': node = new MedianExtractor(this._canvas, this.watchCanvas); break

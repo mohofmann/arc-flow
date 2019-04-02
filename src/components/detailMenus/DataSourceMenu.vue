@@ -4,17 +4,19 @@
       <span>CSV file successfully parsed.</span>
     </md-snackbar>
     <h4>Data Source</h4>
+    <p><i>{{ node.description }}</i></p>
+    <md-divider></md-divider>
     <md-field>
       <label>Upload CSV</label>
       <md-file @md-change="parseFile" :placeholder="fileName" style="max-width: 100% !important"/>
     </md-field>
-    <md-divider></md-divider>
+    <!-- <md-divider></md-divider>
     <md-field>
       <label for="features">Features</label>
       <md-select :disabled="!features.toString()" v-model="selectedFeatures" name="features" id="features" multiple @md-selected="updateSelection">
         <md-option v-for="feature in features" :data="feature" :key="feature" :value="feature">{{ feature }}</md-option>
       </md-select>
-    </md-field>
+    </md-field> -->
     <md-switch v-model="node.logging">Logging</md-switch>
   </div>
 </template>
@@ -29,11 +31,11 @@ const parseFile = function (fileList) {
       complete: result => {
         this.showAlert = true
         this.node.setData(result)
-        // TODO: Fix saving/loading so it doesn't require uploading the csv once
-        localStorage.setItem('tmpData', JSON.stringify(result))
         this.node.name = file.name
-        this.features = result.data[0]
-        this.selectedFeatures = this.features.slice(0,3)
+        // TODO: Fix saving/loading so it doesn't require uploading the csv once
+        // localStorage.setItem('tmpData', JSON.stringify(result))
+        // this.features = result.data[0]
+        // this.selectedFeatures = this.features.slice(0,3)
       }
     })
   }
