@@ -20,12 +20,15 @@ export default class Memory extends Node {
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
 		this.fieldAmount = 512
-		this.fieldSize = 0
 		this.index = 0
 		this.range = 0
 		this.fields = []
 		this.adjustFields()
+		this.setInputs(['Data'])
+		this.setOutputs(['Data'])
+		this.hint.text('')
 
+		this.description = attributes.description
 		this.detailMenu = 'RingbufferMenu'
 	}
 
@@ -46,30 +49,10 @@ export default class Memory extends Node {
 	}
 
 	_perform = function () {
-		let newField = []
-		_.each(this.inputs, (input, index) => {
-			newField.push(input.data)
-			if (this.outputs[index].edge) {
-				this.outputs[index].edge._end.data = input.data
-			}
-		})
-		this.store(newField)
-	}
-
-	setFieldSize = function (fieldSize) {
-		if (fieldSize == 0) {
-			this.setInputs([])
-			this.hint.text(attributes.hint)
-		} else {
-			this.fieldSize = fieldSize
-			let fields = []
-			for (let i = 1; i <= fieldSize; i ++) {
-				fields.push(i.toString())
-			}
-			this.setInputs(fields)
-			this.setOutputs(fields)
-			this.hint.text("")
-		}	
+		this.store(this.inputs[0].data)
+		if (this.outputs[index].edge) {
+			this.outputs[index].edge._end.data = this.inputs[0].data
+		}
 	}
 
 	store = function (newField) {
@@ -84,9 +67,6 @@ export default class Memory extends Node {
 	updateNode = function (fieldSize, fieldAmount) {
 		this.fieldAmount = fieldAmount
 		this.adjustFields()
-		if (this.fieldSize != fieldSize) {
-			this.setFieldSize(fieldSize)
-		}
 	}
 
 }

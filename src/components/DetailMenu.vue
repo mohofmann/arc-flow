@@ -14,6 +14,7 @@ import RangeMenu from './detailMenus/RangeMenu.vue'
 import SegmentorMenu from './detailMenus/SegmentorMenu.vue'
 import MeanExtractorMenu from './detailMenus/MeanExtractorMenu.vue'
 /* PLOP: APPEND IMPORT */
+import LogMenu from './detailMenus/LogMenu.vue'
 import SelectorMenu from './detailMenus/SelectorMenu.vue'
 import FeatureVectorMenu from './detailMenus/FeatureVectorMenu.vue'
 import SmaExtractorMenu from './detailMenus/SmaExtractorMenu.vue'
@@ -48,6 +49,7 @@ export default {
     RangeMenu,
     SegmentorMenu,
     /* PLOP: APPEND COMPONENT */
+    LogMenu,
     SelectorMenu,
     FeatureVectorMenu,
     SmaExtractorMenu,

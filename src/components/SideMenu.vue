@@ -61,6 +61,10 @@
           </md-list-item>
         <md-subheader>Misc</md-subheader>
           <!-- PLOP: APPEND -->
+					<md-list-item @click="createNode('LOG')">
+					  <md-icon>extension</md-icon>
+					  <span class="md-list-item-text">Log</span>
+					</md-list-item>
 					<md-list-item @click="createNode('FEATUREVECTOR')">
 					  <md-icon>extension</md-icon>
 					  <span class="md-list-item-text">Feature Vector</span>
