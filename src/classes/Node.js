@@ -65,6 +65,17 @@ export default class Node {
     }
   }
 
+  // Tries recursively to get the data attribute structure
+  getAttributes () {
+    let attributes = null
+    _.each(this.inputs, input => {
+      if (input.edge) {
+        attributes = input.edge._start.node.getAttributes()
+      }
+    })
+    return attributes
+  }
+
   log (args) {
     this.logging && this._log(args)
   }

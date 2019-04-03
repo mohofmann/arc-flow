@@ -5,8 +5,8 @@
     <md-divider></md-divider>
     <md-field>
       <label for="segmentAmount">Feature Type</label>
-      <md-select v-model="selectedAttributes" @md-selected="updateSelection">
-        <md-option v-for="attribute in attributes" :value="attribute"></md-option>
+      <md-select v-model="selectedAttributes" @md-selected="updateSelection" multiple>
+        <md-option v-for="attribute in attributes" :value="attribute">{{ attribute }}</md-option>
       </md-select>
     </md-field>
     <md-switch v-model="node.logging">Logging</md-switch>
@@ -17,7 +17,12 @@
 import { EventBus } from '../../main.js'
 
 const updateSelection = function () {
+  this.node.setAttributes(this.attributes, this.selectedAttributes)
+}
 
+const getAttributes = function () {
+  let attributes = this.node.getAttributes()
+  this.attributes = attributes
 }
 
 export default {
@@ -27,13 +32,14 @@ export default {
   },
   data: function () {
     return {
-      attributes: this.node.attributes ? this.node.attributes : [],
-      selectedAttributes: this.node.attributes
+      attributes: [],
+      selectedAttributes: this.node.selectedAttributes ? this.node.selectedAttributes : []
     }
   },
   methods: {
     updateSelection: updateSelection
-  }
+  },
+  created: getAttributes
 }
 </script>
 

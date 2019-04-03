@@ -23,11 +23,33 @@ export default class Selector extends Node {
 
 		this.setInputs(["Data"])
 		this.setOutputs([""])
+		this.attributes = []
+		this.selectedAttributes = []
+	}
+
+	setAttributes (attributes, selectedAttributes) {
+		this.attributes = []
+		this.selectedAttributes = selectedAttributes
+
+		_.each(attributes, (attribute, index) => {
+			_.each(selectedAttributes, selectedAttribute => {
+				if (attribute == selectedAttribute) {
+					this.attributes.push({attribute: attribute, index: index})
+				}
+			})
+		})
+
+		this.setOutputs([selectedAttributes.toString()])
+		console.log(this.attributes)
 	}
 
 	_perform () {
 		// take incoming data from this.inputs array
-
+		let output = []
+		_.each(this.attributes, attribute => {
+			output.push(this.inputs[0].data[attribute.index])
+		})
+		console.log(output)
 		// process it
 
 		// and send result to the edge._end of this.outputs array

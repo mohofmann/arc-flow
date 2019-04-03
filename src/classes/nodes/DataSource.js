@@ -45,6 +45,10 @@ export default class DataSource extends Node {
 		})
 	}
 
+	getAttributes () {
+		return this.features
+	}
+
 	// setFeatures = function (features) {
 	// 	this.features = features
 	// 	this._setFeatureIndices()
