@@ -9,8 +9,9 @@ import Node from '../Node.js'
 let attributes = {
 	backgroundColor: '#F06',
 	headerColor: '#CF0053',
-	title: 'Preprocessing',
-	hint: ''
+	title: 'Squared Magnitude',
+	hint: '',
+	description: 'Calculates the squared Magnitude of input attributes'
 }
 
 export default class Preprocessor extends Node {
@@ -19,16 +20,17 @@ export default class Preprocessor extends Node {
 		super (canvas, attributes, watchCanvas)
 
 		this.type = ""
-		this.setInputs(["1", "2", "3"])
-		this.setType("MAGNITUDE")
+		this.setInputs(["Data"])
+		this.setOutputs(['Sqd. Magnitude'])
+		this.description = attributes.description
 
 		this.detailMenu = 'PreprocessorMenu'
 	}
 
 	_perform = function (args) {
 		let energy = 0
-		_.each(this.inputs, input => {
-			energy += (input.data * input.data)
+		_.each(this.inputs[0].data, attribute => {
+			energy += (attribute * attribute)
 			this.log({energy: energy})
 		})
 		if (this.outputs[0].edge) {
@@ -38,13 +40,6 @@ export default class Preprocessor extends Node {
 
 	_log = function (args) {
 		console.log("magnitude is " + args.energy + "\n")
-	}
-
-	setType = function (type) {
-		this.type = type
-		this.type && this.headline.text(attributes.title + ' (' + this.type + ')')
-		this.hint.text("")
-		this.setOutputs([this.type])
 	}
 
 }

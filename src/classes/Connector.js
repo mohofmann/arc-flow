@@ -25,25 +25,25 @@ export default class Connector {
 
     console.log(node.backgroundColor)
 
-  	let circlePos = this.type === 'INPUT' ? -7.5 : node.sizeX - 7.5
-    let textPos = this.type === 'INPUT' ? 20 : node.sizeX - 20
-    let verticalPos = this.type === 'INPUT' ? node.inputs.length : node.outputs.length
-    let anchor = this.type === 'INPUT' ? 'start' : 'end'
+  	this._circlePos = this.type === 'INPUT' ? -7.5 : node.sizeX - 7.5
+    this._textPos = this.type === 'INPUT' ? 20 : node.sizeX - 20
+    this._verticalPos = this.type === 'INPUT' ? node.inputs.length : node.outputs.length
+    this._anchor = this.type === 'INPUT' ? 'start' : 'end'
 
     this.element = canvas.group()
     let text = canvas
       .text(this.name)
-      .move(textPos, verticalMargin + verticalPos * height)
+      .move(this._textPos, verticalMargin + this._verticalPos * height)
       .attr({fill: '#00000099', cursor: 'default'})
-      .font({anchor: anchor, weight: '600'})
+      .font({anchor: this._anchor, weight: '600'})
     let connector = canvas
       .circle(circleSize, circleSize)
       .attr({fill: '#FFFFFF', cursor: 'pointer'})
-      .move(circlePos, verticalMargin + verticalPos * height)
+      .move(this._circlePos, verticalMargin + this._verticalPos * height)
     let innerCircle = canvas
       .circle(circleSize-6, circleSize-6)
       .attr({fill: node.backgroundColor, cursor: 'pointer'})
-      .move(circlePos+3, verticalMargin + verticalPos * height + 3)
+      .move(this._circlePos+3, verticalMargin + this._verticalPos * height + 3)
     this.element.add(text)
     connector.click(event => {
       this.connectorClickEvent(event)
@@ -62,6 +62,14 @@ export default class Connector {
   connectorClickEvent = function (event) {
     EventBus.$emit('selectConnector', this, event.target.instance)
     event.stopPropagation()
+  }
+
+  setLabel (label) {
+    this.element.first()
+      .text(label)
+      .move(this._textPos, verticalMargin + this._verticalPos * height)
+      .attr({fill: '#00000099', cursor: 'default'})
+      .font({anchor: this._anchor, weight: '600'})
   }
 
   setEdge = function (edge) {

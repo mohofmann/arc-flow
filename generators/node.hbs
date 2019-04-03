@@ -9,7 +9,8 @@ let attributes = {
 	backgroundColor: '#F06',
 	headerColor: '#CF0053',
 	title: '{{ titleCase name }}',
-	hint: '{{ description }}'
+	hint: '{{ description }}',
+	description: '{{ description }}'
 }
 
 export default class {{ properCase name }} extends Node {
@@ -18,9 +19,14 @@ export default class {{ properCase name }} extends Node {
 		super (canvas, attributes, watchCanvas)
 
 		this.detailMenu = '{{ properCase name }}Menu'
+		this.description = attributes.description
 
 		// this.setInputs(["1"])
 		// this.setOutputs(["1"])
+	}
+
+	_preperform () {
+		// potential functionality to be executed once before execution
 	}
 
 	_perform () {

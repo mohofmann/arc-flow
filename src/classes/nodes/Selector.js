@@ -28,6 +28,7 @@ export default class Selector extends Node {
 	}
 
 	setAttributes (attributes, selectedAttributes) {
+		if (selectedAttributes == this.selectedAttributes) return
 		this.attributes = []
 		this.selectedAttributes = selectedAttributes
 
@@ -39,7 +40,7 @@ export default class Selector extends Node {
 			})
 		})
 
-		this.setOutputs([selectedAttributes.toString()])
+		this.outputs[0].setLabel(selectedAttributes.toString())
 		console.log(this.attributes)
 	}
 
@@ -49,10 +50,12 @@ export default class Selector extends Node {
 		_.each(this.attributes, attribute => {
 			output.push(this.inputs[0].data[attribute.index])
 		})
-		console.log(output)
 		// process it
 
 		// and send result to the edge._end of this.outputs array
+		if (this.outputs[0].edge) {
+			this.outputs[0].edge._end.data = output
+		}
 	}
 
 	_log (args) {

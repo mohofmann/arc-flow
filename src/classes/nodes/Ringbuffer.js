@@ -50,8 +50,8 @@ export default class Memory extends Node {
 
 	_perform = function () {
 		this.store(this.inputs[0].data)
-		if (this.outputs[index].edge) {
-			this.outputs[index].edge._end.data = this.inputs[0].data
+		if (this.outputs[0].edge) {
+			this.outputs[0].edge._end.data = this.inputs[0].data
 		}
 	}
 

@@ -1,34 +1,15 @@
 <template>
   <div class="md-content">
     <h4>Preprocessor</h4>
+    <p><i>{{ node.description }}</i></p>
     <md-divider></md-divider>
     <br>
-    <md-field>
-      <label for="calculation">Calculation</label>
-      <md-select v-model="preprocessorType" @md-selected="updateType">
-        <md-option value="MAGNITUDE">Magnitude</md-option>
-      </md-select>
-    </md-field>
-    <md-field>
-      <label for="inputs">Inputs</label>
-      <md-select v-model="inputSize" @md-selected="updateInputs">
-        <md-option v-for="size in sizeOptions" :value="size">{{ size }}</md-option>
-      </md-select>
-    </md-field>
     <md-switch v-model="node.logging">Logging</md-switch>
   </div>
 </template>
 
 <script>
 import { EventBus } from '../../main.js'
-
-const updateInputs = function () {
-
-}
-
-const updateType = function () {
-  this.node.setType(this.preprocessorType)
-}
 
 export default {
   name: 'MemoryMenu',
@@ -43,8 +24,6 @@ export default {
     }
   },
   methods: {
-    updateInputs: updateInputs,
-    updateType: updateType
   }
 }
 </script>
