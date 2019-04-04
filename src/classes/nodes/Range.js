@@ -36,7 +36,7 @@ export default class Range extends Node {
 		this.latestPeakIndex = -1
 		this.queueEndIndex = 0
 
-		this.updateQueueSize()
+		// this.updateQueueSize()
 
 		this.setInputs(defaultInputs)
 		this.setOutputs(defaultOutputs)
@@ -46,7 +46,7 @@ export default class Range extends Node {
 
 	_preperform () {
 		this.queue = []
-		this.updateQueueSize()
+		// this.updateQueueSize()
 		this.latestPeakIndex = -1
 		this.queueEndIndex = 0
 	}
@@ -73,7 +73,15 @@ export default class Range extends Node {
 			let relativeIndex = this.queueSize - (this.queueEndIndex - this.latestPeakIndex) - 1
 			// let relativeIndex = this.queueEndIndex - this.latestPeakIndex - 1
 			if (this.latestPeakIndex >= minIndex && this.latestPeakIndex <= maxIndex) {
-				let range = this.queue.slice(relativeIndex - this.rangeBeforeIndex, relativeIndex + this.rangeAfterIndex + 1)
+				// let range = this.queue.slice(relativeIndex - this.rangeBeforeIndex, relativeIndex + this.rangeAfterIndex + 1)
+				let range = this.queue.slice(0)
+				for (let i = 0; i < range.length; i ++) {
+					range[i] = range[i].slice(relativeIndex - this.rangeBeforeIndex, relativeIndex + this.rangeAfterIndex + 1)
+				}
+
+				// _.each(range, attribute => {
+				// 	attribute = attribute.slice(relativeIndex - this.rangeBeforeIndex, relativeIndex + this.rangeAfterIndex + 1)
+				// })
 				if (this.outputs[0].edge) {
 					this.outputs[0].edge._end.data = range
 				}
@@ -95,16 +103,38 @@ export default class Range extends Node {
 	}
 
 	store = function (newValue) {
-		this.queue.push(newValue)
-		this.queue.shift()
+		if (this.queue.length == 0) {
+			this.initializeQueue(newValue)
+		}
+
+		_.each(newValue, (value, index) => {
+			this.queue[index].push(value)
+			this.queue[index].shift()
+		})
+
+		// this.queue.push(newValue)
+		// this.queue.shift()
 		this.queueEndIndex += 1
 	}
 
+	// Initialize an empty field of #attributes subfields
+	// and subfields having queueSize 
+	initializeQueue (sample) {
+		console.log("queue gets initialized")
+		_.each(sample, attribute => {
+			let values = []
+			for (let i = 0; i < this.queueSize; i ++) {
+				values.push(null)
+			}
+			this.queue.push(values)
+		})
+	}
+
 	updateQueueSize () {
-		this.queue = []
-		for (let i = 0; i < this.queueSize; i ++) {
-			this.queue.push(null)
-		}
+		// this.queue = []
+		// for (let i = 0; i < this.queueSize; i ++) {
+		// 	this.queue.push(null)
+		// }
 	}
 
 	updateNode = function (rangeBeforeIndex, rangeAfterIndex, queueSize) {
