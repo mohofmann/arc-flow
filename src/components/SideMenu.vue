@@ -61,6 +61,10 @@
           </md-list-item>
         <md-subheader>Misc</md-subheader>
           <!-- PLOP: APPEND -->
+					<md-list-item @click="createNode('SPLITTER')">
+					  <md-icon>extension</md-icon>
+					  <span class="md-list-item-text">Splitter</span>
+					</md-list-item>
 					<md-list-item @click="createNode('LOG')">
 					  <md-icon>extension</md-icon>
 					  <span class="md-list-item-text">Log</span>

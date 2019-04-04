@@ -33,9 +33,7 @@ const parseFile = function (fileList) {
         this.node.setData(result)
         this.node.name = file.name
         // TODO: Fix saving/loading so it doesn't require uploading the csv once
-        // localStorage.setItem('tmpData', JSON.stringify(result))
-        // this.features = result.data[0]
-        // this.selectedFeatures = this.features.slice(0,3)
+        localStorage.setItem('tmpData', JSON.stringify(result))
       }
     })
   }
