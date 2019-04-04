@@ -24,9 +24,9 @@
             <md-icon>data_usage</md-icon>
             <span class="md-list-item-text">Ring Buffer</span>
           </md-list-item>
-          <md-list-item @click="createNode('RANGE')">
+          <md-list-item @click="createNode('SEGMENTATION')">
             <md-icon>data_usage</md-icon>
-            <span class="md-list-item-text">Range</span></md-list-item>
+            <span class="md-list-item-text">Segmentation</span></md-list-item>
         <md-divider></md-divider>
         <md-subheader>Preprocessing</md-subheader>
           <md-list-item @click="createNode('PREPROCESSOR')">

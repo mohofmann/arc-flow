@@ -1,6 +1,6 @@
 <template>
   <div class="md-content">
-    <h4>Range</h4>
+    <h4>Fixed Segmentation</h4>
     <md-divider></md-divider>
     <br>
     <md-field :class="valid('queueSize') ? '' : 'md-invalid'">
@@ -52,7 +52,7 @@ const valid = function (field) {
 }
 
 export default {
-  name: 'RangeMenu',
+  name: 'SegmentationMenu',
   props: {
     node: Object
   },

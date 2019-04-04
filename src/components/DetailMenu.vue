@@ -10,7 +10,7 @@ import DataSourceMenu from './detailMenus/DataSourceMenu.vue'
 import RingbufferMenu from './detailMenus/RingbufferMenu.vue'
 import PreprocessorMenu from './detailMenus/PreprocessorMenu.vue'
 import PeakDetectorMenu from './detailMenus/PeakDetectorMenu.vue'
-import RangeMenu from './detailMenus/RangeMenu.vue'
+import SegmentationMenu from './detailMenus/SegmentationMenu.vue'
 import SegmentorMenu from './detailMenus/SegmentorMenu.vue'
 import MeanExtractorMenu from './detailMenus/MeanExtractorMenu.vue'
 /* PLOP: APPEND IMPORT */
@@ -47,7 +47,7 @@ export default {
     RingbufferMenu,
     PreprocessorMenu,
     PeakDetectorMenu,
-    RangeMenu,
+    SegmentationMenu,
     SegmentorMenu,
     /* PLOP: APPEND COMPONENT */
     SplitterMenu,

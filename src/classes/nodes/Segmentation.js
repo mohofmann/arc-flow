@@ -1,5 +1,5 @@
 /**************************************
- *	RANGE
+ *	SEGMENTATION
  *	inherits from Node, stores a stream
  *	of data in a ring buffer and
  *	outputs it as a range of signals
@@ -11,7 +11,7 @@ import Node from '../Node.js'
 let attributes = {
 	backgroundColor: '#FFB000',
 	headerColor: '#BF8400',
-	title: 'Range',
+	title: 'Segmentation',
 	hint: '',
 	description: 'Buffers a configurable amount of signals and outputs a range of signals'
 }
@@ -22,10 +22,10 @@ const defaultInputs = [
 ]
 
 const defaultOutputs = [
-	'Range'
+	'Segment'
 ]
 
-export default class Range extends Node {
+export default class Segmentation extends Node {
 
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
@@ -41,7 +41,7 @@ export default class Range extends Node {
 		this.setInputs(defaultInputs)
 		this.setOutputs(defaultOutputs)
 
-		this.detailMenu = 'RangeMenu'
+		this.detailMenu = 'SegmentationMenu'
 	}
 
 	_preperform () {

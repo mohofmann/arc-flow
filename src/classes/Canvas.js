@@ -11,7 +11,7 @@ import 'svg.panzoom.js'
 import DataSource  from './nodes/DataSource.js'
 import Preprocessor from './nodes/Preprocessor.js'
 import Ringbuffer from './nodes/Ringbuffer.js'
-import Range from './nodes/Range.js'
+import Segmentation from './nodes/Segmentation.js'
 import PeakDetector from './nodes/PeakDetector.js'
 import Segmentor from './nodes/Segmentor.js'
 import MeanExtractor from './nodes/MeanExtractor.js'
@@ -76,7 +76,7 @@ export default class Canvas {
     this.createNode('SELECTOR')
     this.createNode('PREPROCESSOR')
     this.createNode('PEAKDETECTOR')
-    this.createNode('RANGE')
+    this.createNode('SEGMENTATION')
     this.createNode('SPLITTER')
     this.createNode('MEANEXTRACTOR')
     this.createNode('MEDIANEXTRACTOR')
@@ -150,7 +150,7 @@ export default class Canvas {
     switch (nodeName) {
       case 'DATASOURCE': node = new DataSource(this._canvas, this.watchCanvas); break
       case 'RINGBUFFER': node = new Ringbuffer(this._canvas, this.watchCanvas); break
-      case 'RANGE': node = new Range(this._canvas, this.watchCanvas); break
+      case 'SEGMENTATION': node = new Segmentation(this._canvas, this.watchCanvas); break
       case 'PREPROCESSOR': node = new Preprocessor(this._canvas, this.watchCanvas); break
       case 'PEAKDETECTOR': node = new PeakDetector(this._canvas, this.watchCanvas); break
       case 'SEGMENTOR': node = new Segmentor(this._canvas, this.watchCanvas); break
