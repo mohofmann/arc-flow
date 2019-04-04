@@ -139,6 +139,9 @@ export default class Node {
       })
       .attr({fill: '#00000088', cursor: 'default'})
     this.element.add(this.hint)
+    // Now use magic to position the node in the current canvas center
+    let point = this._canvas.point(window.innerWidth / 2, window.innerHeight / 2)
+    this.element.move(point.x, point.y)
   }
 
   nodeClickEvent = function () {
