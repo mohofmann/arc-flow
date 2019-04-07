@@ -59,6 +59,11 @@
             <md-icon>gps_fixed</md-icon>
             <span class="md-list-item-text">SMA Extractor</span>
           </md-list-item>
+          <md-list-item @click="createNode('FEATUREVECTOR')">
+            <md-icon>gps_fixed</md-icon>
+            <span class="md-list-item-text">Feature Vector</span>
+          </md-list-item>
+        <md-divider></md-divider>
         <md-subheader>Misc</md-subheader>
           <!-- PLOP: APPEND -->
 					<md-list-item @click="createNode('SPLITTER')">
@@ -68,10 +73,6 @@
 					<md-list-item @click="createNode('LOG')">
 					  <md-icon>extension</md-icon>
 					  <span class="md-list-item-text">Log</span>
-					</md-list-item>
-					<md-list-item @click="createNode('FEATUREVECTOR')">
-					  <md-icon>extension</md-icon>
-					  <span class="md-list-item-text">Feature Vector</span>
 					</md-list-item>
       </md-list>
       <br><br><br><br><br><br>

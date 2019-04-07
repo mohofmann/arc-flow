@@ -26,7 +26,7 @@ export default class MedianExtractor extends Node {
 
 	_perform () {
 		// take incoming data from this.inputs array
-		let data = this.inputs[0].data
+		let data = this.inputs[0].data[0]
 		// process it
 		let median = JStat.median(data)
 		// and send result to the edge._end of this.outputs array
