@@ -14,6 +14,8 @@ import SegmentationMenu from './detailMenus/SegmentationMenu.vue'
 import SegmentorMenu from './detailMenus/SegmentorMenu.vue'
 import MeanExtractorMenu from './detailMenus/MeanExtractorMenu.vue'
 /* PLOP: APPEND IMPORT */
+import MagnitudeMenu from './detailMenus/MagnitudeMenu.vue'
+import JuanNodeMenu from './detailMenus/JuanNodeMenu.vue'
 import SplitterMenu from './detailMenus/SplitterMenu.vue'
 import LogMenu from './detailMenus/LogMenu.vue'
 import SelectorMenu from './detailMenus/SelectorMenu.vue'
@@ -50,6 +52,8 @@ export default {
     SegmentationMenu,
     SegmentorMenu,
     /* PLOP: APPEND COMPONENT */
+    MagnitudeMenu,
+    JuanNodeMenu,
     SplitterMenu,
     LogMenu,
     SelectorMenu,

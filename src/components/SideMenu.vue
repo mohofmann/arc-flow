@@ -29,9 +29,13 @@
             <span class="md-list-item-text">Segmentation</span></md-list-item>
         <md-divider></md-divider>
         <md-subheader>Preprocessing</md-subheader>
-          <md-list-item @click="createNode('PREPROCESSOR')">
+          <md-list-item @click="createNode('MAGNITUDE')">
             <md-icon>trending_up</md-icon>
             <span class="md-list-item-text">Magnitude</span>
+          </md-list-item>
+          <md-list-item @click="createNode('PREPROCESSOR')">
+            <md-icon>trending_up</md-icon>
+            <span class="md-list-item-text">Sq. Magnitude</span>
           </md-list-item>
         <md-divider></md-divider>
         <md-subheader>Peak Detection</md-subheader>
@@ -66,6 +70,10 @@
         <md-divider></md-divider>
         <md-subheader>Misc</md-subheader>
           <!-- PLOP: APPEND -->
+					<md-list-item @click="createNode('JUANNODE')">
+					  <md-icon>extension</md-icon>
+					  <span class="md-list-item-text">Juan Node</span>
+					</md-list-item>
 					<md-list-item @click="createNode('SPLITTER')">
 					  <md-icon>extension</md-icon>
 					  <span class="md-list-item-text">Splitter</span>

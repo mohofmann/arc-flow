@@ -16,6 +16,8 @@ import PeakDetector from './nodes/PeakDetector.js'
 import Segmentor from './nodes/Segmentor.js'
 import MeanExtractor from './nodes/MeanExtractor.js'
 /* PLOP: APPEND IMPORT */
+import Magnitude from './nodes/Magnitude.js'
+import JuanNode from './nodes/JuanNode.js'
 import Splitter from './nodes/Splitter.js'
 import Log from './nodes/Log.js'
 import Selector from './nodes/Selector.js'
@@ -74,8 +76,9 @@ export default class Canvas {
     this.createNode('RINGBUFFER')
     this.createNode('SPLITTER')
     this.createNode('SELECTOR')
-    this.createNode('PREPROCESSOR')
+    this.createNode('MAGNITUDE')
     this.createNode('PEAKDETECTOR')
+    this.createNode('LOG')
     this.createNode('SEGMENTATION')
     this.createNode('SPLITTER')
     this.createNode('MEANEXTRACTOR')
@@ -91,10 +94,10 @@ export default class Canvas {
     let data = JSON.parse(localStorage.getItem('tmpData'))
     this.nodes[0].setData(data)
     data = null
-    this.nodes[3].setAttributes(["ax", "ay", "az", "lax", "lay", "laz"], ["lax", "lay", "laz"])
-    this.nodes[5].minPeakHeight = 160
+    // this.nodes[3].setAttributes(["ax", "ay", "az", "lax", "lay", "laz"], ["lax", "lay", "laz"])
+    this.nodes[5].minPeakHeight = 0.8
     this.nodes[5].minPeakDistance = 100
-    this.nodes[6].updateNode(50, 50, 200)
+    this.nodes[7].updateNode(50, 50, 200)
 
     this.createEdge(this.nodes[0].outputs[0])
     this.createEdge(this.nodes[1].inputs[0])
@@ -107,19 +110,21 @@ export default class Canvas {
     this.createEdge(this.nodes[4].outputs[0])
     this.createEdge(this.nodes[5].inputs[0])
     this.createEdge(this.nodes[2].outputs[1])
-    this.createEdge(this.nodes[6].inputs[0])
-    this.createEdge(this.nodes[5].outputs[1])
-    this.createEdge(this.nodes[6].inputs[1])
-    this.createEdge(this.nodes[6].outputs[0])
     this.createEdge(this.nodes[7].inputs[0])
+    this.createEdge(this.nodes[5].outputs[1])
+    this.createEdge(this.nodes[6].inputs[0])
+    this.createEdge(this.nodes[6].outputs[0])
+    this.createEdge(this.nodes[7].inputs[1])
     this.createEdge(this.nodes[7].outputs[0])
     this.createEdge(this.nodes[8].inputs[0])
-    this.createEdge(this.nodes[7].outputs[1])
-    this.createEdge(this.nodes[9].inputs[0])
     this.createEdge(this.nodes[8].outputs[0])
+    this.createEdge(this.nodes[9].inputs[0])
+    this.createEdge(this.nodes[8].outputs[1])
     this.createEdge(this.nodes[10].inputs[0])
     this.createEdge(this.nodes[9].outputs[0])
     this.createEdge(this.nodes[11].inputs[0])
+    this.createEdge(this.nodes[10].outputs[0])
+    this.createEdge(this.nodes[12].inputs[0])
   }
 
   createEdge = function (connector) {
@@ -156,6 +161,8 @@ export default class Canvas {
       case 'SEGMENTOR': node = new Segmentor(this._canvas, this.watchCanvas); break
       case 'MEANEXTRACTOR': node = new MeanExtractor(this._canvas, this.watchCanvas); break
       /* PLOP: APPEND CASE */
+      case 'MAGNITUDE': node = new Magnitude(this._canvas, this.watchCanvas); break
+      case 'JUANNODE': node = new JuanNode(this._canvas, this.watchCanvas); break
       case 'SPLITTER': node = new Splitter(this._canvas, this.watchCanvas); break
       case 'LOG': node = new Log(this._canvas, this.watchCanvas); break
       case 'SELECTOR': node = new Selector(this._canvas, this.watchCanvas); break

@@ -1,7 +1,6 @@
 /**************************************
- *	PREPROCESSOR
- *	inherits from Node, enabling
- *	energy calculation
+ *	MAGNITUDE
+ *	Calculates Magnitude
  **************************************/
 
 import Node from '../Node.js'
@@ -9,37 +8,41 @@ import Node from '../Node.js'
 let attributes = {
 	backgroundColor: '#F06',
 	headerColor: '#CF0053',
-	title: 'Squared Magnitude',
-	hint: '',
-	description: 'Calculates the squared Magnitude of input attributes'
+	title: 'Magnitude',
+	hint: 'Calculates Magnitude',
+	description: 'Calculates the magnitude of input attributes'
 }
 
-export default class Preprocessor extends Node {
+export default class Magnitude extends Node {
 
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
 
-		this.type = ""
 		this.setInputs(["Data"])
 		this.setOutputs(['Sqd. Magnitude'])
-		this.description = attributes.description
 
-		this.detailMenu = 'PreprocessorMenu'
+		this.detailMenu = 'MagnitudeMenu'
+		this.description = attributes.description
 	}
 
-	_perform = function (args) {
+	_preperform () {
+		// potential functionality to be executed once before execution
+	}
+
+	_perform () {
 		let energy = 0
 		_.each(this.inputs[0].data, attribute => {
 			energy += (attribute * attribute)
-			this.log({energy: energy})
 		})
+		energy = Math.sqrt(energy)
 		if (this.outputs[0].edge) {
 			this.outputs[0].edge._end.data = energy
 		}
 	}
 
-	_log = function (args) {
-		console.log("sq. magnitude is " + args.energy + "\n")
+	_log (args) {
+		
 	}
+
 
 }
