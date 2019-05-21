@@ -1,7 +1,7 @@
 <template>
   <div class="md-content">
     <h4>Magnitude</h4>
-    <p><i></i></p>
+    <p><i>{{ node.description }}</i></p>
     <md-divider></md-divider>
     <br>
     <!-- <md-field>

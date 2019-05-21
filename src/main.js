@@ -44,7 +44,7 @@ export const EventBus = new Vue();
 // Enable DOM Console Log Behavior
 const baseLogFunction = console.log;
 console.log = function () {
-  // baseLogFunction.apply(console, arguments);
+  baseLogFunction.apply(console, arguments);
   let args = Array.prototype.slice.call(arguments);
   for ( var i=0; i<args.length; i++) {
     let node = createLogNode(args[i]);

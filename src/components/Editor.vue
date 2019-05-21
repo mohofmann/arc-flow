@@ -1,6 +1,6 @@
 <template>
   <div class="md-layout">
-    <md-snackbar md-position="center" :md-duration="4000" :md-active.sync="showProgress" md-persistent>
+    <md-snackbar md-position="center" :md-duration="1000" :md-active.sync="showProgress" md-persistent>
       <span>Flow is running</span>
     </md-snackbar>
     <md-snackbar md-position="center" :md-duration="2000" :md-active.sync="showSuccess" md-persistent>
@@ -28,13 +28,16 @@ const setupEditor = function () {
 
 const setupEvents = function () {
   // TODO: investigate why sometimes (loadCanvas) arrow funcs are necessary
-  EventBus.$on('runFlow', this.run)
+  EventBus.$on('runFlow', async () => {
+    this.showProgress = true
+    setTimeout(this.run, 500)
+  })
   EventBus.$on('createNode', node => canvas.createNode(node))
   EventBus.$on('selectConnector', (node, connector) => canvas.createEdge(node, connector))
   EventBus.$on('loadCanvas', () => canvas.loadCanvas())
 }
 
-const run = function () {
+const run = async function () {
   console.log("running")
   // TODO: Use refs for vue-like behavior
   document.getElementById("log").innerHTML = "";
@@ -45,11 +48,11 @@ const run = function () {
     this.showProgress = true
     canvas.nodes[0].run()
     EventBus.$emit('setTab', 'analytics-tab')
-    this.showSuccess = true
+    // this.showSuccess = true
   }
   catch (error) {
-    this.showError = true
-    console.log(error)
+    // this.showError = true
+    console.log("There was an error", error)
   }
 }
 

@@ -33,7 +33,7 @@ export default class Log extends Node {
 		// take incoming data from this.inputs array
 		// process it
 		if (this.inputs[0].data != "-1") {
-			console.log(this.inputs[0].data)
+			console.log(this.inputs[0].edge._start.node.headline.text() + ": " + this.inputs[0].data)
 		}
 		// and send result to the edge._end of this.
 		if (this.outputs[0].edge) {

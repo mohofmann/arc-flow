@@ -72,7 +72,8 @@ export default class DataSource extends Node {
 
 	_perform () {
 		let data = _.tail(this.data.data)
-		_.each(data, row => {
+
+		_.each(data, async row => {
 			this.log({data: row})
 			let output = this.outputs[0]
 			if (output.edge) {

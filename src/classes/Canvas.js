@@ -7,6 +7,7 @@
 import SVG from 'svg.js'
 import 'svg.draggable.js'
 import 'svg.panzoom.js'
+import { get } from 'idb-keyval' 
 
 import DataSource  from './nodes/DataSource.js'
 import Preprocessor from './nodes/Preprocessor.js'
@@ -71,7 +72,16 @@ export default class Canvas {
     // .move(100+20, 0)
   }
 
-  loadCanvas () {
+  loadSamples = function () {
+    get('samples').then(val => {
+      return val
+    })
+  }
+
+  async loadCanvas () {
+    let data = await get('samples')
+    console.log(data)
+
     this.createNode('DATASOURCE')
     this.createNode('RINGBUFFER')
     this.createNode('SPLITTER')
@@ -91,10 +101,9 @@ export default class Canvas {
       node.element.move(index * 300, y)
     })
 
-    let data = JSON.parse(localStorage.getItem('tmpData'))
     this.nodes[0].setData(data)
+    this.nodes[3].setAttributes(data.data[0], ["ax", "ay", "az"])
     data = null
-    // this.nodes[3].setAttributes(["ax", "ay", "az", "lax", "lay", "laz"], ["lax", "lay", "laz"])
     this.nodes[5].minPeakHeight = 0.8
     this.nodes[5].minPeakDistance = 100
     this.nodes[7].updateNode(50, 50, 200)

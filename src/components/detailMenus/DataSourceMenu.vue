@@ -23,6 +23,7 @@
 
 <script>
 import Papa from 'papaparse'
+import { set } from 'idb-keyval'
 
 const parseFile = function (fileList) {
   if (fileList) {
@@ -33,7 +34,10 @@ const parseFile = function (fileList) {
         this.node.setData(result)
         this.node.name = file.name
         // TODO: Fix saving/loading so it doesn't require uploading the csv once
-        localStorage.setItem('tmpData', JSON.stringify(result))
+        set('samples', result)
+          .then(() => console.log("Samples saved"))
+          .catch(err => console.log("Saving samples failed", err))
+        // localStorage.setItem('tmpData', JSON.stringify(result))
       }
     })
   }

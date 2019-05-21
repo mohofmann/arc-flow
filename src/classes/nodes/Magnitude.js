@@ -19,9 +19,10 @@ export default class Magnitude extends Node {
 		super (canvas, attributes, watchCanvas)
 
 		this.setInputs(["Data"])
-		this.setOutputs(['Sqd. Magnitude'])
+		this.setOutputs(['Magnitude'])
 
 		this.detailMenu = 'MagnitudeMenu'
+		this.hint.text("")
 		this.description = attributes.description
 	}
 
