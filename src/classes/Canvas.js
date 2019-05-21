@@ -17,6 +17,7 @@ import PeakDetector from './nodes/PeakDetector.js'
 import Segmentor from './nodes/Segmentor.js'
 import MeanExtractor from './nodes/MeanExtractor.js'
 /* PLOP: APPEND IMPORT */
+import EventLabeler from './nodes/EventLabeler.js'
 import Magnitude from './nodes/Magnitude.js'
 import JuanNode from './nodes/JuanNode.js'
 import Splitter from './nodes/Splitter.js'
@@ -170,6 +171,7 @@ export default class Canvas {
       case 'SEGMENTOR': node = new Segmentor(this._canvas, this.watchCanvas); break
       case 'MEANEXTRACTOR': node = new MeanExtractor(this._canvas, this.watchCanvas); break
       /* PLOP: APPEND CASE */
+      case 'EVENTLABELER': node = new EventLabeler(this._canvas, this.watchCanvas); break
       case 'MAGNITUDE': node = new Magnitude(this._canvas, this.watchCanvas); break
       case 'JUANNODE': node = new JuanNode(this._canvas, this.watchCanvas); break
       case 'SPLITTER': node = new Splitter(this._canvas, this.watchCanvas); break

@@ -30,7 +30,7 @@ export default class DataSource extends Node {
 		this.detailMenu = 'DataSourceMenu'
 	}
 
-	setData = function (data) {
+	setData (data) {
 		this.data = data
 		this.features = this.data.data[0]
 		console.log(this.features)

@@ -70,6 +70,10 @@
         <md-divider></md-divider>
         <md-subheader>Misc</md-subheader>
           <!-- PLOP: APPEND -->
+					<md-list-item @click="createNode('EVENTLABELER')">
+					  <md-icon>extension</md-icon>
+					  <span class="md-list-item-text">Event Labeler</span>
+					</md-list-item>
 					<md-list-item @click="createNode('JUANNODE')">
 					  <md-icon>extension</md-icon>
 					  <span class="md-list-item-text">Juan Node</span>
