@@ -10,7 +10,7 @@ import 'svg.panzoom.js'
 import { get } from 'idb-keyval' 
 
 import DataSource  from './nodes/DataSource.js'
-import Preprocessor from './nodes/Preprocessor.js'
+import SqrMagnitude from './nodes/SqrMagnitude.js'
 import Ringbuffer from './nodes/Ringbuffer.js'
 import Segmentation from './nodes/Segmentation.js'
 import PeakDetector from './nodes/PeakDetector.js'
@@ -104,8 +104,8 @@ export default class Canvas {
     this.nodes[0].setData(data)
     this.nodes[3].setAttributes(data.data[0], ["ax", "ay", "az"])
     data = null
-    this.nodes[5].minPeakHeight = 0.8
-    this.nodes[5].minPeakDistance = 100
+    this.nodes[5].config.minPeakHeight = 0.8
+    this.nodes[5].config.minPeakDistance = 100
     this.nodes[7].updateNode(50, 50, 200)
 
     this.createEdge(this.nodes[0].outputs[0])
@@ -168,7 +168,7 @@ export default class Canvas {
       case 'DATASOURCE': node = new DataSource(this._canvas, this.watchCanvas); break
       case 'RINGBUFFER': node = new Ringbuffer(this._canvas, this.watchCanvas); break
       case 'SEGMENTATION': node = new Segmentation(this._canvas, this.watchCanvas); break
-      case 'PREPROCESSOR': node = new Preprocessor(this._canvas, this.watchCanvas); break
+      case 'SQRMAGNITUDE': node = new SqrMagnitude(this._canvas, this.watchCanvas); break
       case 'PEAKDETECTOR': node = new PeakDetector(this._canvas, this.watchCanvas); break
       case 'SEGMENTOR': node = new Segmentor(this._canvas, this.watchCanvas); break
       case 'MEANEXTRACTOR': node = new MeanExtractor(this._canvas, this.watchCanvas); break

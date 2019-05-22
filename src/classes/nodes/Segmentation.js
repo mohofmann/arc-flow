@@ -29,19 +29,17 @@ export default class Segmentation extends Node {
 
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
-		this.queueSize = 1
-		this.rangeBeforeIndex = 0
-		this.rangeAfterIndex = 0
+
 		this.queue = []
 		this.latestPeakIndex = -1
 		this.queueEndIndex = 0
-
-		// this.updateQueueSize()
-
 		this.setInputs(defaultInputs)
 		this.setOutputs(defaultOutputs)
-
 		this.detailMenu = 'SegmentationMenu'
+
+		this.config.queueSize = 1
+		this.config.rangeBeforeIndex = 0
+		this.config.rangeAfterIndex = 0
 	}
 
 	_preperform () {
@@ -67,16 +65,16 @@ export default class Segmentation extends Node {
 		// .. and try to find its proper range
 		if (this.latestPeakIndex != -1) {
 			// calculate possible index range
-			let minIndex = this.queueEndIndex - this.queueSize + this.rangeBeforeIndex
-			let maxIndex = this.queueEndIndex - this.rangeAfterIndex
+			let minIndex = this.queueEndIndex - this.config.queueSize + this.config.rangeBeforeIndex
+			let maxIndex = this.queueEndIndex - this.config.rangeAfterIndex
 			// check if given peak and range are contained in queue
-			let relativeIndex = this.queueSize - (this.queueEndIndex - this.latestPeakIndex) - 1
+			let relativeIndex = this.config.queueSize - (this.queueEndIndex - this.latestPeakIndex) - 1
 			// let relativeIndex = this.queueEndIndex - this.latestPeakIndex - 1
 			if (this.latestPeakIndex >= minIndex && this.latestPeakIndex <= maxIndex) {
 				// let range = this.queue.slice(relativeIndex - this.rangeBeforeIndex, relativeIndex + this.rangeAfterIndex + 1)
 				let range = this.queue.slice(0)
 				for (let i = 0; i < range.length; i ++) {
-					range[i] = range[i].slice(relativeIndex - this.rangeBeforeIndex, relativeIndex + this.rangeAfterIndex + 1)
+					range[i] = range[i].slice(relativeIndex - this.config.rangeBeforeIndex, relativeIndex + this.config.rangeAfterIndex + 1)
 				}
 
 				// _.each(range, attribute => {
@@ -123,25 +121,17 @@ export default class Segmentation extends Node {
 		console.log("queue gets initialized")
 		_.each(sample, attribute => {
 			let values = []
-			for (let i = 0; i < this.queueSize; i ++) {
+			for (let i = 0; i < this.config.queueSize; i ++) {
 				values.push(null)
 			}
 			this.queue.push(values)
 		})
 	}
 
-	updateQueueSize () {
-		// this.queue = []
-		// for (let i = 0; i < this.queueSize; i ++) {
-		// 	this.queue.push(null)
-		// }
-	}
-
 	updateNode = function (rangeBeforeIndex, rangeAfterIndex, queueSize) {
-		this.rangeBeforeIndex = parseInt(rangeBeforeIndex)
-		this.rangeAfterIndex = parseInt(rangeAfterIndex)
-		this.queueSize = parseInt(queueSize)
-		this.updateQueueSize()
+		this.config.rangeBeforeIndex = parseInt(rangeBeforeIndex)
+		this.config.rangeAfterIndex = parseInt(rangeAfterIndex)
+		this.config.queueSize = parseInt(queueSize)
 	}
 
 }

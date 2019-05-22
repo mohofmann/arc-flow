@@ -59,9 +59,9 @@ export default {
   data: function () {
     return {
       memoryType: 'RINGBUFFER',
-      rangeBeforeIndex: this.node.rangeBeforeIndex,
-      rangeAfterIndex: this.node.rangeAfterIndex,
-      queueSize: this.node.queueSize
+      rangeBeforeIndex: this.node.config.rangeBeforeIndex,
+      rangeAfterIndex: this.node.config.rangeAfterIndex,
+      queueSize: this.node.config.queueSize
     }
   },
   methods: {

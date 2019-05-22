@@ -1,6 +1,6 @@
 <template>
   <div class="md-content">
-    <h4>Preprocessor</h4>
+    <h4>Squared Magnitude</h4>
     <p><i>{{ node.description }}</i></p>
     <md-divider></md-divider>
     <br>
@@ -18,9 +18,6 @@ export default {
   },
   data: function () {
     return {
-      preprocessorType: this.node.type,
-      inputSize: this.node.inputs.length,
-      sizeOptions: [1, 2, 3, 4, 5, 6, 7, 8, 9]
     }
   },
   methods: {

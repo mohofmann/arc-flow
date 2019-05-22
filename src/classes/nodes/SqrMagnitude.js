@@ -14,7 +14,7 @@ let attributes = {
 	description: 'Calculates the squared Magnitude of input attributes'
 }
 
-export default class Preprocessor extends Node {
+export default class SqrMagnitude extends Node {
 
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
@@ -24,7 +24,7 @@ export default class Preprocessor extends Node {
 		this.setOutputs(['Sqd. Magnitude'])
 		this.description = attributes.description
 
-		this.detailMenu = 'PreprocessorMenu'
+		this.detailMenu = 'SqrMagnitudeMenu'
 	}
 
 	_perform = function (args) {

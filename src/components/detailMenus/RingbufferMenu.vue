@@ -29,7 +29,7 @@ export default {
   },
   data: function () {
     return {
-      fieldAmount: this.node.fieldAmount
+      fieldAmount: this.node.config.fieldAmount
     }
   },
   methods: {

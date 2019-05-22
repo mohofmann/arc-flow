@@ -8,7 +8,7 @@
 <script>
 import DataSourceMenu from './detailMenus/DataSourceMenu.vue'
 import RingbufferMenu from './detailMenus/RingbufferMenu.vue'
-import PreprocessorMenu from './detailMenus/PreprocessorMenu.vue'
+import SqrMagnitudeMenu from './detailMenus/SqrMagnitudeMenu.vue'
 import PeakDetectorMenu from './detailMenus/PeakDetectorMenu.vue'
 import SegmentationMenu from './detailMenus/SegmentationMenu.vue'
 import SegmentorMenu from './detailMenus/SegmentorMenu.vue'
@@ -47,7 +47,7 @@ export default {
   components: {
     DataSourceMenu,
     RingbufferMenu,
-    PreprocessorMenu,
+    SqrMagnitudeMenu,
     PeakDetectorMenu,
     SegmentationMenu,
     SegmentorMenu,

@@ -33,7 +33,7 @@
             <md-icon>trending_up</md-icon>
             <span class="md-list-item-text">Magnitude</span>
           </md-list-item>
-          <md-list-item @click="createNode('PREPROCESSOR')">
+          <md-list-item @click="createNode('SQRMAGNITUDE')">
             <md-icon>trending_up</md-icon>
             <span class="md-list-item-text">Sq. Magnitude</span>
           </md-list-item>

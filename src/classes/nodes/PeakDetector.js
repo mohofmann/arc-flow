@@ -26,14 +26,12 @@ export default class PeakDetector extends Node {
 
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
-
-		this.minPeakHeight = 0
-		this.minPeakDistance = 0
-
 		defaultInputs && this.setInputs(defaultInputs)
     defaultOutputs && this.setOutputs(defaultOutputs)
-
     this.detailMenu = 'PeakDetectorMenu'
+
+    this.config.minPeakHeight = 0
+		this.config.minPeakDistance = 0
 	}
 
 	_preperform () {
@@ -56,7 +54,7 @@ export default class PeakDetector extends Node {
 		if (this.outputs[0].edge) this.outputs[0].edge._end.data = energy
  
 		// check whether a previously marked peak candidate was really a peak
-		if (this._lastPeakValue > 0 && this._samplesSinceLastPeak >= this.minPeakDistance) {
+		if (this._lastPeakValue > 0 && this._samplesSinceLastPeak >= this.config.minPeakDistance) {
 			// TODO: Handle the peak
 			this.log()
 			if (this.outputs[1].edge) this.outputs[1].edge._end.data = this._counter - this._samplesSinceLastPeak
@@ -67,8 +65,8 @@ export default class PeakDetector extends Node {
 		}
  
 		// Mark new peak candidates
-		if (energy > this.minPeakHeight) {
-			if (energy > this._lastPeakValue || this._samplesSinceLastPeak >= this.minPeakDistance) {
+		if (energy > this.config.minPeakHeight) {
+			if (energy > this._lastPeakValue || this._samplesSinceLastPeak >= this.config.minPeakDistance) {
 				this._lastPeakValue = energy
 				this._samplesSinceLastPeak = 0
 			}
