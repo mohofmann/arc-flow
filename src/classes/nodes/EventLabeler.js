@@ -27,7 +27,7 @@ export default class EventLabeler extends Node {
 	}
 
 	setData (data) {
-		this.data = data.data
+		this.config.data = data.data
 		console.log(this.data)
 	}
 
@@ -41,7 +41,7 @@ export default class EventLabeler extends Node {
 		
 		if (index == -1) return
 
-		let result = _.filter(this.data, o => _.inRange(o.index, index - 10, index + 10));
+		let result = _.filter(this.config.data, o => _.inRange(o.index, index - 10, index + 10));
 		console.log("Event at index " + index + " got labeled as " + result[0].label)
 		// process it
 

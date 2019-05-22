@@ -23,10 +23,10 @@ export default class FeatureVector extends Node {
 		this.setInputs(["Feature 1"])
 		this.setOutputs(["Vector"])
 		this.hint.text("")
-		this.featureAmount = 1
 		this.description = attributes.description
-
 		this.detailMenu = 'FeatureVectorMenu'
+
+		this.config.featureAmount = 1
 	}
 
 	_perform () {
@@ -50,8 +50,8 @@ export default class FeatureVector extends Node {
 
 	// TODO: create a addInputs function to add new Inputs without destroying old ones
 	updateFeatureAmount (amount) {
-		if (this.featureAmount == amount) return
-		this.featureAmount = amount
+		if (this.config.featureAmount == amount) return
+		this.config.featureAmount = amount
 		let oldInputs = this.inputs
 		let newInputs = []
 		for (let i = 0; i < amount; i ++) {

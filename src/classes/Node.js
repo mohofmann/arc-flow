@@ -24,6 +24,7 @@ export default class Node {
     this.outputs = []
     this.sizeX = sizeX
     this.sizeY = sizeY
+    this.config = {}
 
     this.backgroundColor = attributes.backgroundColor
 

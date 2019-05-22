@@ -74,10 +74,6 @@
 					  <md-icon>extension</md-icon>
 					  <span class="md-list-item-text">Event Labeler</span>
 					</md-list-item>
-					<md-list-item @click="createNode('JUANNODE')">
-					  <md-icon>extension</md-icon>
-					  <span class="md-list-item-text">Juan Node</span>
-					</md-list-item>
 					<md-list-item @click="createNode('SPLITTER')">
 					  <md-icon>extension</md-icon>
 					  <span class="md-list-item-text">Splitter</span>

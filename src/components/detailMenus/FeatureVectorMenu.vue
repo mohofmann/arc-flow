@@ -28,7 +28,7 @@ export default {
   },
   data: function () {
     return {
-      featureAmount: this.node.featureAmount,
+      featureAmount: this.node.config.featureAmount,
       amounts: [1,2,3,4,5,6,7,8,9,10]
     }
   },

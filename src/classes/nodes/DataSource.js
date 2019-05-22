@@ -20,42 +20,28 @@ export default class DataSource extends Node {
 
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
-		this.data = null
 		this.name = ""
 		this.description = attributes.description
-		this.features = []
-		this._featureIndices = []
 		this._index = 0
-
 		this.detailMenu = 'DataSourceMenu'
+
+
+		this.config.features = []
+		this.config.data = null
 	}
 
 	setData (data) {
-		this.data = data
-		this.features = this.data.data[0]
-		console.log(this.features)
-		this.setOutputs(['Data (' + this.features.length + ' axes)'])
+		this.config.data = data
+		this.config.features = this.config.data.data[0]
+		this.setOutputs(['Data (' + this.config.features.length + ' axes)'])
 		this.updateNode()
 	}
 
-	_setFeatureIndices () {
-		this._featureIndices = []
-		_.each(this.features, feature => {
-			this._featureIndices.push(_.findIndex(this.data.data[0], o => { return o == feature}))
-		})
-	}
-
 	getAttributes () {
-		return this.features
+		return this.config.features
 	}
 
-	// setFeatures = function (features) {
-	// 	this.features = features
-	// 	this._setFeatureIndices()
-	// 	this.setOutputs(features)
-	// }
-
-	updateNode = function () {
+	updateNode () {
 		this.hint.text("")
 		this.headline.text(attributes.title + ' (CSV)')
 	}
@@ -71,7 +57,7 @@ export default class DataSource extends Node {
 	}
 
 	_perform () {
-		let data = _.tail(this.data.data)
+		let data = _.tail(this.config.data.data)
 
 		_.each(data, async row => {
 			this.log({data: row})

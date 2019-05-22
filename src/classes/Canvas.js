@@ -19,7 +19,6 @@ import MeanExtractor from './nodes/MeanExtractor.js'
 /* PLOP: APPEND IMPORT */
 import EventLabeler from './nodes/EventLabeler.js'
 import Magnitude from './nodes/Magnitude.js'
-import JuanNode from './nodes/JuanNode.js'
 import Splitter from './nodes/Splitter.js'
 import Log from './nodes/Log.js'
 import Selector from './nodes/Selector.js'
@@ -135,6 +134,9 @@ export default class Canvas {
     this.createEdge(this.nodes[11].inputs[0])
     this.createEdge(this.nodes[10].outputs[0])
     this.createEdge(this.nodes[12].inputs[0])
+
+    console.log(this.nodes)
+    console.log(this.edges)
   }
 
   createEdge = function (connector) {
@@ -173,7 +175,6 @@ export default class Canvas {
       /* PLOP: APPEND CASE */
       case 'EVENTLABELER': node = new EventLabeler(this._canvas, this.watchCanvas); break
       case 'MAGNITUDE': node = new Magnitude(this._canvas, this.watchCanvas); break
-      case 'JUANNODE': node = new JuanNode(this._canvas, this.watchCanvas); break
       case 'SPLITTER': node = new Splitter(this._canvas, this.watchCanvas); break
       case 'LOG': node = new Log(this._canvas, this.watchCanvas); break
       case 'SELECTOR': node = new Selector(this._canvas, this.watchCanvas); break

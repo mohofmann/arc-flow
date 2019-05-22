@@ -10,13 +10,6 @@
       <label>Upload CSV</label>
       <md-file @md-change="parseFile" :placeholder="fileName" style="max-width: 100% !important"/>
     </md-field>
-    <!-- <md-divider></md-divider>
-    <md-field>
-      <label for="features">Features</label>
-      <md-select :disabled="!features.toString()" v-model="selectedFeatures" name="features" id="features" multiple @md-selected="updateSelection">
-        <md-option v-for="feature in features" :data="feature" :key="feature" :value="feature">{{ feature }}</md-option>
-      </md-select>
-    </md-field> -->
     <md-switch v-model="node.logging">Logging</md-switch>
   </div>
 </template>
@@ -43,13 +36,6 @@ const parseFile = function (fileList) {
   }
 }
 
-const updateSelection = function () {
-  if (this.selectedFeatures == this.node.features) return
-  if (this.node) {
-    this.node.setFeatures(this.selectedFeatures)
-  }
-}
-
 export default {
   name: 'DataSourceMenu',
   props: {
@@ -58,14 +44,12 @@ export default {
   data: function () {
     return {
       showAlert: false,
-      features: this.node.data ? this.node.data.data[0] : [],
-      selectedFeatures: this.node.features,
+      features: this.node.config.data ? this.node.config.data.data[0] : [],
       fileName: this.node.name
     }
   },
   methods: {
-    parseFile: parseFile,
-    updateSelection: updateSelection
+    parseFile: parseFile
   },
   created: function () {
 
