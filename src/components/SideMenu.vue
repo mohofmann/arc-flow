@@ -1,5 +1,6 @@
 <template>
   <nav id="sideMenu" style="height: 100%; overflow: scroll;">
+  <!-- <nav id="sideMenu" class="md-layout" style="height: 100%; overflow: scroll"> -->
     <!-- <md-toolbar style="background-color: #424242" :md-elevation="1">
       <md-field>
         <md-icon>search</md-icon>

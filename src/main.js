@@ -41,17 +41,37 @@ Vue.use(MdTabs)
 export const EventBus = new Vue();
 
 
+let cycleLogged = false
 // Enable DOM Console Log Behavior
 const baseLogFunction = console.log;
 console.log = function () {
+	cycleLogged = true
   baseLogFunction.apply(console, arguments);
   let args = Array.prototype.slice.call(arguments);
   for ( var i=0; i<args.length; i++) {
-    let node = createLogNode(args[i]);
-    var br = document.createElement("BR");
-    document.querySelector("#log").appendChild(node);
+  	if (Array.isArray(args[i])) {
+  		_.each(args[i], el => {
+  			applyNode(JSON.stringify(el))
+  		})
+  	} else {
+  		applyNode(args[i])
+  	}
   }
 }
+
+console.clearLog = function () {
+	if (cycleLogged) {
+		console.log("----------------------------")
+		cycleLogged = false
+	}
+}
+
+function applyNode (message) {
+	let node = createLogNode(message)
+	let br = document.createElement("BR")
+	document.querySelector("#log").appendChild(node)
+}
+
 function createLogNode (message) {
   var node = document.createElement("p");
   var textNode = document.createTextNode(message);

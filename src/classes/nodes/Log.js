@@ -32,13 +32,12 @@ export default class Log extends Node {
 	_perform () {
 		// take incoming data from this.inputs array
 		// process it
-		if (this.inputs[0].data != "-1") {
-			console.log(this.inputs[0].edge._start.node.headline.text() + ": " + this.inputs[0].data)
-		}
-		// and send result to the edge._end of this.
-		if (this.outputs[0].edge) {
-			this.outputs[0].edge._end.data = this.inputs[0].data
-		}
+		let data = this.inputs[0].data
+		this.sendMessage(0, data)
+
+		if (data == "-1") return
+		
+		console.log(this.inputs[0].edge._start.node.headline.text().toUpperCase() + ":", data)
 	}
 
 	_log (args) {

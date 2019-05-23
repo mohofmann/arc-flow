@@ -24,12 +24,12 @@ import { EventBus } from '../../main.js'
 
 const updateAttributes = function () {
   if (this.allSegmentsValid()) {
-    this.node.segments = this.segments
+    this.node.config.segments = this.segments
   }
 }
 
 const updateSegmentAmount = function () {
-  if (this.node.segmentAmount != this.segmentAmount) {
+  if (this.node.config.segmentAmount != this.segmentAmount) {
     this.segments = []
     _.times(this.segmentAmount, i => {
       let segment = {start: i*100}
@@ -65,8 +65,8 @@ export default {
   },
   data: function () {
     return {
-      segmentAmount: this.node.segmentAmount,
-      segments: this.node.segments,
+      segmentAmount: this.node.config.segmentAmount,
+      segments: this.node.config.segments,
       amountOptions: [1, 2, 3, 4, 5, 6, 7, 8, 9]
     }
   },

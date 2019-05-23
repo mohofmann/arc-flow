@@ -37,11 +37,12 @@ export default class FeatureVector extends Node {
 				vector.push(input.data)
 			// }
 		})
+		let vector2 = []
+		vector2.push(vector)
+		vector2.push(vector)
 		// process it
 		// and send result to the edge._end of this.outputs array
-		if (this.outputs[0].edge) {
-			this.outputs[0].edge._end.data = vector
-		}
+		this.sendMessage(0, vector2)
 	}
 
 	_log (args) {

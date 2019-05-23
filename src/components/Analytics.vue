@@ -1,6 +1,6 @@
 <template>
-  <div id="analytics" class="md-layout" style="max-height: 100%">
-    <div id="log" ref="log" class="md-layout-item md-size-50" style="padding: 15px; max-height: 100%; overflow: scroll"></div>
+  <div id="analytics" class="md-layout" style="height: auto%">
+    <div id="log" ref="log" class="md-layout-item md-size-50" style="height: 100%; padding: 15px; overflow: scroll"></div>
     <div class="md-layout-item md-size-50">
       <canvas id="pieChart" ref="pieChart"></canvas>
       <canvas id="lineChart" ref="lineChart"></canvas>

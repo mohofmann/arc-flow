@@ -77,6 +77,12 @@ export default class Node {
     return attributes
   }
 
+  sendMessage (index, data) {
+    if (this.outputs[index].edge) {
+      this.outputs[index].edge._end.data = data
+    }
+  }
+
   log (args) {
     this.logging && this._log(args)
   }

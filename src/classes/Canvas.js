@@ -72,15 +72,9 @@ export default class Canvas {
     // .move(100+20, 0)
   }
 
-  loadSamples = function () {
-    get('samples').then(val => {
-      return val
-    })
-  }
-
   async loadCanvas () {
-    let data = await get('samples')
-    console.log(data)
+    let samples = await get('samples')
+    let labels = await get('labels')
 
     this.createNode('DATASOURCE')
     this.createNode('RINGBUFFER')
@@ -88,12 +82,13 @@ export default class Canvas {
     this.createNode('SELECTOR')
     this.createNode('MAGNITUDE')
     this.createNode('PEAKDETECTOR')
-    this.createNode('LOG')
+    this.createNode('SPLITTER')
+    this.createNode('EVENTLABELER')
     this.createNode('SEGMENTATION')
     this.createNode('SPLITTER')
     this.createNode('MEANEXTRACTOR')
     this.createNode('MEDIANEXTRACTOR')
-    this.createNode('LOG')
+    this.createNode('FEATUREVECTOR')
     this.createNode('LOG')
 
     _.each(this.nodes, (node, index) => {
@@ -101,39 +96,46 @@ export default class Canvas {
       node.element.move(index * 300, y)
     })
 
-    this.nodes[0].setData(data)
-    this.nodes[3].setAttributes(data.data[0], ["ax", "ay", "az"])
-    data = null
+    this.nodes[0].setData(samples)
+    this.nodes[7].setData(labels)
+    this.nodes[3].setAttributes(samples.data[0], ["ax", "ay", "az"])
+    samples = null
+    labels = null
     this.nodes[5].config.minPeakHeight = 0.8
     this.nodes[5].config.minPeakDistance = 100
-    this.nodes[7].updateNode(50, 50, 200)
+    this.nodes[8].updateNode(50, 50, 200)
+    this.nodes[12].updateFeatureAmount(2)
 
     this.createEdge(this.nodes[0].outputs[0])
     this.createEdge(this.nodes[1].inputs[0])
     this.createEdge(this.nodes[1].outputs[0])
     this.createEdge(this.nodes[2].inputs[0])
-    this.createEdge(this.nodes[2].outputs[0])
+    this.createEdge(this.nodes[2].outputs[1])
     this.createEdge(this.nodes[3].inputs[0])
     this.createEdge(this.nodes[3].outputs[0])
     this.createEdge(this.nodes[4].inputs[0])
     this.createEdge(this.nodes[4].outputs[0])
     this.createEdge(this.nodes[5].inputs[0])
-    this.createEdge(this.nodes[2].outputs[1])
-    this.createEdge(this.nodes[7].inputs[0])
+    this.createEdge(this.nodes[2].outputs[0])
+    this.createEdge(this.nodes[8].inputs[0])
     this.createEdge(this.nodes[5].outputs[1])
     this.createEdge(this.nodes[6].inputs[0])
+    this.createEdge(this.nodes[6].outputs[1])
+    this.createEdge(this.nodes[7].inputs[0])
     this.createEdge(this.nodes[6].outputs[0])
-    this.createEdge(this.nodes[7].inputs[1])
-    this.createEdge(this.nodes[7].outputs[0])
-    this.createEdge(this.nodes[8].inputs[0])
+    this.createEdge(this.nodes[8].inputs[1])
     this.createEdge(this.nodes[8].outputs[0])
     this.createEdge(this.nodes[9].inputs[0])
-    this.createEdge(this.nodes[8].outputs[1])
+    this.createEdge(this.nodes[9].outputs[1])
     this.createEdge(this.nodes[10].inputs[0])
     this.createEdge(this.nodes[9].outputs[0])
     this.createEdge(this.nodes[11].inputs[0])
     this.createEdge(this.nodes[10].outputs[0])
     this.createEdge(this.nodes[12].inputs[0])
+    this.createEdge(this.nodes[11].outputs[0])
+    this.createEdge(this.nodes[12].inputs[1])
+    this.createEdge(this.nodes[12].outputs[0])
+    this.createEdge(this.nodes[13].inputs[0])
 
     console.log(this.nodes)
     console.log(this.edges)

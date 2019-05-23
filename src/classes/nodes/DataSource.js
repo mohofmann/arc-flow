@@ -67,6 +67,7 @@ export default class DataSource extends Node {
 				// Run successor nodes once for each parsed row
 				output.edge._end.node.run()
 			}
+			console.clearLog()
 		})
 		console.log("Flow execution done.");
 	}

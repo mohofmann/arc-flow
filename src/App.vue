@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header></Header>
-    <div id="content" class="md-layout">
+    <div id="content" class="md-layout md-layout-item md-size-100">
       <SideMenu class="md-layout-item md-size-15" msg="Datasource"></SideMenu>
       <Editor class="md-layout-item md-size-85" v-show="showEditor" msg=""></Editor>
       <Analytics class="md-layout-item md-size-85" v-show="!showEditor"></Analytics>

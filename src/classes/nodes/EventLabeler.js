@@ -24,11 +24,12 @@ export default class EventLabeler extends Node {
 
 		this.setInputs(["Index"])
 		this.setOutputs(["Label"])
+
+		this.config.tolerance = 10
 	}
 
 	setData (data) {
 		this.config.data = data.data
-		console.log(this.data)
 	}
 
 	_preperform () {
@@ -41,15 +42,15 @@ export default class EventLabeler extends Node {
 		
 		if (index == -1) return
 
-		let result = _.filter(this.config.data, o => _.inRange(o.index, index - 10, index + 10));
-		console.log("Event at index " + index + " got labeled as " + result[0].label)
-		// process it
-
+		let result = _.filter(this.config.data, o => _.inRange(o.index, index - this.config.tolerance, index + this.config.tolerance));
+		let label = result.length ? result[0].label : "undefined"
+		this.log({index: index, label: label})
 		// and send result to the edge._end of this.outputs array
+		this.sendMessage(0, label)
 	}
 
 	_log (args) {
-		
+		console.log("Event at index " + args.index + " got labeled as " + (args.label != "-1" ? args.label : "undefined"))
 	}
 
 

@@ -20,34 +20,33 @@ export default class Selector extends Node {
 		this.detailMenu = 'SelectorMenu'
 		this.description = attributes.description
 		this.hint.text("")
-
 		this.setInputs(["Data"])
 		this.setOutputs([""])
-		this.attributes = []
-		this.selectedAttributes = []
+
+		this.config.attributes = []
+		this.config.selectedAttributes = []
 	}
 
 	setAttributes (attributes, selectedAttributes) {
-		if (selectedAttributes == this.selectedAttributes) return
-		this.attributes = []
-		this.selectedAttributes = selectedAttributes
+		if (selectedAttributes == this.config.selectedAttributes) return
+		this.config.attributes = []
+		this.config.selectedAttributes = selectedAttributes
 
 		_.each(attributes, (attribute, index) => {
 			_.each(selectedAttributes, selectedAttribute => {
 				if (attribute == selectedAttribute) {
-					this.attributes.push({attribute: attribute, index: index})
+					this.config.attributes.push({attribute: attribute, index: index})
 				}
 			})
 		})
 
 		this.outputs[0].setLabel(selectedAttributes.toString())
-		console.log(this.attributes)
 	}
 
 	_perform () {
 		// take incoming data from this.inputs array
 		let output = []
-		_.each(this.attributes, attribute => {
+		_.each(this.config.attributes, attribute => {
 			output.push(this.inputs[0].data[attribute.index])
 		})
 		// process it
