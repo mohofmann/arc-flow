@@ -17,6 +17,9 @@ import PeakDetector from './nodes/PeakDetector.js'
 import Segmentor from './nodes/Segmentor.js'
 import MeanExtractor from './nodes/MeanExtractor.js'
 /* PLOP: APPEND IMPORT */
+import Max from './nodes/Max.js'
+import Min from './nodes/Min.js'
+import SVM from './nodes/SVM.js'
 import FeatureTable from './nodes/FeatureTable.js'
 import EventLabeler from './nodes/EventLabeler.js'
 import Magnitude from './nodes/Magnitude.js'
@@ -91,7 +94,10 @@ export default class Canvas {
     this.createNode('MEDIANEXTRACTOR')
     this.createNode('FEATUREVECTOR')
     this.createNode('FEATURETABLE')
+    this.createNode('FEATURETABLE')
     this.createNode('LOG')
+    this.createNode('LOG')
+    this.createNode('SVM')
 
     _.each(this.nodes, (node, index) => {
       let y = Math.random() * (300 - 100) + 100;
@@ -132,6 +138,8 @@ export default class Canvas {
     this.createEdge(this.nodes[10].inputs[0])
     this.createEdge(this.nodes[9].outputs[0])
     this.createEdge(this.nodes[11].inputs[0])
+    this.createEdge(this.nodes[7].outputs[0])
+    this.createEdge(this.nodes[14].inputs[0])
     this.createEdge(this.nodes[10].outputs[0])
     this.createEdge(this.nodes[12].inputs[1])
     this.createEdge(this.nodes[11].outputs[0])
@@ -139,7 +147,13 @@ export default class Canvas {
     this.createEdge(this.nodes[12].outputs[0])
     this.createEdge(this.nodes[13].inputs[0])
     this.createEdge(this.nodes[13].outputs[0])
-    this.createEdge(this.nodes[14].inputs[0])
+    this.createEdge(this.nodes[15].inputs[0])
+    this.createEdge(this.nodes[14].outputs[0])
+    this.createEdge(this.nodes[16].inputs[0])
+    this.createEdge(this.nodes[15].outputs[0])
+    this.createEdge(this.nodes[17].inputs[0])
+    this.createEdge(this.nodes[16].outputs[0])
+    this.createEdge(this.nodes[17].inputs[1])
 
     console.log(this.nodes)
     console.log(this.edges)
@@ -179,6 +193,9 @@ export default class Canvas {
       case 'SEGMENTOR': node = new Segmentor(this._canvas, this.watchCanvas); break
       case 'MEANEXTRACTOR': node = new MeanExtractor(this._canvas, this.watchCanvas); break
       /* PLOP: APPEND CASE */
+      case 'MAX': node = new Max(this._canvas, this.watchCanvas); break
+      case 'MIN': node = new Min(this._canvas, this.watchCanvas); break
+      case 'SVM': node = new SVM(this._canvas, this.watchCanvas); break
       case 'FEATURETABLE': node = new FeatureTable(this._canvas, this.watchCanvas); break
       case 'EVENTLABELER': node = new EventLabeler(this._canvas, this.watchCanvas); break
       case 'MAGNITUDE': node = new Magnitude(this._canvas, this.watchCanvas); break

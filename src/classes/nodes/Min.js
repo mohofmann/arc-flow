@@ -1,43 +1,45 @@
 /**************************************
- *	MEDIANEXTRACTOR
- *	Extracts Median Feature
+ *	MIN
+ *	Minimum value of the signal
  **************************************/
 
 import Node from '../Node.js'
-import JStat from 'jStat'
  
 let attributes = {
 	backgroundColor: '#F06',
 	headerColor: '#CF0053',
-	title: 'Median Extractor',
-	hint: ''
+	title: 'Min',
+	hint: 'Minimum value of the signal',
+	description: 'Minimum value of the signal'
 }
 
-export default class MedianExtractor extends Node {
+export default class Min extends Node {
 
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
 
-		this.setInputs(["Segment"])
-		this.setOutputs(["Median"])
+		this.detailMenu = 'MinMenu'
+		this.description = attributes.description
+		this.hint.text("")
 
-		this.detailMenu = 'MedianExtractorMenu'
+		this.setInputs(["Segment"])
+		this.setOutputs(["Minimum"])
+	}
+
+	_preperform () {
+		// potential functionality to be executed once before execution
 	}
 
 	_perform () {
 		// take incoming data from this.inputs array
-		let data = this.inputs[0].data[0]
+		this.sendMessage(0, _.min(this.inputs[0].data))
 		// process it
-		let median = parseFloat(JStat.median(data))
+
 		// and send result to the edge._end of this.outputs array
-		if (this.outputs[0].edge) {
-			this.outputs[0].edge._end.data = median
-		}
-		this.log({median: median})
 	}
 
 	_log (args) {
-		console.log("Median is " + args.median)
+		
 	}
 
 

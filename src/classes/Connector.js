@@ -23,8 +23,6 @@ export default class Connector {
   	this.element = null
     this.type = type
 
-    console.log(node.backgroundColor)
-
   	this._circlePos = this.type === 'INPUT' ? -7.5 : node.sizeX - 7.5
     this._textPos = this.type === 'INPUT' ? 20 : node.sizeX - 20
     this._verticalPos = this.type === 'INPUT' ? node.inputs.length : node.outputs.length

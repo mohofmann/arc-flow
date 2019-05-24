@@ -49,6 +49,16 @@ export default class FeatureVector extends Node {
 	// TODO: create a addInputs function to add new Inputs without destroying old ones
 	updateFeatureAmount (amount) {
 		if (this.config.featureAmount == amount) return
+		// let oldInputs = this.inputs
+		// if (this.config.featureAmount < amount) {
+		// 	for (let i = this.config.featureAmount; i < amount; i++ ) {
+		// 		this.inputs.push("Feature " + (i+1))
+		// 	}
+		// } else {
+		// 	for (let i = this.config.featureAmount; i > amount; i-- ) {
+		// 		this.inputs.pop()
+		// 	}
+		// }
 		this.config.featureAmount = amount
 		let oldInputs = this.inputs
 		let newInputs = []

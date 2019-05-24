@@ -199,6 +199,14 @@ export default class Node {
     this.adjustHeight()
   }
 
+  removeInputs = function (amount) {
+
+  }
+
+  addInputs = function (inputs) {
+    
+  }
+
   setOutputs = function (outputs) {
     // Remove existing inputs
     this.resetConnectors(this.outputs)

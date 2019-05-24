@@ -19,7 +19,7 @@ import { EventBus } from '../main.js'
 const setupEvents = function () {
   EventBus.$on('renderDataChart', data => renderDataChart(data, this.dataChart))
   EventBus.$on('resetAnalytics', () => {
-    $refs.logcontainer.scrollTop = 0;
+    this.$refs.logcontainer.scrollTop = 0;
   })
 }
 

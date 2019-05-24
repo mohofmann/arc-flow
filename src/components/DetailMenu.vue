@@ -14,6 +14,9 @@ import SegmentationMenu from './detailMenus/SegmentationMenu.vue'
 import SegmentorMenu from './detailMenus/SegmentorMenu.vue'
 import MeanExtractorMenu from './detailMenus/MeanExtractorMenu.vue'
 /* PLOP: APPEND IMPORT */
+import MaxMenu from './detailMenus/MaxMenu.vue'
+import MinMenu from './detailMenus/MinMenu.vue'
+import SVMMenu from './detailMenus/SVMMenu.vue'
 import FeatureTableMenu from './detailMenus/FeatureTableMenu.vue'
 import EventLabelerMenu from './detailMenus/EventLabelerMenu.vue'
 import MagnitudeMenu from './detailMenus/MagnitudeMenu.vue'
@@ -53,6 +56,9 @@ export default {
     SegmentationMenu,
     SegmentorMenu,
     /* PLOP: APPEND COMPONENT */
+    MaxMenu,
+    MinMenu,
+    SVMMenu,
     FeatureTableMenu,
     EventLabelerMenu,
     MagnitudeMenu,

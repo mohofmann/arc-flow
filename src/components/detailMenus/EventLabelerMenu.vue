@@ -7,12 +7,11 @@
       <label>Upload CSV with labels</label>
       <md-file @md-change="parseFile" :placeholder="fileName" style="max-width: 100% !important"/>
     </md-field>
-    <!-- <md-field>
-      <label for="segmentAmount">Feature Type</label>
-      <md-select v-model="selectedFeature" @md-selected="updateFeature">
-        <md-option v-for="feature in features" :value="feature">{{ feature }}</md-option>
-      </md-select>
-    </md-field> -->
+    <md-field>
+      <md-icon>skip_previous</md-icon>
+      <label for="fieldAmount">Index Tolerance</label>
+      <md-input v-model="tolerance" @keyup.native="updateTolerance"></md-input>
+    </md-field>
     <md-switch v-model="node.logging">Logging</md-switch>
   </div>
 </template>
@@ -40,6 +39,10 @@ const parseFile = function (fileList) {
   }
 }
 
+const updateTolerance = function () {
+  this.node.config.tolerance = this.tolerance
+}
+
 export default {
   name: 'EventLabelerMenu',
   props: {
@@ -48,11 +51,13 @@ export default {
   data: function () {
     return {
       showAlert: false,
-      fileName: this.node.name
+      fileName: this.node.name,
+      tolerance: this.node.config.tolerance
     }
   },
   methods: {
-    parseFile: parseFile
+    parseFile: parseFile,
+    updateInexTolerance: updateTolerance
   }
 }
 </script>

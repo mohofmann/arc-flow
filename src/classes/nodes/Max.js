@@ -1,43 +1,45 @@
 /**************************************
- *	MEDIANEXTRACTOR
- *	Extracts Median Feature
+ *	MAX
+ *	Maximum value of the signal
  **************************************/
 
 import Node from '../Node.js'
-import JStat from 'jStat'
  
 let attributes = {
 	backgroundColor: '#F06',
 	headerColor: '#CF0053',
-	title: 'Median Extractor',
-	hint: ''
+	title: 'Max',
+	hint: 'Maximum value of the signal',
+	description: 'Maximum value of the signal'
 }
 
-export default class MedianExtractor extends Node {
+export default class Max extends Node {
 
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
 
-		this.setInputs(["Segment"])
-		this.setOutputs(["Median"])
+		this.detailMenu = 'MaxMenu'
+		this.description = attributes.description
+		this.hint.text("")
 
-		this.detailMenu = 'MedianExtractorMenu'
+		this.setInputs(["Segment"])
+		this.setOutputs(["Maximum"])
+	}
+
+	_preperform () {
+		// potential functionality to be executed once before execution
 	}
 
 	_perform () {
 		// take incoming data from this.inputs array
-		let data = this.inputs[0].data[0]
+		this.sendMessage(0, _.max(this.inputs[0].data))
 		// process it
-		let median = parseFloat(JStat.median(data))
+
 		// and send result to the edge._end of this.outputs array
-		if (this.outputs[0].edge) {
-			this.outputs[0].edge._end.data = median
-		}
-		this.log({median: median})
 	}
 
 	_log (args) {
-		console.log("Median is " + args.median)
+		
 	}
 
 

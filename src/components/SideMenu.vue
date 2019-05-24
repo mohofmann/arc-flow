@@ -71,6 +71,18 @@
         <md-divider></md-divider>
         <md-subheader>Misc</md-subheader>
           <!-- PLOP: APPEND -->
+					<md-list-item @click="createNode('MAX')">
+					  <md-icon>extension</md-icon>
+					  <span class="md-list-item-text">Max</span>
+					</md-list-item>
+					<md-list-item @click="createNode('MIN')">
+					  <md-icon>extension</md-icon>
+					  <span class="md-list-item-text">Min</span>
+					</md-list-item>
+					<md-list-item @click="createNode('SVM')">
+					  <md-icon>extension</md-icon>
+					  <span class="md-list-item-text">SVM</span>
+					</md-list-item>
 					<md-list-item @click="createNode('FEATURETABLE')">
 					  <md-icon>extension</md-icon>
 					  <span class="md-list-item-text">Feature Table</span>
