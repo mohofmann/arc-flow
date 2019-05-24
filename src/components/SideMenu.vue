@@ -71,6 +71,10 @@
         <md-divider></md-divider>
         <md-subheader>Misc</md-subheader>
           <!-- PLOP: APPEND -->
+					<md-list-item @click="createNode('FEATURETABLE')">
+					  <md-icon>extension</md-icon>
+					  <span class="md-list-item-text">Feature Table</span>
+					</md-list-item>
 					<md-list-item @click="createNode('EVENTLABELER')">
 					  <md-icon>extension</md-icon>
 					  <span class="md-list-item-text">Event Labeler</span>

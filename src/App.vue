@@ -137,6 +137,11 @@ md-overlay {
   z-index: 100;
 }
 
+.md-list-item-content {
+  min-height: 40px !important;
+  height: 40px !important;
+}
+
 .layout-detailmenu {
   -webkit-box-shadow: -3px 0px 5px 0px rgba(0,0,0,0.3);
   -moz-box-shadow: -3px 0px 5px 0px rgba(0,0,0,0.3);

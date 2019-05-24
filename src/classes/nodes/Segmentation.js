@@ -118,7 +118,6 @@ export default class Segmentation extends Node {
 	// Initialize an empty field of #attributes subfields
 	// and subfields having queueSize 
 	initializeQueue (sample) {
-		console.log("queue gets initialized")
 		_.each(sample, attribute => {
 			let values = []
 			for (let i = 0; i < this.config.queueSize; i ++) {
