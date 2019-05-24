@@ -131,9 +131,9 @@ export default class Canvas {
     this.createEdge(this.nodes[9].outputs[0])
     this.createEdge(this.nodes[11].inputs[0])
     this.createEdge(this.nodes[10].outputs[0])
-    this.createEdge(this.nodes[12].inputs[0])
-    this.createEdge(this.nodes[11].outputs[0])
     this.createEdge(this.nodes[12].inputs[1])
+    this.createEdge(this.nodes[11].outputs[0])
+    this.createEdge(this.nodes[12].inputs[0])
     this.createEdge(this.nodes[12].outputs[0])
     this.createEdge(this.nodes[13].inputs[0])
 

@@ -1,7 +1,10 @@
 <template>
-  <div id="analytics" class="md-layout" style="height: auto%">
-    <div id="log" ref="log" class="md-layout-item md-size-50" style="height: 100%; padding: 15px; overflow: scroll"></div>
-    <div class="md-layout-item md-size-50">
+  <div id="analytics" class="md-layout content-height">
+    <div id="logcontainer" ref="logcontainer" class="md-layout-item md-elevation-1 md-size-30">
+      <p style="font-size: 16px; font-weight: 600;">ARCFLOW Console</p>
+      <div id="log" ref="log"></div>
+    </div>
+    <div class="md-layout-item md-elevation-4 md-size-70">
       <canvas id="pieChart" ref="pieChart"></canvas>
       <canvas id="lineChart" ref="lineChart"></canvas>
     </div>
@@ -15,6 +18,9 @@ import { EventBus } from '../main.js'
 
 const setupEvents = function () {
   EventBus.$on('renderDataChart', data => renderDataChart(data, this.dataChart))
+  EventBus.$on('resetAnalytics', () => {
+    $refs.logcontainer.scrollTop = 0;
+  })
 }
 
 const setupCharts = function () {
@@ -168,6 +174,18 @@ export default {
 
 #analytics {
   background-color: #161616;
+}
+
+#logcontainer {
+  height: 100%;
+  padding: 15px;
+  overflow: scroll;
+  background-color: #060606;
+  font-family: 'Courier New';
+  font-size: 10pt;
+  -moz-box-shadow: inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 5px #000000;
 }
 
 </style>

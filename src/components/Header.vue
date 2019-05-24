@@ -48,7 +48,8 @@ export default {
   },
   methods: {
     run: () => {
-      EventBus.$emit('runFlow', null)
+      EventBus.$emit('runFlow', null);
+      EventBus.$emit('resetAnalytics');
     },
     loadCanvas: loadCanvas,
     reload: () => {

@@ -2,9 +2,9 @@
   <div id="app">
     <Header></Header>
     <div id="content" class="md-layout md-layout-item md-size-100">
-      <SideMenu class="md-layout-item md-size-15" msg="Datasource"></SideMenu>
+      <SideMenu class="md-layout-item md-size-15" msg="Datasource" v-show="showEditor"></SideMenu>
       <Editor class="md-layout-item md-size-85" v-show="showEditor" msg=""></Editor>
-      <Analytics class="md-layout-item md-size-85" v-show="!showEditor"></Analytics>
+      <Analytics class="md-layout-item md-size-100" v-show="!showEditor"></Analytics>
       <!-- TODO: See how to fix SVG render bug when container is display: none -->
       <!-- <div class="md-layout-item md-size-85" style="position: relative">
         <Editor class="editor" msg=""></Editor>
@@ -31,6 +31,16 @@ const setupEvents = function () {
   })
 }
 
+const setupKeybindings = function () {
+  document.addEventListener('keydown', e => {
+    // switch (e.key) {
+    //   case "1": EventBus.$emit('setTab', 'editor-tab'); break;
+    //   case "2": EventBus.$emit('setTab', 'analytics-tab'); break;
+    //   default: break;
+    // }
+  })
+}
+
 export default {
   name: 'App',
   components: {
@@ -48,7 +58,10 @@ export default {
   methods: {
     run: () => {EventBus.$emit('runFlow', null)}
   },
-  created: setupEvents
+  created: () => {
+    setupEvents()
+    setupKeybindings()
+  }
 }
 </script>
 
@@ -65,6 +78,13 @@ svg {
 
 md-overlay {
   z-index: 0 !important;
+}
+
+.content-height {
+  height: calc(100% - 64px);
+  height: -o-calc(100% - 64px); /* opera */
+  height: -webkit-calc(100% - 64px); /* google, safari */
+  height: -moz-calc(100% - 64px); /* firefox */
 }
 
 .run .md-ripple {

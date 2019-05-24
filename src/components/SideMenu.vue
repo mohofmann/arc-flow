@@ -1,5 +1,5 @@
 <template>
-  <nav id="sideMenu" style="height: 100%; overflow: scroll;">
+  <nav id="sideMenu" class="content-height" style="overflow: scroll;">
   <!-- <nav id="sideMenu" class="md-layout" style="height: 100%; overflow: scroll"> -->
     <!-- <md-toolbar style="background-color: #424242" :md-elevation="1">
       <md-field>
@@ -84,7 +84,7 @@
 					  <span class="md-list-item-text">Log</span>
 					</md-list-item>
       </md-list>
-      <br><br><br><br><br><br>
+      <br>
   </nav>
 </template>
 
@@ -121,6 +121,10 @@ export default {
 
   .md-button {
     margin: 12px 0;
+  }
+
+  .md-list-item-container {
+    font-size: 14px;
   }
 
 </style>
