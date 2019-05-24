@@ -33,11 +33,11 @@ const setupEvents = function () {
 
 const setupKeybindings = function () {
   document.addEventListener('keydown', e => {
-    // switch (e.key) {
-    //   case "1": EventBus.$emit('setTab', 'editor-tab'); break;
-    //   case "2": EventBus.$emit('setTab', 'analytics-tab'); break;
-    //   default: break;
-    // }
+    switch (e.key) {
+      case "1": EventBus.$emit('setTab', 'editor-tab'); break;
+      case "2": EventBus.$emit('setTab', 'analytics-tab'); break;
+      default: break;
+    }
   })
 }
 
@@ -56,11 +56,13 @@ export default {
     }
   },
   methods: {
-    run: () => {EventBus.$emit('runFlow', null)}
+    run: () => {EventBus.$emit('runFlow', null)},
+    setupEvents: setupEvents,
+    setupKeybindings: setupKeybindings
   },
-  created: () => {
-    setupEvents()
-    setupKeybindings()
+  created: function () {
+    this.setupEvents();
+    this.setupKeybindings();
   }
 }
 </script>
