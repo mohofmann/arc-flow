@@ -4,9 +4,11 @@
       <p style="font-size: 16px; font-weight: 600;">ARCFLOW Console</p>
       <div id="log" ref="log"></div>
     </div>
-    <div class="md-layout-item md-elevation-4 md-size-70">
-      <canvas id="pieChart" ref="pieChart"></canvas>
-      <canvas id="lineChart" ref="lineChart"></canvas>
+    <div class="md-layout md-layout-item md-elevation-4 md-size-70">
+      <canvas id="pieChart1" class="md-layout-item md-size-50" ref="pieChart1"></canvas>
+      <canvas id="lineChart1" class="md-layout-item md-size-50" ref="lineChart1"></canvas>
+      <canvas id="lineChart2" class="md-layout-item md-size-50" ref="lineChart2"></canvas>
+      <canvas id="pieChart2" class="md-layout-item md-size-50" ref="pieChart2"></canvas>
     </div>
   </div>
 </template>
@@ -34,8 +36,10 @@ const setupCharts = function () {
     yellow: "rgb(255, 205, 86)"
   }
 
-  this.pieChart = this.$refs.pieChart.getContext('2d')
-  this.lineChart = this.$refs.lineChart.getContext('2d')
+  this.pieChart1 = this.$refs.pieChart1.getContext('2d')
+  this.lineChart1 = this.$refs.lineChart1.getContext('2d')
+  this.pieChart2 = this.$refs.pieChart2.getContext('2d')
+  this.lineChart2 = this.$refs.lineChart2.getContext('2d')
 
   let pieConfig = {
     type: 'doughnut',
@@ -125,8 +129,10 @@ const setupCharts = function () {
     }
   };
 
-  new Chart(this.pieChart, pieConfig)
-  new Chart(this.lineChart, polarConfig)
+  new Chart(this.pieChart1, pieConfig)
+  new Chart(this.lineChart1, polarConfig)
+  new Chart(this.pieChart2, pieConfig)
+  new Chart(this.lineChart2, polarConfig)
 
 }
 

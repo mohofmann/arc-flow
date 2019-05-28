@@ -14,6 +14,7 @@ import SegmentationMenu from './detailMenus/SegmentationMenu.vue'
 import SegmentorMenu from './detailMenus/SegmentorMenu.vue'
 import MeanExtractorMenu from './detailMenus/MeanExtractorMenu.vue'
 /* PLOP: APPEND IMPORT */
+import KNNMenu from './detailMenus/KNNMenu.vue'
 import MaxMenu from './detailMenus/MaxMenu.vue'
 import MinMenu from './detailMenus/MinMenu.vue'
 import SVMMenu from './detailMenus/SVMMenu.vue'
@@ -56,6 +57,7 @@ export default {
     SegmentationMenu,
     SegmentorMenu,
     /* PLOP: APPEND COMPONENT */
+    KNNMenu,
     MaxMenu,
     MinMenu,
     SVMMenu,

@@ -7,7 +7,8 @@
 import SVG from 'svg.js'
 import 'svg.draggable.js'
 import 'svg.panzoom.js'
-import { get, set } from 'idb-keyval' 
+import { get, set } from 'idb-keyval'
+import { saveAs } from 'file-saver';
 
 import DataSource  from './nodes/DataSource.js'
 import SqrMagnitude from './nodes/SqrMagnitude.js'
@@ -17,6 +18,7 @@ import PeakDetector from './nodes/PeakDetector.js'
 import Segmentor from './nodes/Segmentor.js'
 import MeanExtractor from './nodes/MeanExtractor.js'
 /* PLOP: APPEND IMPORT */
+import KNN from './nodes/KNN.js'
 import Max from './nodes/Max.js'
 import Min from './nodes/Min.js'
 import SVM from './nodes/SVM.js'
@@ -121,7 +123,15 @@ export default class Canvas {
     })
     await set('projectDefinition', projectDefinition)
     console.log("Project saved.")
-    this.downloadObjectAsJson(projectDefinition, "project.arc")
+    this.downloadProject(projectDefinition, "project.arc")
+  }
+
+  downloadProject (object, fileName) {
+    var fileToSave = new Blob([JSON.stringify(object)], {
+      type: 'application/json',
+      name: fileName
+    });
+    saveAs(fileToSave, fileName);
   }
 
   downloadObjectAsJson (exportObj, exportName){
@@ -195,6 +205,7 @@ export default class Canvas {
       case 'SEGMENTOR': node = new Segmentor(this._canvas, this.watchCanvas); break
       case 'MEANEXTRACTOR': node = new MeanExtractor(this._canvas, this.watchCanvas); break
       /* PLOP: APPEND CASE */
+      case 'KNN': node = new KNN(this._canvas, this.watchCanvas); break
       case 'MAX': node = new Max(this._canvas, this.watchCanvas); break
       case 'MIN': node = new Min(this._canvas, this.watchCanvas); break
       case 'SVM': node = new SVM(this._canvas, this.watchCanvas); break

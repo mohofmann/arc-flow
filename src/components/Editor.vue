@@ -1,13 +1,16 @@
 <template>
   <div class="md-layout">
     <md-snackbar md-position="center" :md-duration="1000" :md-active.sync="showProgress" md-persistent>
-      <span>Flow is running</span>
+      <span>Flow is running..</span>
     </md-snackbar>
     <md-snackbar md-position="center" :md-duration="2000" :md-active.sync="showSuccess" md-persistent>
       <span>Flow successfully executed</span>
     </md-snackbar>
     <md-snackbar md-position="center" :md-duration="2000" :md-active.sync="showError" md-persistent>
       <span>Flow execution failed</span>
+    </md-snackbar>
+    <md-snackbar md-position="center" :md-duration="3000" :md-active.sync="showLoading" md-persistent>
+      <span>Project is loading..</span>
     </md-snackbar>
     <div class="md-layout-item md-size-100" id="editor"></div>
     <DetailMenu class="md-layout-item"></DetailMenu>
@@ -35,7 +38,7 @@ const setupEvents = function () {
   EventBus.$on('createNode', node => canvas.createNode(node))
   EventBus.$on('removeNode', node => canvas.removeNode(node))
   EventBus.$on('selectConnector', (node, connector) => canvas.createEdge(node, connector))
-  EventBus.$on('loadProject', () => canvas.loadProject())
+  EventBus.$on('loadProject', () => {this.showLoading = true; canvas.loadProject()})
   EventBus.$on('saveProject', () => canvas.saveProject())
 }
 
@@ -70,7 +73,8 @@ export default {
     return {
       showError: false,
       showProgress: false,
-      showSuccess: false
+      showSuccess: false,
+      showLoading: false
     }
   },
   methods: {

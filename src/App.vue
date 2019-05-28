@@ -34,8 +34,8 @@ const setupEvents = function () {
 const setupKeybindings = function () {
   document.addEventListener('keydown', e => {
     switch (e.key) {
-      case "1": EventBus.$emit('setTab', 'editor-tab'); break;
-      case "2": EventBus.$emit('setTab', 'analytics-tab'); break;
+      case "e": EventBus.$emit('setTab', 'editor-tab'); break;
+      case "a": EventBus.$emit('setTab', 'analytics-tab'); break;
       default: break;
     }
   })

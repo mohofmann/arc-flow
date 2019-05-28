@@ -54,39 +54,45 @@
         <md-subheader>Feature Extraction</md-subheader>
           <md-list-item @click="createNode('MEANEXTRACTOR')">
             <md-icon>gps_fixed</md-icon>
-            <span class="md-list-item-text">Mean Extractor</span>
+            <span class="md-list-item-text">Mean</span>
           </md-list-item>
           <md-list-item @click="createNode('MEDIANEXTRACTOR')">
             <md-icon>gps_fixed</md-icon>
-            <span class="md-list-item-text">Median Extractor</span>
+            <span class="md-list-item-text">Median</span>
           </md-list-item>
           <md-list-item @click="createNode('SMAEXTRACTOR')">
             <md-icon>gps_fixed</md-icon>
-            <span class="md-list-item-text">SMA Extractor</span>
+            <span class="md-list-item-text">SMA</span>
+          </md-list-item>
+          <md-list-item @click="createNode('MAX')">
+            <md-icon>gps_fixed</md-icon>
+            <span class="md-list-item-text">Max</span>
+          </md-list-item>
+          <md-list-item @click="createNode('MIN')">
+            <md-icon>gps_fixed</md-icon>
+            <span class="md-list-item-text">Min</span>
           </md-list-item>
           <md-list-item @click="createNode('FEATUREVECTOR')">
             <md-icon>gps_fixed</md-icon>
             <span class="md-list-item-text">Feature Vector</span>
           </md-list-item>
         <md-divider></md-divider>
+        <md-subheader>Classification</md-subheader>
+          <md-list-item @click="createNode('FEATURETABLE')">
+            <md-icon>settings_input_composite</md-icon>
+            <span class="md-list-item-text">Feature Table</span>
+          </md-list-item>
+          <md-list-item @click="createNode('KNN')">
+            <md-icon>settings_input_composite</md-icon>
+            <span class="md-list-item-text">KNN</span>
+          </md-list-item>
+          <md-list-item @click="createNode('SVM')">
+            <md-icon>settings_input_composite</md-icon>
+            <span class="md-list-item-text">SVM</span>
+          </md-list-item>
+        <md-divider></md-divider>
         <md-subheader>Misc</md-subheader>
           <!-- PLOP: APPEND -->
-					<md-list-item @click="createNode('MAX')">
-					  <md-icon>extension</md-icon>
-					  <span class="md-list-item-text">Max</span>
-					</md-list-item>
-					<md-list-item @click="createNode('MIN')">
-					  <md-icon>extension</md-icon>
-					  <span class="md-list-item-text">Min</span>
-					</md-list-item>
-					<md-list-item @click="createNode('SVM')">
-					  <md-icon>extension</md-icon>
-					  <span class="md-list-item-text">SVM</span>
-					</md-list-item>
-					<md-list-item @click="createNode('FEATURETABLE')">
-					  <md-icon>extension</md-icon>
-					  <span class="md-list-item-text">Feature Table</span>
-					</md-list-item>
 					<md-list-item @click="createNode('EVENTLABELER')">
 					  <md-icon>extension</md-icon>
 					  <span class="md-list-item-text">Event Labeler</span>

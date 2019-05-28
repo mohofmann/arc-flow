@@ -1,6 +1,6 @@
 <template>
   <div class="md-content">
-    <h4>SVM</h4>
+    <h4>Knn</h4>
     <p><i>{{ node.description }}</i></p>
     <md-divider></md-divider>
     <br>
@@ -18,7 +18,7 @@
 import { EventBus } from '../../main.js'
 
 export default {
-  name: 'SVMMenu',
+  name: 'KNNMenu',
   props: {
     node: Object
   },
