@@ -33,8 +33,10 @@ const setupEvents = function () {
     setTimeout(this.run, 500)
   })
   EventBus.$on('createNode', node => canvas.createNode(node))
+  EventBus.$on('removeNode', node => canvas.removeNode(node))
   EventBus.$on('selectConnector', (node, connector) => canvas.createEdge(node, connector))
-  EventBus.$on('loadCanvas', () => canvas.loadCanvas())
+  EventBus.$on('loadProject', () => canvas.loadProject())
+  EventBus.$on('saveProject', () => canvas.saveProject())
 }
 
 const run = async function () {

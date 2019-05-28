@@ -22,6 +22,7 @@ const parseFile = function (fileList) {
   if (fileList) {
     const file = fileList[0]
     Papa.parse(file, {
+      dynamicTyping: true,
       complete: result => {
         this.showAlert = true
         this.node.setData(result)

@@ -30,6 +30,11 @@ export default class DataSource extends Node {
 		this.config.data = null
 	}
 
+	configure (config) {
+		this.config = config
+		this.updateNode()
+	}
+
 	setData (data) {
 		this.config.data = data
 		this.config.features = this.config.data.data[0]

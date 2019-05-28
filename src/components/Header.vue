@@ -11,11 +11,11 @@
     <md-button @click="run" class="md-icon-button md-raised run">
       <md-icon>play_arrow</md-icon>
     </md-button>&nbsp;&nbsp;
-    <md-button @click="loadCanvas" class="md-icon-button md-raised">
+    <md-button @click="loadProject" class="md-icon-button md-raised">
       <md-icon>cloud_upload</md-icon>
     </md-button>&nbsp;&nbsp;
-    <md-button class="md-icon-button md-raised">
-      <md-icon>settings</md-icon>
+    <md-button @click="saveProject" class="md-icon-button md-raised">
+      <md-icon>cloud_download</md-icon>
     </md-button>
   </md-toolbar>
 </template>
@@ -34,9 +34,13 @@ const switchTab = function (tabId) {
   EventBus.$emit('switchTab', tabId)
 }
 
-const loadCanvas = function () {
-  EventBus.$emit('loadCanvas', null)
+const loadProject = function () {
+  EventBus.$emit('loadProject', null)
   this.switchTab('editor-tab')
+}
+
+const saveProject = function () {
+  EventBus.$emit('saveProject', null)
 }
 
 export default {
@@ -51,7 +55,8 @@ export default {
       EventBus.$emit('runFlow', null);
       EventBus.$emit('resetAnalytics');
     },
-    loadCanvas: loadCanvas,
+    loadProject: loadProject,
+    saveProject: saveProject,
     reload: () => {
       location.reload()
     },

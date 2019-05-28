@@ -15,7 +15,7 @@ let attributes = {
 	description: 'Buffers a signal vector and is able to output past signals'
 }
 
-export default class Memory extends Node {
+export default class Ringbuffer extends Node {
 
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)

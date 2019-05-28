@@ -32,7 +32,7 @@ export default class Max extends Node {
 
 	_perform () {
 		// take incoming data from this.inputs array
-		this.sendMessage(0, _.max(this.inputs[0].data))
+		this.sendMessage(0, parseFloat(_.max(this.inputs[0].data[0])))
 		// process it
 
 		// and send result to the edge._end of this.outputs array

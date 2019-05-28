@@ -28,6 +28,10 @@ export default class EventLabeler extends Node {
 		this.config.tolerance = 10
 	}
 
+	configure (config) {
+		this.config = config
+	}
+
 	setData (data) {
 		this.config.data = data.data
 	}

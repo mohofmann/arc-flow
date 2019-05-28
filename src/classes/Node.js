@@ -25,6 +25,7 @@ export default class Node {
     this.sizeX = sizeX
     this.sizeY = sizeY
     this.config = {}
+    this.id = null
 
     this.backgroundColor = attributes.backgroundColor
 
@@ -37,21 +38,9 @@ export default class Node {
     this._watchCanvas()
   }
 
-  // TODO: also remove edge references in inputs & outputs
-  remove = function () {
-    _.each(this.inputs, input => {
-      input.edge && input.edge.remove()
-    })
-    _.each(this.outputs, output => {
-      output.edge && output.edge.remove()
-    })
-    this.element.remove()
-    this._watchCanvas()
-  }
-
   // Checks if all conditions for execution are given and then
   // calls the _perform function
-  run = function () {
+  run () {
     // Only execute computation if every input got data
     if (_.every(this.inputs, 'data')) {
       this._perform()
@@ -87,6 +76,10 @@ export default class Node {
     this.logging && this._log(args)
   }
 
+  configure (config) {
+    // To be overwritten by every implementation
+  }
+
   _log (args) {
     // To be overwritten by every implementation
   }
@@ -107,8 +100,9 @@ export default class Node {
     // by every node implementation
   }
 
-  createTile = function (attributes) {
+  createTile (attributes) {
     this.element = this._canvas.group()
+    this.id = this.element.node.id
     this.body = this._canvas
       .rect(sizeX, sizeY)
       .radius(radius)
@@ -176,9 +170,7 @@ export default class Node {
   }
 
   nodeRemoveEvent = function (event) {
-    // delete Node upon button press
-    // TODO: Also delete Node out of canvas' node list
-    this.remove()
+    EventBus.$emit('removeNode', this)
     event.stopPropagation()
   }
 
@@ -191,8 +183,8 @@ export default class Node {
     this.resetConnectors(this.inputs)
     this.inputs = []
     // Add every single input
-    _.each(inputs, el => {
-      let connector = new Connector(this._canvas, this, el, 'INPUT')
+    _.each(inputs, (el, idx) => {
+      let connector = new Connector(this._canvas, this, el, 'INPUT', idx)
       this.inputs.push(connector)
     })
     // Adjust the tile size
@@ -212,8 +204,8 @@ export default class Node {
     this.resetConnectors(this.outputs)
     this.outputs = []
     // Add every single input
-    _.each(outputs, el => {
-      let connector = new Connector(this._canvas, this, el, 'OUTPUT')
+    _.each(outputs, (el, idx) => {
+      let connector = new Connector(this._canvas, this, el, 'OUTPUT', idx)
       this.outputs.push(connector)
     })
     // Adjust the tile size

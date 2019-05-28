@@ -25,6 +25,10 @@ export default class Splitter extends Node {
 		this.setOutputs(["Data", "Data"])
 	}
 
+	configure (config) {
+		this.config = config
+	}
+
 	_preperform () {
 		// potential functionality to be executed once before execution
 	}
@@ -39,6 +43,15 @@ export default class Splitter extends Node {
 
 	_log (args) {
 		
+	}
+
+	updateOutputs (amount) {
+		this.config.outputAmount = amount
+		let outputs = []
+		for (let i = 0; i < amount; i ++) {
+			outputs.push((i+1).toString())
+		}
+		this.setOutputs(outputs)
 	}
 
 

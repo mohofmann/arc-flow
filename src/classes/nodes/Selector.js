@@ -27,7 +27,13 @@ export default class Selector extends Node {
 		this.config.selectedAttributes = []
 	}
 
+	configure (config) {
+		this.config = config
+		this.outputs[0].setLabel(this.config.selectedAttributes.toString())
+	}
+
 	setAttributes (attributes, selectedAttributes) {
+		console.log("gets called")
 		if (selectedAttributes == this.config.selectedAttributes) return
 		this.config.attributes = []
 		this.config.selectedAttributes = selectedAttributes
@@ -39,8 +45,8 @@ export default class Selector extends Node {
 				}
 			})
 		})
-
 		this.outputs[0].setLabel(selectedAttributes.toString())
+		console.log(selectedAttributes.toString())
 	}
 
 	_perform () {

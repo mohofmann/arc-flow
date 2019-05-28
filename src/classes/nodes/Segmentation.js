@@ -42,6 +42,10 @@ export default class Segmentation extends Node {
 		this.config.rangeAfterIndex = 0
 	}
 
+	configure (config) {
+		this.config = config
+	}
+
 	_preperform () {
 		this.queue = []
 		// this.updateQueueSize()
@@ -100,7 +104,7 @@ export default class Segmentation extends Node {
 		}
 	}
 
-	store = function (newValue) {
+	store (newValue) {
 		if (this.queue.length == 0) {
 			this.initializeQueue(newValue)
 		}

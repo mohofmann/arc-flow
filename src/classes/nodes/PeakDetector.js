@@ -34,6 +34,10 @@ export default class PeakDetector extends Node {
 		this.config.minPeakDistance = 0
 	}
 
+	configure (config) {
+		this.config = config
+	}
+
 	_preperform () {
 		this._samplesSinceLastPeak = 0
 		this._lastPeakValue = 0

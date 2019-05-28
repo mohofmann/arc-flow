@@ -7,7 +7,7 @@
 import SVG from 'svg.js'
 import 'svg.draggable.js'
 import 'svg.panzoom.js'
-import { get } from 'idb-keyval' 
+import { get, set } from 'idb-keyval' 
 
 import DataSource  from './nodes/DataSource.js'
 import SqrMagnitude from './nodes/SqrMagnitude.js'
@@ -37,7 +37,7 @@ const domId = 'editor'
 const sizeX = '100%'
 const sizeY = '100%'
 const panZoomSettings = {
-  zoomMin: 0.3,
+  zoomMin: 0.1,
   zoomMax: 1.3
 }
 
@@ -54,7 +54,7 @@ export default class Canvas {
     this._canvas = new SVG(domId)
       .size(sizeX, sizeY)
       .style(style)
-      .zoom(0.8)
+      .zoom(0.7)
       .click(event => {
         if (event.target.instance === this._canvas) {
           EventBus.$emit('deselectNode', null)
@@ -76,87 +76,89 @@ export default class Canvas {
     // .move(100+20, 0)
   }
 
-  async loadCanvas () {
-    let samples = await get('samples')
-    let labels = await get('labels')
+  async saveProject () {
+    let projectDefinition = {
+      nodeDefinitions: [],
+      edgeDefinitions: []
+    }
 
-    this.createNode('DATASOURCE')
-    this.createNode('RINGBUFFER')
-    this.createNode('SPLITTER')
-    this.createNode('SELECTOR')
-    this.createNode('MAGNITUDE')
-    this.createNode('PEAKDETECTOR')
-    this.createNode('SPLITTER')
-    this.createNode('EVENTLABELER')
-    this.createNode('SEGMENTATION')
-    this.createNode('SPLITTER')
-    this.createNode('MEANEXTRACTOR')
-    this.createNode('MEDIANEXTRACTOR')
-    this.createNode('FEATUREVECTOR')
-    this.createNode('FEATURETABLE')
-    this.createNode('FEATURETABLE')
-    this.createNode('LOG')
-    this.createNode('LOG')
-    this.createNode('SVM')
-
-    _.each(this.nodes, (node, index) => {
-      let y = Math.random() * (300 - 100) + 100;
-      node.element.move(index * 300, y)
+    _.each(this.nodes, node => {
+      let nodeDefinition = {
+        name: null,
+        id: null,
+        config: null,
+        x: null,
+        y: null,
+        inputs: [],
+        outputs: []
+      }
+      nodeDefinition.name = node.constructor.name.toUpperCase()
+      nodeDefinition.id = node.id
+      nodeDefinition.config = node.config
+      nodeDefinition.x = node.element.x()
+      nodeDefinition.y = node.element.y()
+      _.each(node.inputs, input => {
+        nodeDefinition.inputs.push(input.name)
+      })
+      _.each(node.outputs, output => {
+        nodeDefinition.outputs.push(output.name)
+      })
+      projectDefinition.nodeDefinitions.push(nodeDefinition)
     })
 
-    this.nodes[0].setData(samples)
-    this.nodes[7].setData(labels)
-    this.nodes[3].setAttributes(samples.data[0], ["ax", "ay", "az"])
-    samples = null
-    labels = null
-    this.nodes[5].config.minPeakHeight = 0.8
-    this.nodes[5].config.minPeakDistance = 100
-    this.nodes[8].updateNode(50, 50, 200)
-    this.nodes[12].updateFeatureAmount(2)
+    _.each(this.edges, edge => {
+      let edgeDefinition = {
+        start: {
+          node: edge._start.node.id,
+          output: edge._start.id
+        },
+        end: {
+          node: edge._end.node.id,
+          input: edge._end.id
+        }
+      }
+      projectDefinition.edgeDefinitions.push(edgeDefinition)
+    })
+    await set('projectDefinition', projectDefinition)
+    console.log("Project saved.")
+    this.downloadObjectAsJson(projectDefinition, "project.arc")
+  }
 
-    this.createEdge(this.nodes[0].outputs[0])
-    this.createEdge(this.nodes[1].inputs[0])
-    this.createEdge(this.nodes[1].outputs[0])
-    this.createEdge(this.nodes[2].inputs[0])
-    this.createEdge(this.nodes[2].outputs[1])
-    this.createEdge(this.nodes[3].inputs[0])
-    this.createEdge(this.nodes[3].outputs[0])
-    this.createEdge(this.nodes[4].inputs[0])
-    this.createEdge(this.nodes[4].outputs[0])
-    this.createEdge(this.nodes[5].inputs[0])
-    this.createEdge(this.nodes[2].outputs[0])
-    this.createEdge(this.nodes[8].inputs[0])
-    this.createEdge(this.nodes[5].outputs[1])
-    this.createEdge(this.nodes[6].inputs[0])
-    this.createEdge(this.nodes[6].outputs[1])
-    this.createEdge(this.nodes[7].inputs[0])
-    this.createEdge(this.nodes[6].outputs[0])
-    this.createEdge(this.nodes[8].inputs[1])
-    this.createEdge(this.nodes[8].outputs[0])
-    this.createEdge(this.nodes[9].inputs[0])
-    this.createEdge(this.nodes[9].outputs[1])
-    this.createEdge(this.nodes[10].inputs[0])
-    this.createEdge(this.nodes[9].outputs[0])
-    this.createEdge(this.nodes[11].inputs[0])
-    this.createEdge(this.nodes[7].outputs[0])
-    this.createEdge(this.nodes[14].inputs[0])
-    this.createEdge(this.nodes[10].outputs[0])
-    this.createEdge(this.nodes[12].inputs[1])
-    this.createEdge(this.nodes[11].outputs[0])
-    this.createEdge(this.nodes[12].inputs[0])
-    this.createEdge(this.nodes[12].outputs[0])
-    this.createEdge(this.nodes[13].inputs[0])
-    this.createEdge(this.nodes[13].outputs[0])
-    this.createEdge(this.nodes[15].inputs[0])
-    this.createEdge(this.nodes[14].outputs[0])
-    this.createEdge(this.nodes[16].inputs[0])
-    this.createEdge(this.nodes[15].outputs[0])
-    this.createEdge(this.nodes[17].inputs[0])
-    this.createEdge(this.nodes[16].outputs[0])
-    this.createEdge(this.nodes[17].inputs[1])
+  downloadObjectAsJson (exportObj, exportName){
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+    var downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href",     dataStr);
+    downloadAnchorNode.setAttribute("download", exportName + ".json");
+    document.body.appendChild(downloadAnchorNode); // required for firefox
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+  }
 
-    console.log(this.nodes)
-    console.log(this.edges)
+  // TODO: Fix unability to create edges vice versa (from input to output)
+  async loadProject () {
+    let projectDefinition = await get('projectDefinition')
+
+    _.each(projectDefinition.nodeDefinitions, nodeDefinition => {
+      this.createNode(nodeDefinition.name)
+      let node = _.last(this.nodes)
+      node.id = nodeDefinition.id
+      node.setInputs(nodeDefinition.inputs)
+      node.setOutputs(nodeDefinition.outputs)
+      node.configure(nodeDefinition.config)
+      node.element.move(nodeDefinition.x, nodeDefinition.y)
+    })
+
+    _.each(projectDefinition.edgeDefinitions, edgeDefinition => {
+      this.createEdge(this.findNode(edgeDefinition.start.node).outputs[edgeDefinition.start.output])
+      this.createEdge(this.findNode(edgeDefinition.end.node).inputs[edgeDefinition.end.input])
+    })
+  }
+
+  // Finds a node by its id
+  findNode (id) {
+    return _.find(this.nodes, node => {
+      return node.id == id
+    })
   }
 
   createEdge = function (connector) {
@@ -208,6 +210,24 @@ export default class Canvas {
       default: break
     }
     this.nodes.push(node)
+  }
+
+  removeNode (node) {
+    console.log("now removing, bitch")
+    _.each(node.inputs, input => {
+      input.edge && input.edge.remove()
+    })
+    _.each(node.outputs, output => {
+      output.edge && output.edge.remove()
+    })
+    _.remove(this.nodes, n => {
+      // console.log(node.element.node.id)
+      // console.log(this.element.node.id)
+      return n.element.node.id == node.element.node.id
+    })
+
+    node.element.remove()
+    this.watchCanvas()
   }
 
   watchCanvas = function () {
