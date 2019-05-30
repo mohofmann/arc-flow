@@ -26,6 +26,11 @@ export default class FeatureTable extends Node {
 		this.counter = 0
 		this.setInputs(["Vector"])
 		this.setOutputs(["Table"])
+		this.config.tableSize = 267
+	}
+
+	configure (config) {
+		this.config = config
 	}
 
 	_preperform () {
@@ -37,7 +42,7 @@ export default class FeatureTable extends Node {
 		// take incoming data from this.inputs array
 		this.table.push(this.inputs[0].data)
 		this.counter ++
-		if (this.counter < 267) return
+		if (this.counter < this.config.tableSize) return
 		this.counter = 0
 		this.sendMessage(0, this.table)
 	}

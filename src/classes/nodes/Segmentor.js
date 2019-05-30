@@ -26,6 +26,10 @@ export default class Segmentor extends Node {
 		this.config.segments = [{start: 0}]
 	}
 
+	configure (config) {
+		this.config = config
+	}
+
 	_perform () {
 		let range = this.inputs[0].data
 

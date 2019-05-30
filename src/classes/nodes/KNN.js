@@ -19,7 +19,7 @@ export default class Knn extends Node {
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
 
-		this.detailMenu = 'KnnMenu'
+		this.detailMenu = 'KNNMenu'
 		this.description = attributes.description
 		this.hint.text("")
 

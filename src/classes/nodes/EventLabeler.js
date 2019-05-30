@@ -47,7 +47,7 @@ export default class EventLabeler extends Node {
 		if (index == -1) return
 
 		let result = _.filter(this.config.data, o => _.inRange(o.index, index - this.config.tolerance, index + this.config.tolerance));
-		let label = result.length ? result[0].label : "undefined"
+		let label = result.length ? result[0].label : -1
 		this.log({index: index, label: label})
 		// and send result to the edge._end of this.outputs array
 		this.sendMessage(0, label)
