@@ -2,8 +2,8 @@
   <div id="app">
     <Header></Header>
     <div id="content" class="md-layout md-layout-item md-size-100">
-      <SideMenu class="md-layout-item md-size-15" msg="Datasource" v-show="showEditor"></SideMenu>
-      <Editor class="md-layout-item md-size-85" v-show="showEditor" msg=""></Editor>
+      <SideMenu class="md-layout-item md-size-20" msg="Datasource" v-show="showEditor"></SideMenu>
+      <Editor class="md-layout-item md-size-80" v-show="showEditor" msg=""></Editor>
       <Analytics class="md-layout-item md-size-100" v-show="!showEditor"></Analytics>
       <!-- TODO: See how to fix SVG render bug when container is display: none -->
       <!-- <div class="md-layout-item md-size-85" style="position: relative">
@@ -150,7 +150,7 @@ md-overlay {
 }
 
 .md-drawer {
-  width: 300px !important;
+  width: 250px !important;
 }
 
 .af-full-width {

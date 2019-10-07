@@ -25,6 +25,7 @@ export default class DataSource extends Node {
 		this._index = 0
 		this.detailMenu = 'DataSourceMenu'
 
+		this.setInputs(["Clock"])
 
 		this.config.features = []
 		this.config.data = null
@@ -51,30 +52,26 @@ export default class DataSource extends Node {
 		this.headline.text(attributes.title + ' (CSV)')
 	}
 
-	_runSuccessors () {
-		// Empty function as datasource acts as initial
-		// clock and runs successor nodes not once but for every
-		// data row (see _perform function)
-	}
-
 	_log (args) {
 		console.log("Row Output is " + args.data)
 	}
 
 	_perform () {
+		let index = this.inputs[0].data
 		let data = _.tail(this.config.data.data)
+		this.sendMessage(0, data[index])
 
-		_.each(data, async row => {
-			this.log({data: row})
-			let output = this.outputs[0]
-			if (output.edge) {
-				output.edge._end.data = row
-				// Run successor nodes once for each parsed row
-				output.edge._end.node.run()
-			}
-			console.clearLog()
-		})
-		console.log("Flow execution done.");
+		// _.each(data, async row => {
+		// 	this.log({data: row})
+		// 	let output = this.outputs[0]
+		// 	if (output.edge) {
+		// 		output.edge._end.data = row
+		// 		// Run successor nodes once for each parsed row
+		// 		output.edge._end.node.run()
+		// 	}
+		// 	console.clearLog()
+		// })
+		// console.log("Flow execution done.");
 	}
 
 }

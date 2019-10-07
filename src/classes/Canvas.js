@@ -18,6 +18,7 @@ import PeakDetector from './nodes/PeakDetector.js'
 import Segmentor from './nodes/Segmentor.js'
 import MeanExtractor from './nodes/MeanExtractor.js'
 /* PLOP: APPEND IMPORT */
+import Start from './nodes/Start.js'
 import KNN from './nodes/KNN.js'
 import Max from './nodes/Max.js'
 import Min from './nodes/Min.js'
@@ -205,6 +206,7 @@ export default class Canvas {
       case 'SEGMENTOR': node = new Segmentor(this._canvas, this.watchCanvas); break
       case 'MEANEXTRACTOR': node = new MeanExtractor(this._canvas, this.watchCanvas); break
       /* PLOP: APPEND CASE */
+      case 'START': node = new Start(this._canvas, this.watchCanvas); break
       case 'KNN': node = new KNN(this._canvas, this.watchCanvas); break
       case 'MAX': node = new Max(this._canvas, this.watchCanvas); break
       case 'MIN': node = new Min(this._canvas, this.watchCanvas); break

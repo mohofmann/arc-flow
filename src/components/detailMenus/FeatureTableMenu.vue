@@ -4,6 +4,11 @@
     <p><i>{{ node.description }}</i></p>
     <md-divider></md-divider>
     <br>
+    <md-field>
+      <md-icon>skip_previous</md-icon>
+      <label for="fieldAmount">Table Size</label>
+      <md-input v-model="tableSize" @keyup.native="updateTableSize"></md-input>
+    </md-field>
     <!-- <md-field>
       <label for="segmentAmount">Feature Type</label>
       <md-select v-model="selectedFeature" @md-selected="updateFeature">
@@ -17,6 +22,10 @@
 <script>
 import { EventBus } from '../../main.js'
 
+const updateTableSize = function () {
+  this.node.config.tableSize = this.tableSize
+}
+
 export default {
   name: 'FeatureTableMenu',
   props: {
@@ -24,9 +33,11 @@ export default {
   },
   data: function () {
     return {
+      tableSize: this.node.config.tableSize
     }
   },
   methods: {
+    updateTableSize: updateTableSize
   }
 }
 </script>
