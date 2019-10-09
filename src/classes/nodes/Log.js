@@ -9,7 +9,7 @@ let attributes = {
 	backgroundColor: '#F06',
 	headerColor: '#CF0053',
 	title: 'Log',
-	hint: 'Logs input signal',
+	hint: '',
 	description: 'Logs incoming data and passes it through to the output'
 }
 
@@ -23,10 +23,13 @@ export default class Log extends Node {
 
 		this.setInputs(["Data"])
 		this.setOutputs(["Data"])
+
+		this.maxLog = 100
+		this.logCount = 0
 	}
 
 	_preperform () {
-		
+		this.logCount = 0
 	}
 
 	_perform () {
@@ -35,9 +38,10 @@ export default class Log extends Node {
 		let data = this.inputs[0].data
 		this.sendMessage(0, data)
 
-		if (data == "-1") return
+		if (data == "-1" || this.logCount >= this.maxLog) return
 		
 		console.log(this.inputs[0].edge._start.node.headline.text().toUpperCase() + ":", data)
+		this.logCount ++
 	}
 
 	_log (args) {

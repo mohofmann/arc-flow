@@ -9,7 +9,7 @@ let attributes = {
 	backgroundColor: '#F06',
 	headerColor: '#CF0053',
 	title: 'Splitter',
-	hint: 'Splits input signals',
+	hint: '',
 	description: 'Splits input signals'
 }
 
