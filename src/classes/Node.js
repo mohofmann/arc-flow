@@ -9,7 +9,7 @@ import JStat from 'jStat'
 import Connector from './Connector.js'
 import { EventBus } from '../main.js'
 
-const sizeX = 250
+const sizeX = 205
 const sizeY = 80
 const radius = 10
 
