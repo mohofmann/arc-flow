@@ -57,21 +57,21 @@ export default class DataSource extends Node {
 	}
 
 	_perform () {
-		let index = this.inputs[0].data
+		// let index = this.inputs[0].data
 		let data = _.tail(this.config.data.data)
-		this.sendMessage(0, data[index])
-
-		// _.each(data, async row => {
-		// 	this.log({data: row})
-		// 	let output = this.outputs[0]
-		// 	if (output.edge) {
-		// 		output.edge._end.data = row
-		// 		// Run successor nodes once for each parsed row
-		// 		output.edge._end.node.run()
-		// 	}
-		// 	console.clearLog()
-		// })
-		// console.log("Flow execution done.");
+		// this.sendMessage(0, data[index])
+		console.log("want to run")
+		_.each(data, async row => {
+			this.log({data: row})
+			let output = this.outputs[0]
+			if (output.edge) {
+				output.edge._end.data = row
+				// Run successor nodes once for each parsed row
+				output.edge._end.node.run()
+			}
+			console.clearLog()
+		})
+		console.log("Flow execution done.");
 	}
 
 }
