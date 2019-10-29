@@ -31,7 +31,7 @@ export default class Segmentor extends Node {
 	}
 
 	_perform () {
-		let range = this.inputs[0].data
+		let range = this.inputs[0].data[0]
 
 		_.each(this.config.segments, (segment, index) => {
 			let newRange = []
@@ -44,7 +44,9 @@ export default class Segmentor extends Node {
 			}
 			this.log({index: index, newRange: newRange})
 			if (this.outputs[index].edge) {
-				this.outputs[index].edge._end.data = newRange
+				let result = []
+				result.push(newRange)
+				this.outputs[index].edge._end.data = result
 			}
 		})
 	}

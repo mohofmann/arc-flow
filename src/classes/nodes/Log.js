@@ -24,7 +24,7 @@ export default class Log extends Node {
 		this.setInputs(["Data"])
 		this.setOutputs(["Data"])
 
-		this.maxLog = 100
+		this.maxLog = 300
 		this.logCount = 0
 	}
 

@@ -26,14 +26,23 @@ export default class MedianExtractor extends Node {
 
 	_perform () {
 		// take incoming data from this.inputs array
-		let data = this.inputs[0].data[0]
+		let data = this.inputs[0].data
 		// process it
-		let median = parseFloat(JStat.median(data))
-		// and send result to the edge._end of this.outputs array
+		// 
+		//// FOR DEBUGGING
+		if (data == -1) return
 		if (this.outputs[0].edge) {
-			this.outputs[0].edge._end.data = median
+			this.outputs[0].edge._end.data = data
 		}
-		this.log({median: median})
+		////
+		// 
+
+		// let median = parseFloat(JStat.median(data))
+		// // and send result to the edge._end of this.outputs array
+		// if (this.outputs[0].edge) {
+		// 	this.outputs[0].edge._end.data = median
+		// }
+		// this.log({median: median})
 	}
 
 	_log (args) {
