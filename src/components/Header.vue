@@ -1,7 +1,7 @@
 <template>
   <md-toolbar :md-elevation="1" class="header">
     <h2 @click="reload" style="cursor: pointer">&nbsp;&nbsp;ARCFLOW</h2>
-    <span>&nbsp;&nbsp;&nbsp;v 0.5</span>
+    <span>&nbsp;&nbsp;&nbsp;v 1.0</span>
     <span style="flex: 1"></span>
     <md-tabs @md-changed="switchTab" :md-active-tab="activeTab">
       <md-tab id="editor-tab" md-label="Editor"></md-tab>

@@ -42,7 +42,6 @@ export default class FeatureTable extends Node {
 		// take incoming data from this.inputs array
 		this.table.push(this.inputs[0].data)
 		this.counter ++
-		console.log(this.counter)
 		if (this.counter < this.config.tableSize) return
 		this.counter = 0
 		this.sendMessage(0, this.table)

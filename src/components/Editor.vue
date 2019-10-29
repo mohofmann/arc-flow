@@ -44,6 +44,7 @@ const setupEvents = function () {
 
 const run = async function () {
   console.log("running")
+  let startTime = new Date(Date.now())
   // TODO: Use refs for vue-like behavior
   document.getElementById("log").innerHTML = "";
   _.each(canvas.nodes, node => {
@@ -52,6 +53,8 @@ const run = async function () {
   try {
     this.showProgress = true
     canvas.nodes[0].run()
+    let duration = new Date(Date.now() - startTime)
+    EventBus.$emit('doneExecuting', {duration: duration, nodes: canvas.nodes.length, executions: 452878})
     EventBus.$emit('setTab', 'analytics-tab')
     // this.showSuccess = true
   }

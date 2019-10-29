@@ -15,6 +15,8 @@ let attributes = {
 	hint: 'Click to add Data',
 	description: 'Imports and parses a table containing sensor data and outputs it sample by sample'
 }
+
+let samples = 0
  
 export default class DataSource extends Node {
 
@@ -59,8 +61,8 @@ export default class DataSource extends Node {
 	_perform () {
 		// let index = this.inputs[0].data
 		let data = _.tail(this.config.data.data)
+		let samples = data.length
 		// this.sendMessage(0, data[index])
-		console.log("want to run")
 		_.each(data, async row => {
 			this.log({data: row})
 			let output = this.outputs[0]

@@ -42,7 +42,6 @@ export default class Start extends Node {
 	}
 
 	_perform () {
-		console.log("running this bitch")
 		// take incoming data from this.inputs array
 		// _.times(this.config.count, async i => {
 		// 	let output = this.outputs[0]

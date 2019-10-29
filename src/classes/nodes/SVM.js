@@ -4,6 +4,7 @@
  **************************************/
 
 import Node from '../Node.js'
+import { EventBus } from '../../main.js'
  
 let attributes = {
 	backgroundColor: '#F06',
@@ -99,6 +100,8 @@ export default class Svm extends Node {
   	})
   	console.log("Matches: " + matches)
   	console.log("Accuracy: " + (matches / total) + " %")
+    let accuracy = (matches / total).toString().substring(0, 7) + " %"
+    EventBus.$emit('doneClassifying', accuracy)
 
 
 
