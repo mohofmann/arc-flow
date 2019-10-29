@@ -32,11 +32,11 @@
       <div class="md-layout-item md-size-100" style="height: 20px"></div>
       <div class="md-layout-item md-size-15">
       </div>
-      <div class="md-layout-item md-size-40">
+      <div class="md-layout-item md-size-40" v-if="nodes > 30">
         <img src="../assets/dl.png" style="height: 300px">
         <p style="font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ACTIVITIES PER CLASS</p>
       </div>
-      <div class="md-layout-item md-size-40">
+      <div class="md-layout-item md-size-40" v-if="nodes > 30">
         <img src="../assets/dp2.png" style="height: 300px">
         <p style="font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PREDICTIONS</p>
       </div>
