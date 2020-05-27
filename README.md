@@ -38,3 +38,39 @@ They can be connected by clicking the output of one node followed by clicking th
 When a functioning chain of nodes has been set up, you can execute it by clicking on the green **Run** button.
 
 >The small algorithm you created now parses a csv file, sends it row by row to the Selector which selects an attribute from that row and sends the attributes one by one to the Log node which finally prints the attribute to the console. Click the green **Run** button to execute the flow and see the outcome in the analytics console.
+
+## Included Nodes
+| Name														| Inputs  										| Outputs  						| Description  				|
+| ------------------------------- | --------------------				| ------------------- | ------------------- |
+| Datasource 											| -     											| Sample 							| Reads and parses a CSV file and sends it row by row |
+| Selector 												| Sample     									| Filtered Sample 		| Selects any axes from a sample and outputs it |
+| Segmentation 										| Values, Index Sample  			| Segment 						| Builds a segment around a given index |
+| Magnitude 											| Sample     									| Magnitude Value 		| Calculates the magnitude of the input sample |
+| Squared Magnitude 							| Sample     									| Sq. Magnitude Value | Calculates the squared mag- nitude of the input sample |
+| Lowpass Filter							 		| Values     									| Filtered Values		 	| Applies a lowpass filter |
+| Peak Detector 									| Values     									| Peak Index, Values 	| Detects peaks in a stream of values 
+| Subsegmentor								 		| Segment     								| Subsegments 				| Splits a segment into n subsegments |
+| Mean Extractor							 		| Segment     								| Mean value 					| Calculates the mean over a sample |
+| Median Extractor 								| Segment     								| Median value 				| Calculates the median over a sample |
+| SMA Extractor 									| Segment     								| SMA Value 					| Calculates the SMA over a sample |
+| Min Extractor 									| Segment     								| Minimum Value 			| Calculates the minimum over a sample |
+| Max Extractor 									| Segment											| Maximum Value 			| Calculates the maximum over a sample |
+| SD Extractor 										| Segment											| SD Value 				 		| Calculates the standard deviation over a sample |
+| Variance Extractor 							| Segment											| Variance Value 			| Calculates the variance over a sample |
+| Feature Vector 									| Features										| Vector 							| Merges n features into a feature vector |
+| Feature Table 									| Feature Vectors							| Feature Table				| Builds a feature table out of n feature vectors |
+| KNN Classifier							 		| Feature Table, Lables Table | - 									| Predicts features through KNN |
+| SVM Classifier 									| Feature Table, Lables Table	| -									 	| Predicts features through SVM | 
+| Event Labeler								 		| Peak Indices     						| Event Labels 				| Reads and parses a CSV file containing ground truth labels and maps them to segments |
+| Splitter							 					| Signal	     								| Data 			 					| Splits incoming signal onto multiple outputs |
+| Log 														| Signal	     								| Signal 			 				| Prints the incoming values in the console |
+
+## Extensibility
+By running
+`
+npm run generate
+`
+a little CLI helps you scaffold a new node, which you can then overwrite with custom functionality
+
+## License
+tbd
