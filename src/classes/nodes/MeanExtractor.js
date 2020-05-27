@@ -24,8 +24,7 @@ export default class MeanExtractor extends Node {
 	}
 
 	_perform () {
-		console.log("performing")
-		let range = this.inputs[0].data
+		let range = this.inputs[0].data[0]
 		let mean = 0
 
 		_.each(range, value => {

@@ -25,7 +25,7 @@ export default class SmaExtractor extends Node {
 
 	_perform () {
 		// take incoming data from this.inputs array
-		let data = this.inputs[0].data
+		let data = this.inputs[0].data[0]
 		let sum = 0
 		// process it
 		_.each(data, (value) => {

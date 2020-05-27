@@ -1,20 +1,23 @@
 <template>
   <div class="md-content">
-    <md-snackbar md-position="center" :md-duration="4000" :md-active.sync="showAlert" md-persistent>
-      <span>CSV file successfully parsed.</span>
-    </md-snackbar>
-    <h4>Data Source</h4>
+    <h4>Event Labeler</h4>
     <p><i>{{ node.description }}</i></p>
     <md-divider></md-divider>
     <md-field>
-      <label>Upload CSV</label>
+      <label>Upload CSV with labels</label>
       <md-file @md-change="parseFile" :placeholder="fileName" style="max-width: 100% !important"/>
+    </md-field>
+    <md-field>
+      <md-icon>skip_previous</md-icon>
+      <label for="fieldAmount">Index Tolerance</label>
+      <md-input v-model="tolerance" @keyup.native="updateTolerance"></md-input>
     </md-field>
     <md-switch v-model="node.logging">Logging</md-switch>
   </div>
 </template>
 
 <script>
+import { EventBus } from '../../main.js'
 import Papa from 'papaparse'
 import { set } from 'idb-keyval'
 
@@ -22,39 +25,40 @@ const parseFile = function (fileList) {
   if (fileList) {
     const file = fileList[0]
     Papa.parse(file, {
+      header: true,
       dynamicTyping: true,
       complete: result => {
         this.showAlert = true
         this.node.setData(result)
         this.node.name = file.name
         // TODO: Fix saving/loading so it doesn't require uploading the csv once
-        set('samples', result)
-          .then(() => console.log("Samples saved"))
-          .catch(err => console.log("Saving samples failed", err))
-        // localStorage.setItem('tmpData', JSON.stringify(result))
+        set('labels', result)
+          .then(() => console.log("Labels saved"))
+          .catch(err => console.log("Saving labels failed", err))
       }
     })
   }
 }
 
+const updateTolerance = function () {
+  this.node.config.tolerance = this.tolerance
+}
+
 export default {
-  name: 'DataSourceMenu',
+  name: 'EventLabelerMenu',
   props: {
     node: Object
   },
   data: function () {
     return {
       showAlert: false,
-      // features: this.node.config.data ? this.node.config.data.data[0] : [],
-      features: this.node.config.data ? this.node.config.data[0] : [],
-      fileName: this.node.name
+      fileName: this.node.name,
+      tolerance: this.node.config.tolerance
     }
   },
   methods: {
-    parseFile: parseFile
-  },
-  created: function () {
-
+    parseFile: parseFile,
+    updateInexTolerance: updateTolerance
   }
 }
 </script>

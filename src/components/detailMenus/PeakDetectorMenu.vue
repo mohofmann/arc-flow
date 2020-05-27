@@ -21,8 +21,8 @@
 import { EventBus } from '../../main.js'
 
 const updateAttributes = function () {
-  this.node.minPeakHeight = this.minPeakHeight
-  this.node.minPeakDistance = this.minPeakDistance
+  this.node.config.minPeakHeight = this.minPeakHeight
+  this.node.config.minPeakDistance = this.minPeakDistance
 }
 
 export default {
@@ -32,8 +32,8 @@ export default {
   },
   data: function () {
     return {
-      minPeakHeight: this.node.minPeakHeight,
-      minPeakDistance: this.node.minPeakDistance
+      minPeakHeight: this.node.config.minPeakHeight,
+      minPeakDistance: this.node.config.minPeakDistance
     }
   },
   methods: {

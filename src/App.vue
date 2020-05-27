@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <Header></Header>
-    <div id="content" class="md-layout">
-      <SideMenu class="md-layout-item md-size-15" msg="Datasource"></SideMenu>
+    <div id="content" class="md-layout md-layout-item md-size-100">
+      <SideMenu class="md-layout-item md-size-15" msg="Datasource" v-show="showEditor"></SideMenu>
       <Editor class="md-layout-item md-size-85" v-show="showEditor" msg=""></Editor>
-      <Analytics class="md-layout-item md-size-85" v-show="!showEditor"></Analytics>
+      <Analytics class="md-layout-item md-size-100" v-show="!showEditor"></Analytics>
       <!-- TODO: See how to fix SVG render bug when container is display: none -->
       <!-- <div class="md-layout-item md-size-85" style="position: relative">
         <Editor class="editor" msg=""></Editor>
@@ -31,6 +31,16 @@ const setupEvents = function () {
   })
 }
 
+const setupKeybindings = function () {
+  document.addEventListener('keydown', e => {
+    switch (e.key) {
+      case "e": EventBus.$emit('setTab', 'editor-tab'); break;
+      case "a": EventBus.$emit('setTab', 'analytics-tab'); break;
+      default: break;
+    }
+  })
+}
+
 export default {
   name: 'App',
   components: {
@@ -46,9 +56,14 @@ export default {
     }
   },
   methods: {
-    run: () => {EventBus.$emit('runFlow', null)}
+    run: () => {EventBus.$emit('runFlow', null)},
+    setupEvents: setupEvents,
+    setupKeybindings: setupKeybindings
   },
-  created: setupEvents
+  created: function () {
+    this.setupEvents();
+    this.setupKeybindings();
+  }
 }
 </script>
 
@@ -65,6 +80,13 @@ svg {
 
 md-overlay {
   z-index: 0 !important;
+}
+
+.content-height {
+  height: calc(100% - 64px);
+  height: -o-calc(100% - 64px); /* opera */
+  height: -webkit-calc(100% - 64px); /* google, safari */
+  height: -moz-calc(100% - 64px); /* firefox */
 }
 
 .run .md-ripple {
@@ -115,6 +137,11 @@ md-overlay {
   z-index: 100;
 }
 
+.md-list-item-content {
+  min-height: 40px !important;
+  height: 40px !important;
+}
+
 .layout-detailmenu {
   -webkit-box-shadow: -3px 0px 5px 0px rgba(0,0,0,0.3);
   -moz-box-shadow: -3px 0px 5px 0px rgba(0,0,0,0.3);
@@ -123,7 +150,7 @@ md-overlay {
 }
 
 .md-drawer {
-  width: 300px !important;
+  width: 250px !important;
 }
 
 .af-full-width {

@@ -8,12 +8,20 @@
 <script>
 import DataSourceMenu from './detailMenus/DataSourceMenu.vue'
 import RingbufferMenu from './detailMenus/RingbufferMenu.vue'
-import PreprocessorMenu from './detailMenus/PreprocessorMenu.vue'
+import SqrMagnitudeMenu from './detailMenus/SqrMagnitudeMenu.vue'
 import PeakDetectorMenu from './detailMenus/PeakDetectorMenu.vue'
-import RangeMenu from './detailMenus/RangeMenu.vue'
+import SegmentationMenu from './detailMenus/SegmentationMenu.vue'
 import SegmentorMenu from './detailMenus/SegmentorMenu.vue'
 import MeanExtractorMenu from './detailMenus/MeanExtractorMenu.vue'
 /* PLOP: APPEND IMPORT */
+import StartMenu from './detailMenus/StartMenu.vue'
+import KNNMenu from './detailMenus/KNNMenu.vue'
+import MaxMenu from './detailMenus/MaxMenu.vue'
+import MinMenu from './detailMenus/MinMenu.vue'
+import SVMMenu from './detailMenus/SVMMenu.vue'
+import FeatureTableMenu from './detailMenus/FeatureTableMenu.vue'
+import EventLabelerMenu from './detailMenus/EventLabelerMenu.vue'
+import MagnitudeMenu from './detailMenus/MagnitudeMenu.vue'
 import SplitterMenu from './detailMenus/SplitterMenu.vue'
 import LogMenu from './detailMenus/LogMenu.vue'
 import SelectorMenu from './detailMenus/SelectorMenu.vue'
@@ -45,11 +53,19 @@ export default {
   components: {
     DataSourceMenu,
     RingbufferMenu,
-    PreprocessorMenu,
+    SqrMagnitudeMenu,
     PeakDetectorMenu,
-    RangeMenu,
+    SegmentationMenu,
     SegmentorMenu,
     /* PLOP: APPEND COMPONENT */
+    StartMenu,
+    KNNMenu,
+    MaxMenu,
+    MinMenu,
+    SVMMenu,
+    FeatureTableMenu,
+    EventLabelerMenu,
+    MagnitudeMenu,
     SplitterMenu,
     LogMenu,
     SelectorMenu,

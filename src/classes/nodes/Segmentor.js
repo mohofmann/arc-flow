@@ -18,20 +18,24 @@ export default class Segmentor extends Node {
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
 
-		this.segmentAmount = 1
-		this.segments = [{start: 0}]
 		this.setInputs(["Range"])
 		this.setOutputs(["Segment 1"])
-
 		this.detailMenu = 'SegmentorMenu'
+
+		this.config.segmentAmount = 1
+		this.config.segments = [{start: 0}]
+	}
+
+	configure (config) {
+		this.config = config
 	}
 
 	_perform () {
-		let range = this.inputs[0].data
+		let range = this.inputs[0].data[0]
 
-		_.each(this.segments, (segment, index) => {
+		_.each(this.config.segments, (segment, index) => {
 			let newRange = []
-			let nextSegment = this.segments[index + 1]
+			let nextSegment = this.config.segments[index + 1]
 			if (nextSegment) {
 				newRange = range.slice(segment.start, nextSegment.start)
 			}
@@ -40,7 +44,9 @@ export default class Segmentor extends Node {
 			}
 			this.log({index: index, newRange: newRange})
 			if (this.outputs[index].edge) {
-				this.outputs[index].edge._end.data = newRange
+				let result = []
+				result.push(newRange)
+				this.outputs[index].edge._end.data = result
 			}
 		})
 	}
@@ -55,7 +61,7 @@ export default class Segmentor extends Node {
 			outputs.push("Segment " + (i+1))
 		})
 		this.setOutputs(outputs)
-		this.segmentAmount = amount
+		this.config.segmentAmount = amount
 	}
 
 

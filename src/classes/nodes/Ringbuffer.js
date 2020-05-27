@@ -15,11 +15,10 @@ let attributes = {
 	description: 'Buffers a signal vector and is able to output past signals'
 }
 
-export default class Memory extends Node {
+export default class Ringbuffer extends Node {
 
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
-		this.fieldAmount = 512
 		this.index = 0
 		this.range = 0
 		this.fields = []
@@ -30,18 +29,20 @@ export default class Memory extends Node {
 
 		this.description = attributes.description
 		this.detailMenu = 'RingbufferMenu'
+
+		this.config.fieldAmount = 512
 	}
 
 	adjustFields = function () {
 		// shrink the amount of fields
-		if (this.fields.length > this.fieldAmount) {
-			this.fields = _.take(this.fields, this.fieldAmount)
-			if (this.index >= this.fieldAmount) {
-				this.index = this.fieldAmount - 1
+		if (this.fields.length > this.config.fieldAmount) {
+			this.fields = _.take(this.fields, this.config.fieldAmount)
+			if (this.index >= this.config.fieldAmount) {
+				this.index = this.config.fieldAmount - 1
 			}
 		// or add fields
 		} else {
-			const missingFields = this.fieldAmount - this.fields.length
+			const missingFields = this.config.fieldAmount - this.fields.length
 			for (let i = 0; i < missingFields; i ++) {
 				this.fields.push([])
 			}
@@ -61,11 +62,11 @@ export default class Memory extends Node {
 	}
 
 	increaseIndex = function () {
-		this.index = (this.index + 1) % this.fieldAmount
+		this.index = (this.index + 1) % this.config.fieldAmount
 	}
 
 	updateNode = function (fieldSize, fieldAmount) {
-		this.fieldAmount = fieldAmount
+		this.config.fieldAmount = fieldAmount
 		this.adjustFields()
 	}
 

@@ -9,7 +9,7 @@ let attributes = {
 	backgroundColor: '#F06',
 	headerColor: '#CF0053',
 	title: 'Splitter',
-	hint: 'Splits input signals',
+	hint: '',
 	description: 'Splits input signals'
 }
 
@@ -23,6 +23,10 @@ export default class Splitter extends Node {
 
 		this.setInputs(["Data"])
 		this.setOutputs(["Data", "Data"])
+	}
+
+	configure (config) {
+		this.config = config
 	}
 
 	_preperform () {
@@ -39,6 +43,15 @@ export default class Splitter extends Node {
 
 	_log (args) {
 		
+	}
+
+	updateOutputs (amount) {
+		this.config.outputAmount = amount
+		let outputs = []
+		for (let i = 0; i < amount; i ++) {
+			outputs.push((i+1).toString())
+		}
+		this.setOutputs(outputs)
 	}
 
 

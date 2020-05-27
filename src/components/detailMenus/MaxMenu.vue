@@ -1,14 +1,15 @@
 <template>
   <div class="md-content">
-    <h4>Ringbuffer</h4>
+    <h4>Max</h4>
     <p><i>{{ node.description }}</i></p>
     <md-divider></md-divider>
     <br>
-    <md-field>
-      <md-icon>view_comfy</md-icon>
-      <label for="fieldAmount">Memory Fields</label>
-      <md-input v-model="fieldAmount" @keyup.native="updateAttributes"></md-input>
-    </md-field>
+    <!-- <md-field>
+      <label for="segmentAmount">Feature Type</label>
+      <md-select v-model="selectedFeature" @md-selected="updateFeature">
+        <md-option v-for="feature in features" :value="feature">{{ feature }}</md-option>
+      </md-select>
+    </md-field> -->
     <md-switch v-model="node.logging">Logging</md-switch>
   </div>
 </template>
@@ -16,24 +17,16 @@
 <script>
 import { EventBus } from '../../main.js'
 
-const updateAttributes  = function () {
-  if (this.node) {
-    this.node.updateNode(this.fieldSize, this.fieldAmount)
-  }
-}
-
 export default {
-  name: 'MemoryMenu',
+  name: 'MaxMenu',
   props: {
     node: Object
   },
   data: function () {
     return {
-      fieldAmount: this.node.config.fieldAmount
     }
   },
   methods: {
-    updateAttributes: updateAttributes
   }
 }
 </script>

@@ -14,7 +14,7 @@ const height = 30
 
 export default class Connector {
 
-  constructor (canvas, node, name, type) {
+  constructor (canvas, node, name, type, id) {
   	this._canvas = canvas
     this.node = node
   	this.data = null
@@ -22,8 +22,7 @@ export default class Connector {
     this.name = name
   	this.element = null
     this.type = type
-
-    console.log(node.backgroundColor)
+    this.id = id
 
   	this._circlePos = this.type === 'INPUT' ? -7.5 : node.sizeX - 7.5
     this._textPos = this.type === 'INPUT' ? 20 : node.sizeX - 20
@@ -65,6 +64,7 @@ export default class Connector {
   }
 
   setLabel (label) {
+    console.log("setting the label " + label)
     this.element.first()
       .text(label)
       .move(this._textPos, verticalMargin + this._verticalPos * height)

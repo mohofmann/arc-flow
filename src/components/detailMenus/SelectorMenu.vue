@@ -33,7 +33,7 @@ export default {
   data: function () {
     return {
       attributes: [],
-      selectedAttributes: this.node.selectedAttributes ? this.node.selectedAttributes : []
+      selectedAttributes: this.node.config.selectedAttributes ? this.node.config.selectedAttributes : []
     }
   },
   methods: {

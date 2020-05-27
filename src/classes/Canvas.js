@@ -7,15 +7,25 @@
 import SVG from 'svg.js'
 import 'svg.draggable.js'
 import 'svg.panzoom.js'
+import { get, set } from 'idb-keyval'
+import { saveAs } from 'file-saver';
 
 import DataSource  from './nodes/DataSource.js'
-import Preprocessor from './nodes/Preprocessor.js'
+import SqrMagnitude from './nodes/SqrMagnitude.js'
 import Ringbuffer from './nodes/Ringbuffer.js'
-import Range from './nodes/Range.js'
+import Segmentation from './nodes/Segmentation.js'
 import PeakDetector from './nodes/PeakDetector.js'
 import Segmentor from './nodes/Segmentor.js'
 import MeanExtractor from './nodes/MeanExtractor.js'
 /* PLOP: APPEND IMPORT */
+import Start from './nodes/Start.js'
+import KNN from './nodes/KNN.js'
+import Max from './nodes/Max.js'
+import Min from './nodes/Min.js'
+import SVM from './nodes/SVM.js'
+import FeatureTable from './nodes/FeatureTable.js'
+import EventLabeler from './nodes/EventLabeler.js'
+import Magnitude from './nodes/Magnitude.js'
 import Splitter from './nodes/Splitter.js'
 import Log from './nodes/Log.js'
 import Selector from './nodes/Selector.js'
@@ -30,7 +40,7 @@ const domId = 'editor'
 const sizeX = '100%'
 const sizeY = '100%'
 const panZoomSettings = {
-  zoomMin: 0.3,
+  zoomMin: 0.1,
   zoomMax: 1.3
 }
 
@@ -47,79 +57,105 @@ export default class Canvas {
     this._canvas = new SVG(domId)
       .size(sizeX, sizeY)
       .style(style)
-      .zoom(0.8)
+      .zoom(0.7)
       .click(event => {
         if (event.target.instance === this._canvas) {
           EventBus.$emit('deselectNode', null)
         }
       })
-    // this._canvas.line(97, -1000, 98, 1000)
-    // .stroke({ width: 2, color: '#4687CC' })
-    // .style({ cursor: 'ew-resize', 'stroke-dasharray': '2'})
-    // this._canvas.line(100, -1000, 100, 1000)
-    // .stroke({ width: 2, color: '#CF0053' })
-    // .style({ cursor: 'ew-resize', 'stroke-dasharray': '2'})
-    // this._canvas.text("WEARABLE")
-    // .font({size: 32, anchor: 'end', weight: '600'})
-    // .fill({color: '#4687CC', opacity: '0.7'})
-    // .move(100-20, 0)
-    // this._canvas.text("SMARTPHONE")
-    // .font({size: 32, anchor: 'start', weight: '600'})
-    // .fill({color: '#CF0053', opacity: '0.7'})
-    // .move(100+20, 0)
   }
 
-  loadCanvas () {
-    this.createNode('DATASOURCE')
-    this.createNode('RINGBUFFER')
-    this.createNode('SPLITTER')
-    this.createNode('SELECTOR')
-    this.createNode('PREPROCESSOR')
-    this.createNode('PEAKDETECTOR')
-    this.createNode('RANGE')
-    this.createNode('SPLITTER')
-    this.createNode('MEANEXTRACTOR')
-    this.createNode('MEDIANEXTRACTOR')
-    this.createNode('LOG')
-    this.createNode('LOG')
+  async saveProject () {
+    let projectDefinition = {
+      nodeDefinitions: [],
+      edgeDefinitions: []
+    }
 
-    _.each(this.nodes, (node, index) => {
-      let y = Math.random() * (300 - 100) + 100;
-      node.element.move(index * 300, y)
+    _.each(this.nodes, node => {
+      let nodeDefinition = {
+        name: null,
+        id: null,
+        config: null,
+        x: null,
+        y: null,
+        inputs: [],
+        outputs: []
+      }
+      nodeDefinition.name = node.constructor.name.toUpperCase()
+      nodeDefinition.id = node.id
+      nodeDefinition.config = node.config
+      nodeDefinition.x = node.element.x()
+      nodeDefinition.y = node.element.y()
+      _.each(node.inputs, input => {
+        nodeDefinition.inputs.push(input.name)
+      })
+      _.each(node.outputs, output => {
+        nodeDefinition.outputs.push(output.name)
+      })
+      projectDefinition.nodeDefinitions.push(nodeDefinition)
     })
 
-    let data = JSON.parse(localStorage.getItem('tmpData'))
-    this.nodes[0].setData(data)
-    data = null
-    this.nodes[3].setAttributes(["ax", "ay", "az", "lax", "lay", "laz"], ["lax", "lay", "laz"])
-    this.nodes[5].minPeakHeight = 160
-    this.nodes[5].minPeakDistance = 100
-    this.nodes[6].updateNode(50, 50, 200)
+    _.each(this.edges, edge => {
+      let edgeDefinition = {
+        start: {
+          node: edge._start.node.id,
+          output: edge._start.id
+        },
+        end: {
+          node: edge._end.node.id,
+          input: edge._end.id
+        }
+      }
+      projectDefinition.edgeDefinitions.push(edgeDefinition)
+    })
+    await set('projectDefinition', projectDefinition)
+    console.log("Project saved.")
+    this.downloadProject(projectDefinition, "project.arc")
+  }
 
-    this.createEdge(this.nodes[0].outputs[0])
-    this.createEdge(this.nodes[1].inputs[0])
-    this.createEdge(this.nodes[1].outputs[0])
-    this.createEdge(this.nodes[2].inputs[0])
-    this.createEdge(this.nodes[2].outputs[0])
-    this.createEdge(this.nodes[3].inputs[0])
-    this.createEdge(this.nodes[3].outputs[0])
-    this.createEdge(this.nodes[4].inputs[0])
-    this.createEdge(this.nodes[4].outputs[0])
-    this.createEdge(this.nodes[5].inputs[0])
-    this.createEdge(this.nodes[2].outputs[1])
-    this.createEdge(this.nodes[6].inputs[0])
-    this.createEdge(this.nodes[5].outputs[1])
-    this.createEdge(this.nodes[6].inputs[1])
-    this.createEdge(this.nodes[6].outputs[0])
-    this.createEdge(this.nodes[7].inputs[0])
-    this.createEdge(this.nodes[7].outputs[0])
-    this.createEdge(this.nodes[8].inputs[0])
-    this.createEdge(this.nodes[7].outputs[1])
-    this.createEdge(this.nodes[9].inputs[0])
-    this.createEdge(this.nodes[8].outputs[0])
-    this.createEdge(this.nodes[10].inputs[0])
-    this.createEdge(this.nodes[9].outputs[0])
-    this.createEdge(this.nodes[11].inputs[0])
+  downloadProject (object, fileName) {
+    var fileToSave = new Blob([JSON.stringify(object)], {
+      type: 'application/json',
+      name: fileName
+    });
+    saveAs(fileToSave, fileName);
+  }
+
+  downloadObjectAsJson (exportObj, exportName){
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+    var downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href",     dataStr);
+    downloadAnchorNode.setAttribute("download", exportName + ".json");
+    document.body.appendChild(downloadAnchorNode); // required for firefox
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+  }
+
+  // TODO: Fix unability to create edges vice versa (from input to output)
+  async loadProject () {
+    let projectDefinition = await get('projectDefinition')
+
+    _.each(projectDefinition.nodeDefinitions, nodeDefinition => {
+      this.createNode(nodeDefinition.name)
+      let node = _.last(this.nodes)
+      node.id = nodeDefinition.id
+      node.setInputs(nodeDefinition.inputs)
+      node.setOutputs(nodeDefinition.outputs)
+      node.configure(nodeDefinition.config)
+      node.element.move(nodeDefinition.x, nodeDefinition.y)
+    })
+
+    _.each(projectDefinition.edgeDefinitions, edgeDefinition => {
+      this.createEdge(this.findNode(edgeDefinition.start.node).outputs[edgeDefinition.start.output])
+      this.createEdge(this.findNode(edgeDefinition.end.node).inputs[edgeDefinition.end.input])
+    })
+  }
+
+  // Finds a node by its id
+  findNode (id) {
+    return _.find(this.nodes, node => {
+      return node.id == id
+    })
   }
 
   createEdge = function (connector) {
@@ -150,12 +186,20 @@ export default class Canvas {
     switch (nodeName) {
       case 'DATASOURCE': node = new DataSource(this._canvas, this.watchCanvas); break
       case 'RINGBUFFER': node = new Ringbuffer(this._canvas, this.watchCanvas); break
-      case 'RANGE': node = new Range(this._canvas, this.watchCanvas); break
-      case 'PREPROCESSOR': node = new Preprocessor(this._canvas, this.watchCanvas); break
+      case 'SEGMENTATION': node = new Segmentation(this._canvas, this.watchCanvas); break
+      case 'SQRMAGNITUDE': node = new SqrMagnitude(this._canvas, this.watchCanvas); break
       case 'PEAKDETECTOR': node = new PeakDetector(this._canvas, this.watchCanvas); break
       case 'SEGMENTOR': node = new Segmentor(this._canvas, this.watchCanvas); break
       case 'MEANEXTRACTOR': node = new MeanExtractor(this._canvas, this.watchCanvas); break
       /* PLOP: APPEND CASE */
+      case 'START': node = new Start(this._canvas, this.watchCanvas); break
+      case 'KNN': node = new KNN(this._canvas, this.watchCanvas); break
+      case 'MAX': node = new Max(this._canvas, this.watchCanvas); break
+      case 'MIN': node = new Min(this._canvas, this.watchCanvas); break
+      case 'SVM': node = new SVM(this._canvas, this.watchCanvas); break
+      case 'FEATURETABLE': node = new FeatureTable(this._canvas, this.watchCanvas); break
+      case 'EVENTLABELER': node = new EventLabeler(this._canvas, this.watchCanvas); break
+      case 'MAGNITUDE': node = new Magnitude(this._canvas, this.watchCanvas); break
       case 'SPLITTER': node = new Splitter(this._canvas, this.watchCanvas); break
       case 'LOG': node = new Log(this._canvas, this.watchCanvas); break
       case 'SELECTOR': node = new Selector(this._canvas, this.watchCanvas); break
@@ -165,6 +209,23 @@ export default class Canvas {
       default: break
     }
     this.nodes.push(node)
+  }
+
+  removeNode (node) {
+    _.each(node.inputs, input => {
+      input.edge && input.edge.remove()
+    })
+    _.each(node.outputs, output => {
+      output.edge && output.edge.remove()
+    })
+    _.remove(this.nodes, n => {
+      // console.log(node.element.node.id)
+      // console.log(this.element.node.id)
+      return n.element.node.id == node.element.node.id
+    })
+
+    node.element.remove()
+    this.watchCanvas()
   }
 
   watchCanvas = function () {

@@ -1,5 +1,6 @@
 <template>
-  <nav id="sideMenu" style="height: 100%; overflow: scroll;">
+  <nav id="sideMenu" class="content-height" style="overflow: scroll;">
+  <!-- <nav id="sideMenu" class="md-layout" style="height: 100%; overflow: scroll"> -->
     <!-- <md-toolbar style="background-color: #424242" :md-elevation="1">
       <md-field>
         <md-icon>search</md-icon>
@@ -24,14 +25,18 @@
             <md-icon>data_usage</md-icon>
             <span class="md-list-item-text">Ring Buffer</span>
           </md-list-item>
-          <md-list-item @click="createNode('RANGE')">
+          <md-list-item @click="createNode('SEGMENTATION')">
             <md-icon>data_usage</md-icon>
-            <span class="md-list-item-text">Range</span></md-list-item>
+            <span class="md-list-item-text">Segmentation</span></md-list-item>
         <md-divider></md-divider>
         <md-subheader>Preprocessing</md-subheader>
-          <md-list-item @click="createNode('PREPROCESSOR')">
+          <md-list-item @click="createNode('MAGNITUDE')">
             <md-icon>trending_up</md-icon>
             <span class="md-list-item-text">Magnitude</span>
+          </md-list-item>
+          <md-list-item @click="createNode('SQRMAGNITUDE')">
+            <md-icon>trending_up</md-icon>
+            <span class="md-list-item-text">Sq. Magnitude</span>
           </md-list-item>
         <md-divider></md-divider>
         <md-subheader>Peak Detection</md-subheader>
@@ -49,18 +54,53 @@
         <md-subheader>Feature Extraction</md-subheader>
           <md-list-item @click="createNode('MEANEXTRACTOR')">
             <md-icon>gps_fixed</md-icon>
-            <span class="md-list-item-text">Mean Extractor</span>
+            <span class="md-list-item-text">Mean</span>
           </md-list-item>
           <md-list-item @click="createNode('MEDIANEXTRACTOR')">
             <md-icon>gps_fixed</md-icon>
-            <span class="md-list-item-text">Median Extractor</span>
+            <span class="md-list-item-text">Median</span>
           </md-list-item>
           <md-list-item @click="createNode('SMAEXTRACTOR')">
             <md-icon>gps_fixed</md-icon>
-            <span class="md-list-item-text">SMA Extractor</span>
+            <span class="md-list-item-text">SMA</span>
           </md-list-item>
+          <md-list-item @click="createNode('MAX')">
+            <md-icon>gps_fixed</md-icon>
+            <span class="md-list-item-text">Max</span>
+          </md-list-item>
+          <md-list-item @click="createNode('MIN')">
+            <md-icon>gps_fixed</md-icon>
+            <span class="md-list-item-text">Min</span>
+          </md-list-item>
+          <md-list-item @click="createNode('FEATUREVECTOR')">
+            <md-icon>gps_fixed</md-icon>
+            <span class="md-list-item-text">Feature Vector</span>
+          </md-list-item>
+        <md-divider></md-divider>
+        <md-subheader>Classification</md-subheader>
+          <md-list-item @click="createNode('FEATURETABLE')">
+            <md-icon>settings_input_composite</md-icon>
+            <span class="md-list-item-text">Feature Table</span>
+          </md-list-item>
+          <md-list-item @click="createNode('KNN')">
+            <md-icon>settings_input_composite</md-icon>
+            <span class="md-list-item-text">KNN</span>
+          </md-list-item>
+          <md-list-item @click="createNode('SVM')">
+            <md-icon>settings_input_composite</md-icon>
+            <span class="md-list-item-text">SVM</span>
+          </md-list-item>
+        <md-divider></md-divider>
         <md-subheader>Misc</md-subheader>
           <!-- PLOP: APPEND -->
+					<md-list-item @click="createNode('START')">
+					  <md-icon>extension</md-icon>
+					  <span class="md-list-item-text">Start</span>
+					</md-list-item>
+					<md-list-item @click="createNode('EVENTLABELER')">
+					  <md-icon>extension</md-icon>
+					  <span class="md-list-item-text">Event Labeler</span>
+					</md-list-item>
 					<md-list-item @click="createNode('SPLITTER')">
 					  <md-icon>extension</md-icon>
 					  <span class="md-list-item-text">Splitter</span>
@@ -69,12 +109,8 @@
 					  <md-icon>extension</md-icon>
 					  <span class="md-list-item-text">Log</span>
 					</md-list-item>
-					<md-list-item @click="createNode('FEATUREVECTOR')">
-					  <md-icon>extension</md-icon>
-					  <span class="md-list-item-text">Feature Vector</span>
-					</md-list-item>
       </md-list>
-      <br><br><br><br><br><br>
+      <br>
   </nav>
 </template>
 
@@ -111,6 +147,10 @@ export default {
 
   .md-button {
     margin: 12px 0;
+  }
+
+  .md-list-item-container {
+    font-size: 14px;
   }
 
 </style>

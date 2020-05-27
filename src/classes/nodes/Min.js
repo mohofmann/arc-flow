@@ -1,6 +1,6 @@
 /**************************************
- *	{{ upperCase name }}
- *	{{ description }}
+ *	MIN
+ *	Minimum value of the signal
  **************************************/
 
 import Node from '../Node.js'
@@ -8,26 +8,22 @@ import Node from '../Node.js'
 let attributes = {
 	backgroundColor: '#F06',
 	headerColor: '#CF0053',
-	title: '{{ titleCase name }}',
-	hint: '{{ description }}',
-	description: '{{ description }}'
+	title: 'Min',
+	hint: 'Minimum value of the signal',
+	description: 'Minimum value of the signal'
 }
 
-export default class {{ properCase name }} extends Node {
+export default class Min extends Node {
 
 	constructor (canvas, watchCanvas) {
 		super (canvas, attributes, watchCanvas)
 
-		this.detailMenu = '{{ properCase name }}Menu'
+		this.detailMenu = 'MinMenu'
 		this.description = attributes.description
 		this.hint.text("")
 
-		// this.setInputs(["1"])
-		// this.setOutputs(["1"])
-	}
-
-	configure (config) {
-		// potential setup work to be executed on node recreation (e.g. through loading a project)
+		this.setInputs(["Segment"])
+		this.setOutputs(["Minimum"])
 	}
 
 	_preperform () {
@@ -36,7 +32,7 @@ export default class {{ properCase name }} extends Node {
 
 	_perform () {
 		// take incoming data from this.inputs array
-
+		this.sendMessage(0, parseFloat(_.min(this.inputs[0].data[0])))
 		// process it
 
 		// and send result to the edge._end of this.outputs array
