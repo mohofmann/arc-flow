@@ -12,7 +12,7 @@ let attributes = {
 	backgroundColor: '#57A9FF',
 	headerColor: '#4687CC',
 	title: 'Data Source',
-	hint: 'Click to add Data',
+	hint: '',
 	description: 'Imports and parses a table containing sensor data and outputs it sample by sample'
 }
 
@@ -39,8 +39,12 @@ export default class DataSource extends Node {
 	}
 
 	setData (data) {
-		this.config.data = data
-		this.config.features = this.config.data.data[0]
+		// this.config.data = data
+		// this.config.features = this.config.data.data[0]
+		this.config.features = data.data[0]
+		this.config.data = _.tail(data.data)
+		this.config.samples = this.config.data.length
+
 		this.setOutputs(['Data (' + this.config.features.length + ' axes)'])
 		this.updateNode()
 	}
@@ -59,6 +63,15 @@ export default class DataSource extends Node {
 	}
 
 	_perform () {
+		let input = this.inputs[0].data
+		let output = this.outputs[0]
+		if (output.edge) {
+			output.edge._end.data = this.config.data[input]
+			output.edge._end.node.run()
+		}
+	}
+
+	__perform () {
 		// let index = this.inputs[0].data
 		let data = _.tail(this.config.data.data)
 		let samples = data.length

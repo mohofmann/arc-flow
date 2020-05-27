@@ -10,7 +10,7 @@ let attributes = {
 	headerColor: '#CF0053',
 	title: 'Log',
 	hint: '',
-	description: 'Logs incoming data and passes it through to the output'
+	description: 'Logs incoming data and passes it through to the output. Beware: Logging is currently expensive.'
 }
 
 export default class Log extends Node {
@@ -24,12 +24,14 @@ export default class Log extends Node {
 		this.setInputs(["Data"])
 		this.setOutputs(["Data"])
 
-		this.maxLog = 300
+		this.maxLog = 100
 		this.logCount = 0
+		this.maxLogExceeded = false
 	}
 
 	_preperform () {
 		this.logCount = 0
+		this.maxLogExceeded = false
 	}
 
 	_perform () {
@@ -38,7 +40,11 @@ export default class Log extends Node {
 		let data = this.inputs[0].data
 		this.sendMessage(0, data)
 
-		if (data == "-1" || this.logCount >= this.maxLog) return
+		if (data == "-1" || this.logCount >= this.maxLog) {
+			if (!this.maxLogExceeded) console.log("Log count exceeded, stopping to log")
+			this.maxLogExceeded = true
+			return
+		}
 		
 		console.log(this.inputs[0].edge._start.node.headline.text().toUpperCase() + ":", data)
 		this.logCount ++

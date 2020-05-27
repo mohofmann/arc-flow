@@ -43,18 +43,18 @@ export default class Start extends Node {
 
 	_perform () {
 		// take incoming data from this.inputs array
-		// _.times(this.config.count, async i => {
-		// 	let output = this.outputs[0]
-		// 	if (output.edge) {
-		// 		this.sendMessage(0, i)
-		// 		output.edge._end.node.run()
-		// 	}
-		// })
-		let output = this.outputs[0]
-		if (output.edge) {
-			this.sendMessage(0, 1)
-			output.edge._end.node.run()
-		}
+		_.times(this.config.count, async i => {
+			let output = this.outputs[0]
+			if (output.edge) {
+				this.sendMessage(0, i)
+				output.edge._end.node.run()
+			}
+		})
+		// let output = this.outputs[0]
+		// if (output.edge) {
+		// 	this.sendMessage(0, 1)
+		// 	output.edge._end.node.run()
+		// }
 		// process it
 
 		// and send result to the edge._end of this.outputs array

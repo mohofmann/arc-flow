@@ -4,11 +4,22 @@
     <p><i>{{ node.description }}</i></p>
     <md-divider></md-divider>
     <br>
+    <md-field>
+      <md-icon>view_comfy</md-icon>
+      <label for="fieldAmount">Log Limit</label>
+      <md-input v-model="maxLog" @keyup.native="updateAttributes"></md-input>
+    </md-field>
   </div>
 </template>
 
 <script>
 import { EventBus } from '../../main.js'
+
+const updateAttributes  = function () {
+  if (this.node) {
+    this.node.maxLog = this.maxLog
+  }
+}
 
 export default {
   name: 'LogMenu',
@@ -17,9 +28,11 @@ export default {
   },
   data: function () {
     return {
+      maxLog: this.node.maxLog
     }
   },
   methods: {
+    updateAttributes: updateAttributes
   }
 }
 </script>

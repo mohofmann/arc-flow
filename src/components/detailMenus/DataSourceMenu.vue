@@ -45,7 +45,8 @@ export default {
   data: function () {
     return {
       showAlert: false,
-      features: this.node.config.data ? this.node.config.data.data[0] : [],
+      // features: this.node.config.data ? this.node.config.data.data[0] : [],
+      features: this.node.config.data ? this.node.config.data[0] : [],
       fileName: this.node.name
     }
   },

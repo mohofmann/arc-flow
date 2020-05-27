@@ -24,13 +24,14 @@ import Canvas from '../classes/Canvas.js'
 import DetailMenu from './DetailMenu.vue'
 
 let canvas = null
+let firstNode = null
 
 const setupEditor = function () {
   canvas = new Canvas()
+  canvas.createNode('START')
 }
 
 const setupEvents = function () {
-  // TODO: investigate why sometimes (loadCanvas) arrow funcs are necessary
   EventBus.$on('runFlow', async () => {
     this.showProgress = true
     setTimeout(this.run, 500)
@@ -54,7 +55,7 @@ const run = async function () {
     this.showProgress = true
     canvas.nodes[0].run()
     let duration = new Date(Date.now() - startTime)
-    EventBus.$emit('doneExecuting', {duration: duration, nodes: canvas.nodes.length, executions: 452878})
+    EventBus.$emit('doneExecuting', {duration: duration, nodes: canvas.nodes.length, executions: canvas.nodes[0].config.count})
     EventBus.$emit('setTab', 'analytics-tab')
     // this.showSuccess = true
   }

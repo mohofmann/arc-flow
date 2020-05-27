@@ -63,20 +63,6 @@ export default class Canvas {
           EventBus.$emit('deselectNode', null)
         }
       })
-    // this._canvas.line(97, -1000, 98, 1000)
-    // .stroke({ width: 2, color: '#4687CC' })
-    // .style({ cursor: 'ew-resize', 'stroke-dasharray': '2'})
-    // this._canvas.line(100, -1000, 100, 1000)
-    // .stroke({ width: 2, color: '#CF0053' })
-    // .style({ cursor: 'ew-resize', 'stroke-dasharray': '2'})
-    // this._canvas.text("WEARABLE")
-    // .font({size: 32, anchor: 'end', weight: '600'})
-    // .fill({color: '#4687CC', opacity: '0.7'})
-    // .move(100-20, 0)
-    // this._canvas.text("SMARTPHONE")
-    // .font({size: 32, anchor: 'start', weight: '600'})
-    // .fill({color: '#CF0053', opacity: '0.7'})
-    // .move(100+20, 0)
   }
 
   async saveProject () {
@@ -226,7 +212,6 @@ export default class Canvas {
   }
 
   removeNode (node) {
-    console.log("now removing, bitch")
     _.each(node.inputs, input => {
       input.edge && input.edge.remove()
     })

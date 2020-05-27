@@ -116,10 +116,12 @@ export default class Node {
       .rect(sizeX, 10)
       .attr({fill: attributes.headerColor})
       .move(0, 15))
-    this.element.add(this._canvas
+    if (attributes.title !== 'Start') {
+      this.element.add(this._canvas
       .circle(15, 15)
       .attr({fill: '#00000099', cursor: 'pointer'})
       .move(sizeX-20, 5))
+    }
     this.headline = this._canvas
       .text(attributes.title)
       .move(sizeX/2, 4)
