@@ -21,18 +21,20 @@ npm run serve
 #### Adding Nodes
 Nodes represent pieces of modular activity recognition functionality. There are some predefined nodes available, which can be added to the canvas by clicking their names in the left sidebar.
 ##### Mini-Tutorial
->Add a Data Source node to the canvas
+>When opening arcflow, you see a blank canvas with only one node inside: The start node. It serves as the entry point and clock for the algorithm. Now add a new Data Source node to the canvas
 
 #### Modifying Nodes
 When added to the canvas, nodes can be moved around by clicking and dragging them. Clicking the dark circle right to their name deletes them. And purely clicking a node opens a contextual sidebar, which shows additional information and configuration options.
 ##### Mini-Tutorial
->Click on the Data Source node and upload a csv file with data through the contextual sidebar
+>Click on the Data Source node and upload a csv file with data through the contextual sidebar. Make sure the csv file has its column names in the first line so it gets correctly parsed.
 
 #### Connecting Nodes
 Nodes have inputs and outputs, displayed through white circles on the left (input) and right (output) side of the node.
 They can be connected by clicking the output of one node followed by clicking the input of another node.
 ##### Mini-Tutorial
->Add a **Selector** node to the canvas, and connect the Data Source's output with the Selector's input. Click on the selector node and select one axis (corresponds to a column in your data). Further add a **Log** node and connect its input to the Selector's output
+>Connect the Start node's output with the Data Source node's input. Add a **Selector** node to the canvas, and connect the Data Source's output with the Selector's input. Click on the selector node and select one axis (corresponds to a column in your data). Further add a **Log** node and connect its input to the Selector's output, like shown below
+
+![arcflow tutorial screenshot](https://i.imgur.com/RoCDz5V.png)
 
 #### Executing Flow
 When a functioning chain of nodes has been set up, you can execute it by clicking on the green **Run** button.
