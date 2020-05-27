@@ -11,6 +11,9 @@ Activity recognition algorithms usually consist of a chain of certain steps that
 
 **arcflow** aims to simplify prototyping such algorithms by realizing them as flow consisting of nodes and edges.
 
+## Demo
+You can try and play around with arcflow here https://mohofmann.github.io/arc-flow/
+
 ## Setup
 ```
 npm install
