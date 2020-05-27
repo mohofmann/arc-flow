@@ -20,23 +20,23 @@ npm run serve
 ## Usage
 #### Adding Nodes
 Nodes represent pieces of modular activity recognition functionality. There are some predefined nodes available, which can be added to the canvas by clicking their names in the left sidebar.
-
+##### Mini-Tutorial
 >Add a Data Source node to the canvas
 
 #### Modifying Nodes
 When added to the canvas, nodes can be moved around by clicking and dragging them. Clicking the dark circle right to their name deletes them. And purely clicking a node opens a contextual sidebar, which shows additional information and configuration options.
-
+##### Mini-Tutorial
 >Click on the Data Source node and upload a csv file with data through the contextual sidebar
 
 #### Connecting Nodes
 Nodes have inputs and outputs, displayed through white circles on the left (input) and right (output) side of the node.
 They can be connected by clicking the output of one node followed by clicking the input of another node.
-
+##### Mini-Tutorial
 >Add a **Selector** node to the canvas, and connect the Data Source's output with the Selector's input. Click on the selector node and select one axis (corresponds to a column in your data). Further add a **Log** node and connect its input to the Selector's output
 
 #### Executing Flow
 When a functioning chain of nodes has been set up, you can execute it by clicking on the green **Run** button.
-
+##### Mini-Tutorial
 >The small algorithm you created now parses a csv file, sends it row by row to the Selector which selects an attribute from that row and sends the attributes one by one to the Log node which finally prints the attribute to the console. Click the green **Run** button to execute the flow and see the outcome in the analytics console.
 
 ## Included Nodes
